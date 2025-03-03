@@ -3,12 +3,13 @@ use strict;
 use Getopt::Std;
 use Cwd 'abs_path';
 my %opts;
-getopt ('c:s:e:p:t:',\%opts);
+getopt ('c:s:e:p:t:@:',\%opts);
 my $chr=$opts{'c'};
 my $start=$opts{'s'};
 my $end=$opts{'e'};
 my $proband=$opts{'p'};
 my $type=$opts{"t"};
+my $threads=$opts{"@"};
 my $start_original=$start;
 my $end_original=$end;
 my $exp_length=$end_original-$start_original+1;
@@ -91,11 +92,12 @@ if ($preload==0){
  }
 
  print "Generating new temporary SAM/DEPTH files\n";
- system ("samtools view -F 0x400 \"$file\" $chr:$start-$end |cut -f1,2,3,4,5,6,7,8,9,12 -d\$'\t' > $dir/d1temp_server/$proband.$chr.$start_original.$end_original.$type.SAM.txt");
- system ("samtools depth \"$file\" -r $chr:$start-$end > $dir/d1temp_server/$proband.$chr.$start_original.$end_original.$type.DEPTH.txt");
+ system ("samtools view -@ $threads -F 0x400 \"$file\" $chr:$start-$end |cut -f1,2,3,4,5,6,7,8,9,12 -d\$'\t' > $dir/d1temp_server/$proband.$chr.$start_original.$end_original.$type.SAM.txt");
+ system ("samtools depth -@ $threads \"$file\" -r $chr:$start-$end > $dir/d1temp_server/$proband.$chr.$start_original.$end_original.$type.DEPTH.txt");
  system ("gzip -f $dir/d1temp_server/$proband.$chr.$start_original.$end_original.$type.SAM.txt $dir/d1temp_server/$proband.$chr.$start_original.$end_original.$type.DEPTH.txt");
  $depth="$dir/d1temp_server/$proband.$chr.$start_original.$end_original.$type.DEPTH.txt.gz";
  $sam="$dir/d1temp_server/$proband.$chr.$start_original.$end_original.$type.SAM.txt.gz";
+ print "Done generating new temporary SAM/DEPTH files\n";
 }
 else{
  print "Reusing existing temporary SAM/DEPTH files\n";
@@ -311,6 +313,7 @@ close file1;
 print out1 "write.table (cbind(median_depth_in,median_depth_out,median_depth_in/median_depth_out,median_mq_in,median_mq_out,median_mq_in/median_mq_out,ct_paired_end_support,ct_paired_end_opposite,ct_paired_end_non_supporting,ct_split_read),file=\"$dir/d1stat/$proband.$chr.$start_original.$end_original.$type.txt\",sep=\"\t\",col.names=F,row.names=F)\n";
 
 close out1;
+
 system ("R CMD BATCH --vanilla $dir/$proband.$chr.$start.$end.temp4.txt");
 #system ("rm $dir/$proband.$chr.$start.$end.temp1.txt $dir/$proband.$chr.$start.$end.temp2.txt $dir/$proband.$chr.$start.$end.temp3.txt $dir/$proband.$chr.$start.$end.temp4.txt $dir/$proband.$chr.$start.$end.temp4.txt.Rout");
 system ("rm $dir/$proband.$chr.$start.$end.temp1.txt $dir/$proband.$chr.$start.$end.temp2.txt $dir/$proband.$chr.$start.$end.temp3.txt $dir/$proband.$chr.$start.$end.temp4.txt");

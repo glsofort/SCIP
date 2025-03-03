@@ -3,12 +3,13 @@ use strict;
 use Cwd 'abs_path';
 use Getopt::Std;
 my %opts;
-getopt ('p:c:s:e:t:',\%opts);
+getopt ('p:c:s:e:t:@:',\%opts);
 my $chr=$opts{'c'};
 my $start=$opts{'s'};
 my $end=$opts{'e'};
 my $proband=$opts{'p'};
 my $type=$opts{"t"};
+my $threads=$opts{"@"};
 
 my $start_original=$start;
 my $end_original=$end;
@@ -36,8 +37,8 @@ while (<file1>){
 close file1;
 
 #unless (-e "$dir/app_temp_file/$proband/$proband.$chr.$start_original.$end_original.$type.script04_file1.txt.gz"){
- system ("samtools depth $refbam -r chr$chr:$start-$end > $dir/$proband.$chr.$start_original.$end_original.$type.d101temp1");
- system ("samtools view -F 0x400 $refbam chr$chr:$start-$end |cut -f1,2,3,4,5,6,7,8,9,12 -d\$'\t' > $dir/$proband.$chr.$start_original.$end_original.$type.d101temp2");
+ system ("samtools depth -@ $threads $refbam -r chr$chr:$start-$end > $dir/$proband.$chr.$start_original.$end_original.$type.d101temp1");
+ system ("samtools view -@ $threads -F 0x400 $refbam chr$chr:$start-$end |cut -f1,2,3,4,5,6,7,8,9,12 -d\$'\t' > $dir/$proband.$chr.$start_original.$end_original.$type.d101temp2");
 
  my $min=1e20; my $max=0;
  open file1, "<$dir/$proband.$chr.$start_original.$end_original.$type.d101temp2";

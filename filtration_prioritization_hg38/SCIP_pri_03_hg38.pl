@@ -3,12 +3,13 @@ use strict;
 use Getopt::Std;
 use Cwd 'abs_path';
 my %opts;
-getopt ('c:s:e:p:t:',\%opts);
+getopt ('p:c:s:e:t:@:',\%opts);
 my $chr=$opts{'c'};
 my $start=$opts{'s'};
 my $end=$opts{'e'};
 my $proband=$opts{'p'};
 my $type=$opts{"t"};
+my $threads=$opts{"@"};
 my $start_original=$start;
 my $end_original=$end;
 my $exp_length=$end_original-$start_original+1;
@@ -91,8 +92,8 @@ if ($preload==0){
  }
 
  print "Generating new temporary SAM/DEPTH files\n";
- system ("samtools view -F 0x400 \"$file\" chr$chr:$start-$end |cut -f1,2,3,4,5,6,7,8,9,12 -d\$'\t' > $dir/d1temp_server/$proband.$chr.$start_original.$end_original.$type.SAM.txt");
- system ("samtools depth \"$file\" -r chr$chr:$start-$end > $dir/d1temp_server/$proband.$chr.$start_original.$end_original.$type.DEPTH.txt");
+ system ("samtools view -@ $threads -F 0x400 \"$file\" chr$chr:$start-$end |cut -f1,2,3,4,5,6,7,8,9,12 -d\$'\t' > $dir/d1temp_server/$proband.$chr.$start_original.$end_original.$type.SAM.txt");
+ system ("samtools depth -@ $threads \"$file\" -r chr$chr:$start-$end > $dir/d1temp_server/$proband.$chr.$start_original.$end_original.$type.DEPTH.txt");
  system ("gzip -f $dir/d1temp_server/$proband.$chr.$start_original.$end_original.$type.SAM.txt $dir/d1temp_server/$proband.$chr.$start_original.$end_original.$type.DEPTH.txt");
  $depth="$dir/d1temp_server/$proband.$chr.$start_original.$end_original.$type.DEPTH.txt.gz";
  $sam="$dir/d1temp_server/$proband.$chr.$start_original.$end_original.$type.SAM.txt.gz";
