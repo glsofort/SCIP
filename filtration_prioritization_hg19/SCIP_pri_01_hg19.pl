@@ -8,7 +8,7 @@ my $name=$opts{"n"};
 my $num=$opts{"u"};
 my $threads=$opts{"@"};
 my $start_num=($num-1)*50000+1;
-my $end_num=$num*50000;
+my $end_num=$num*100;
 # adjust the above number (50000) lower to achieve parallelization
 
 my $cwd=abs_path();
@@ -47,8 +47,8 @@ while (<file1>){
  # comment out this bracket if want to re-generate temporary files for all existing variants
  unless (-e "$dir/app_temp_file/$split1[0]/$split1[0].$split1[1].$split1[2].$split1[3].$split1[4].log.txt.gz"){
   system ("mkdir -p $dir/app_temp_file/$split1[0]"); 
-  system ("perl $dir/SCIP_pri_03_hg19.pl -c $split1[1] -s $split1[2] -e $split1[3] -p $split1[0] -t $split1[4] -@ $threads");
-  system ("perl $dir/SCIP_pri_04_hg19.pl -c $split1[1] -s $split1[2] -e $split1[3] -p $split1[0] -t $split1[4] -@ $threads");
+  system ("perl $dir/SCIP_pri_03_hg19.pl -c $split1[1] -s $split1[2] -e $split1[3] -p $split1[0] -t $split1[4] -@ 5");
+  system ("perl $dir/SCIP_pri_04_hg19.pl -c $split1[1] -s $split1[2] -e $split1[3] -p $split1[0] -t $split1[4] -@ 5");
   system ("perl $dir/SCIP_pri_05_hg19.pl -c $split1[1] -s $split1[2] -e $split1[3] -p $split1[0] -t $split1[4]");
   system ("perl $dir/SCIP_pri_06_hg19.pl -c $split1[1] -s $split1[2] -e $split1[3] -p $split1[0] -t $split1[4]");
   system ("perl $dir/SCIP_pri_07_hg19.pl -c $split1[1] -s $split1[2] -e $split1[3] -p $split1[0] -t $split1[4]");
