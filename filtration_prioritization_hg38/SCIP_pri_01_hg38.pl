@@ -2,12 +2,14 @@
 use strict;
 use Getopt::Std;
 use Cwd 'abs_path';
+use Parallel::ForkManager;
+
 my %opts;
 getopt ('n:u:',\%opts);
 my $name=$opts{"n"};
 my $num=$opts{"u"};
-my $start_num=($num-1)*50000+1;
-my $end_num=$num*50000;
+my $start_num=($num-1)*300+1;
+my $end_num=$num*300;
 # adjust the above number (50000) lower to achieve parallelization
 
 my $cwd=abs_path();
@@ -35,10 +37,16 @@ while (<file1>){
 close file1;
 close out1;
 
+my $pm = Parallel::ForkManager->new($threads);
+
 open file1, "<$dir/$name.$num.variant_list.txt";
 while (<file1>){
  chomp;
  my @split1=split /\t/,$_;
+
+ # Fork a child process for parallel execution
+ $pm->start and next;
+
  my $start=localtime();
  my $start_time=time();
  print "$start\t$_\n";
@@ -46,8 +54,8 @@ while (<file1>){
  # comment out this bracket if want to re-generate temporary files for all existing variants
  unless (-e "$dir/app_temp_file/$split1[0]/$split1[0].$split1[1].$split1[2].$split1[3].$split1[4].log.txt.gz"){
   system ("mkdir -p $dir/app_temp_file/$split1[0]"); 
-  system ("perl $dir/SCIP_pri_03_hg38.pl -c $split1[1] -s $split1[2] -e $split1[3] -p $split1[0] -t $split1[4]");
-  system ("perl $dir/SCIP_pri_04_hg38.pl -c $split1[1] -s $split1[2] -e $split1[3] -p $split1[0] -t $split1[4]");
+  system ("perl $dir/SCIP_pri_03_hg38.pl -c $split1[1] -s $split1[2] -e $split1[3] -p $split1[0] -t $split1[4] -@ 4");
+  system ("perl $dir/SCIP_pri_04_hg38.pl -c $split1[1] -s $split1[2] -e $split1[3] -p $split1[0] -t $split1[4] -@ 4");
   system ("perl $dir/SCIP_pri_05_hg38.pl -c $split1[1] -s $split1[2] -e $split1[3] -p $split1[0] -t $split1[4]");
   system ("perl $dir/SCIP_pri_06_hg38.pl -c $split1[1] -s $split1[2] -e $split1[3] -p $split1[0] -t $split1[4]");
   system ("perl $dir/SCIP_pri_07_hg38.pl -c $split1[1] -s $split1[2] -e $split1[3] -p $split1[0] -t $split1[4]");
@@ -76,7 +84,9 @@ while (<file1>){
   close out1;
   system ("gzip -f $dir/app_temp_file/$split1[0]/$split1[0].$split1[1].$split1[2].$split1[3].$split1[4].log.txt");
  }
+ $pm->finish;  # Child process exits
 }
+$pm->wait_all_children;  # Wait for all processes to finish
 close file1;
 
 system ("rm $dir/$name.$num.variant_list.txt");
