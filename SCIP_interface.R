@@ -210,7 +210,7 @@ server=function(input,output,session){
     # If sample_id exists in the URL, update config_path and store sample_id
     if (!is.null(query$sample_id)) {
       rv$sample_id <- query$sample_id
-      config_path <- paste0("/glsofort/samples/", query$sample_id, "/fastq_results/SCIP/interface_config.txt")
+      config_path <- paste0("/highspeed-data/samples/", query$sample_id, "/SCIP/interface_config.txt")
     }
     
     rv$assembly <- "hg19"
