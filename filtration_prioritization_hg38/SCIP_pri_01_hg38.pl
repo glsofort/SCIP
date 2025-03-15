@@ -5,9 +5,10 @@ use Cwd 'abs_path';
 use Parallel::ForkManager;
 
 my %opts;
-getopt ('n:u:',\%opts);
+getopt ('n:u:@:',\%opts);
 my $name=$opts{"n"};
 my $num=$opts{"u"};
+my $threads=$opts{"@"};
 my $start_num=($num-1)*300+1;
 my $end_num=$num*300;
 # adjust the above number (50000) lower to achieve parallelization
