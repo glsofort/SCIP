@@ -5,7 +5,7 @@ use Cwd 'abs_path';
 use Parallel::ForkManager;
 
 my %opts;
-getopt ('n:u:',\%opts);
+getopt ('n:u:@:',\%opts);
 my $name=$opts{"n"};
 my $num=$opts{"u"};
 my $threads=$opts{"@"};
