@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@alicloud/openapi-client": "^0.4.14",
+    "commander": "^13.1.0"
+  }
+}

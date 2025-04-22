@@ -1,0 +1,2192 @@
+SCIP: Suite for CNV Interpretation and Prioritization	scip: 用于cnv解释和优先级排序的套件
+CNV Name (Start Typing to Search)	cnv名称 (开始键入以搜索)
+Save	保存
+Previous	上一个
+Next	下一个
+Variant Quality	变体质量
+Determination	测定
+No Override	无覆盖
+Passed	通过
+Failed	失败
+Ruled Out - Quality Inadequate / Difficult to Assess	排除-质量不足/难以评估
+Ruled Out - Population Variation	排除-人口变异
+Ruled Out - No Gene of Interest Identified	排除-没有发现感兴趣的基因
+Ruled Out - Incorrect Boundary, Fully Intronic	排除-不正确的边界，完全内含子
+Ruled Out - Non-intragenic DUP	排除-非基因内dup
+Ruled Out - Other Reasons	排除-其他原因
+Deferred - Recessive Gene - Look for Compound Het SNV	延迟-隐性基因-寻找复合het snv
+Already Interpreted - Same Variant Identified by Another Caller	已解释-由另一个调用方标识的相同变体
+Further Review - Potentially Reportable	进一步审查-可能需要报告
+Further Review - Not Likely Reportable	进一步审查-不太可能报告
+Notes (Optional)	注释 (可选)
+Optional Notes about the Variant	关于变体的可选说明
+Variant Summary	变体摘要
+Read Depth and Mapping Quality	读取深度和映射质量
+Update Read Depth	更新读取深度
+View Sample Only	仅查看示例
+View Sample with NA12878 Overlaid	查看覆盖了na12878的示例
+View NA12878 Only	仅查看na12878
+Update Mapping Quality	更新映射质量
+Anomalous Reads	异常读取
+Load Anomalous Reads	加载异常读取
+All (Paired-end and Split-reads)	全部 (双端和拆分读取)
+Paired-end Reads Only	双端只读
+Normal Orientation, Small Insert Size Only	正常方向，仅小插入尺寸
+Normal Orientation, Large Insert Size Only	正常方向，仅大插入尺寸
+Abnormal Orientation Only	仅方向异常
+Split-reads Only	拆分-仅读取
+Paired-end Outlier Percentile	双端异常值百分位数
+Insert Size Estimates	插入尺寸估计值
+External and Internal Variant Databases	外部和内部变体数据库
+gnomAD SV Allele Frequency	gnomad sv等位基因频率
+ClinVar - Consequence	clinvar-后果
+No Filter	无筛选器
+P/LP Only	仅p/lp
+Any non-B/LB	任何非b/lb
+B/LB Only	仅b/lb
+ClinVar - Variant Size	clinvar-变体尺寸
+No Filter	无筛选器
+Under 10 Mb	10 mb以下
+Under 5 Mb	5 mb以下
+Under 1 Mb	1 mb以下
+Under 500 kb	500 kb以下
+Under 250 kb	250 kb以下
+Genomic Neighbourhood	基因组邻域
+Plot Genomic Neighbourhood	绘制基因组邻域
+Important Notes	重要说明
+For Manta INS and BND variants: the Read Depth and Mapping Quality section is not applicable. The Anomalous Reads section is experimental. 	对于manta ins和bnd变体: 读取深度和映射质量部分不适用。异常读取部分是实验性的。
+Users are encouraged to double check those variants in IGV.	鼓励用户在igv中仔细检查这些变体。
+In the External and Internal Variant Databases section, CNVs in the opposite direction of the analyzed variant (e.g., DELs when the analyzed variant is a DUP) are not shown.	在外部和内部变体数据库部分中，未显示在所分析的变体的相反方向上的cnv (例如，当所分析的变体是dup时的del)。
+In the Genomic Neighbourhood section, ClinGen HI/TS regions/genes that do not overlap the analyzed variant are not shown. For DELs, TS information are not displayed.	在基因组邻域部分中，未显示与所分析的变体不重叠的clingenhi/ts区域/基因。对于dels，不显示ts信息。
+Version Control	版本控制
+Interface Version 0.1.7 Public (20220202)	接口版本0.1.7 public (20220202)
+Cardiac Genome Clinic, Ted Rogers Centre for Heart Research	心脏基因组诊所，ted罗杰斯心脏研究中心
+Division of Clinical and Metabolic Genetics & The Centre for Applied Genomics, The Hospital for Sick Children. © 2022	临床和代谢遗传学科和应用基因组学中心，病童医院。©2022
+Already at the First Variant	已经在第一个变体
+Interpretation Saved	已保存解释
+Already at the Last Variant	已经在最后一个变体
+No Change from Last Saved	与上次保存时无更改
+Last Interpreted	最后解释
+High	高
+Medium	中
+Low	低
+Quality	质量
+Priority	优先级
+Sample ID	样品编号
+Start	开始
+End	结束
+Type	类型
+Size (kb)	大小 (kb)
+Depth Ratio	深度比
+Mapping Quality	映射质量
+Supporting Pairs	支撑对
+Opposing Pairs	对立对
+Split-reads	拆分-读取
+Positive Information	正面信息
+No Positive Information	无正面信息
+Negative Information	负面信息
+No Negative Information	无负面信息
+Read Depth	读取深度
+Click the "Update Read Depth" button above to show read depth. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新读取深度” 按钮以显示读取深度。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Mapping Quality	映射质量
+Click the "Update Mapping Quality" button above to show mapping quality. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新映射质量” 按钮以显示映射质量。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Lower Bound	下界
+Upper Bound	上界
+Click the "Load Anomalous Reads" button above to load this section.	单击上面的 “加载异常读数” 按钮以加载此部分。
+Anomalous Reads	异常读取
+Click the "Load Anomalous Reads" button above to load this section. Experimental for INS and BND type variants.	单击上面的 “加载异常读数” 按钮以加载此部分。ins和bnd型变体的实验。
+Read_Name	read_name
+Flag	旗标
+Left_Start	left_start
+Left_End	left_end
+Right_Start	right_start
+Right_End	right_end
+Size	尺寸
+Read_Type	read_type
+No reads were found based on the filter(s).	基于过滤器未找到读取。
+No gnomAD-SV variants were found based on the filter(s).	基于过滤器未发现gnomad-sv变体。
+No ClinVar variants were found based on the filter(s).	基于过滤器未发现clinvar变体。
+No variants in other internal samples were found based on the filter(s).	基于过滤器未发现其他内部样品中的变体。
+Internal Cohort	内部队列
+Total	合计
+Same Family	同一个家庭
+No variants in other CGC samples were found based on the filter(s).	基于过滤器未发现其他cgc样品中的变体。
+Strand	钢绞线
+Overlap	重叠
+Expression	表达式
+Links	链接
+Search	搜索
+Transcript Information	成绩单信息
+Genomic Neighbourhood	基因组邻域
+Click the "Plot Genomic Neighbourhood" button above to load this plot.	单击上面的 “绘制基因组邻域” 按钮以加载此图。
+This variant does not overlap with ClinGen HI regions.	此变体与clingen hi区域不重叠。
+TS not applicable because the variant is a DEL.	ts不适用，因为变体是del。
+This variant does not overlap with ClinGen TS regions.	此变体不与clingen ts区域重叠。
+This variant does not overlap with genes with pLI >= 0.1.	该变体与pli >= 0.1的基因不重叠。
+Genes	基因
+Sufficient	足够的
+Emerging	新兴
+Little	小
+Recessive/Unlikely	隐性/不太可能
+SCIP: Suite for CNV Interpretation and Prioritization	scip: 用于cnv解释和优先级排序的套件
+CNV Name (Start Typing to Search)	cnv名称 (开始键入以搜索)
+Save	保存
+Previous	上一个
+Next	下一个
+Variant Quality	变体质量
+Determination	测定
+No Override	无覆盖
+Passed	通过
+Failed	失败
+Not Evaluated	未评估
+Ruled Out - Quality Inadequate / Difficult to Assess	排除-质量不足/难以评估
+Ruled Out - Population Variation	排除-人口变异
+Ruled Out - No Gene of Interest Identified	排除-没有发现感兴趣的基因
+Ruled Out - Incorrect Boundary, Fully Intronic	排除-不正确的边界，完全内含子
+Ruled Out - Non-intragenic DUP	排除-非基因内dup
+Ruled Out - Other Reasons	排除-其他原因
+Deferred - Recessive Gene - Look for Compound Het SNV	延迟-隐性基因-寻找复合het snv
+Already Interpreted - Same Variant Identified by Another Caller	已解释-由另一个调用方标识的相同变体
+Further Review - Potentially Reportable	进一步审查-可能需要报告
+Further Review - Not Likely Reportable	进一步审查-不太可能报告
+Notes (Optional)	注释 (可选)
+Optional Notes about the Variant	关于变体的可选说明
+Variant Summary	变体摘要
+Read Depth and Mapping Quality	读取深度和映射质量
+Update Read Depth	更新读取深度
+View Sample Only	仅查看示例
+View Sample with NA12878 Overlaid	查看覆盖了na12878的示例
+View NA12878 Only	仅查看na12878
+Update Mapping Quality	更新映射质量
+Anomalous Reads	异常读取
+Load Anomalous Reads	加载异常读取
+All (Paired-end and Split-reads)	全部 (双端和拆分读取)
+Paired-end Reads Only	双端只读
+Normal Orientation, Small Insert Size Only	正常方向，仅小插入尺寸
+Normal Orientation, Large Insert Size Only	正常方向，仅大插入尺寸
+Abnormal Orientation Only	仅方向异常
+Split-reads Only	拆分-仅读取
+Paired-end Outlier Percentile	双端异常值百分位数
+Insert Size Estimates	插入尺寸估计值
+External and Internal Variant Databases	外部和内部变体数据库
+gnomAD SV Allele Frequency	gnomad sv等位基因频率
+ClinVar - Consequence	clinvar-后果
+No Filter	无筛选器
+P/LP Only	仅p/lp
+Any non-B/LB	任何非b/lb
+B/LB Only	仅b/lb
+ClinVar - Variant Size	clinvar-变体尺寸
+No Filter	无筛选器
+Under 10 Mb	10 mb以下
+Under 5 Mb	5 mb以下
+Under 1 Mb	1 mb以下
+Under 500 kb	500 kb以下
+Under 250 kb	250 kb以下
+Genomic Neighbourhood	基因组邻域
+Plot Genomic Neighbourhood	绘制基因组邻域
+Important Notes	重要说明
+For Manta INS and BND variants: the Read Depth and Mapping Quality section is not applicable. The Anomalous Reads section is experimental. 	对于manta ins和bnd变体: 读取深度和映射质量部分不适用。异常读取部分是实验性的。
+Users are encouraged to double check those variants in IGV.	鼓励用户在igv中仔细检查这些变体。
+In the External and Internal Variant Databases section, CNVs in the opposite direction of the analyzed variant (e.g., DELs when the analyzed variant is a DUP) are not shown.	在外部和内部变体数据库部分中，未显示在所分析的变体的相反方向上的cnv (例如，当所分析的变体是dup时的del)。
+In the Genomic Neighbourhood section, ClinGen HI/TS regions/genes that do not overlap the analyzed variant are not shown. For DELs, TS information are not displayed.	在基因组邻域部分中，未显示与所分析的变体不重叠的clingenhi/ts区域/基因。对于dels，不显示ts信息。
+Version Control	版本控制
+Interface Version 0.1.7 Public (20220202)	接口版本0.1.7 public (20220202)
+Cardiac Genome Clinic, Ted Rogers Centre for Heart Research	心脏基因组诊所，ted罗杰斯心脏研究中心
+Division of Clinical and Metabolic Genetics & The Centre for Applied Genomics, The Hospital for Sick Children. © 2022	临床和代谢遗传学科和应用基因组学中心，病童医院。©2022
+Already at the First Variant	已经在第一个变体
+Interpretation Saved	已保存解释
+Already at the Last Variant	已经在最后一个变体
+No Change from Last Saved	与上次保存时无更改
+Last Interpreted	最后解释
+High	高
+Medium	中
+Low	低
+Quality	质量
+Priority	优先级
+Sample ID	样品编号
+Start	开始
+End	结束
+Type	类型
+Size (kb)	大小 (kb)
+Depth Ratio	深度比
+Mapping Quality	映射质量
+Supporting Pairs	支撑对
+Opposing Pairs	对立对
+Split-reads	拆分-读取
+Positive Information	正面信息
+No Positive Information	无正面信息
+Negative Information	负面信息
+No Negative Information	无负面信息
+Read Depth	读取深度
+Click the "Update Read Depth" button above to show read depth. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新读取深度” 按钮以显示读取深度。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Mapping Quality	映射质量
+Click the "Update Mapping Quality" button above to show mapping quality. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新映射质量” 按钮以显示映射质量。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Lower Bound	下界
+Upper Bound	上界
+Click the "Load Anomalous Reads" button above to load this section.	单击上面的 “加载异常读数” 按钮以加载此部分。
+Anomalous Reads	异常读取
+Click the "Load Anomalous Reads" button above to load this section. Experimental for INS and BND type variants.	单击上面的 “加载异常读数” 按钮以加载此部分。ins和bnd型变体的实验。
+Read_Name	read_name
+Flag	旗标
+Left_Start	left_start
+Left_End	left_end
+Right_Start	right_start
+Right_End	right_end
+Size	尺寸
+Read_Type	read_type
+No reads were found based on the filter(s).	基于过滤器未找到读取。
+No gnomAD-SV variants were found based on the filter(s).	基于过滤器未发现gnomad-sv变体。
+No ClinVar variants were found based on the filter(s).	基于过滤器未发现clinvar变体。
+No variants in other internal samples were found based on the filter(s).	基于过滤器未发现其他内部样品中的变体。
+Internal Cohort	内部队列
+Total	合计
+Same Family	同一个家庭
+No variants in other CGC samples were found based on the filter(s).	基于过滤器未发现其他cgc样品中的变体。
+Strand	钢绞线
+Overlap	重叠
+Expression	表达式
+Links	链接
+Search	搜索
+Transcript Information	成绩单信息
+Genomic Neighbourhood	基因组邻域
+Click the "Plot Genomic Neighbourhood" button above to load this plot.	单击上面的 “绘制基因组邻域” 按钮以加载此图。
+This variant does not overlap with ClinGen HI regions.	此变体与clingen hi区域不重叠。
+TS not applicable because the variant is a DEL.	ts不适用，因为变体是del。
+This variant does not overlap with ClinGen TS regions.	此变体不与clingen ts区域重叠。
+This variant does not overlap with genes with pLI >= 0.1.	该变体与pli >= 0.1的基因不重叠。
+Genes	基因
+Sufficient	足够的
+Emerging	新兴
+Little	小
+Recessive/Unlikely	隐性/不太可能
+SCIP: Suite for CNV Interpretation and Prioritization	scip: 用于cnv解释和优先级排序的套件
+CNV Name (Start Typing to Search)	cnv名称 (开始键入以搜索)
+Save	保存
+Previous	上一个
+Next	下一个
+Variant Quality	变体质量
+Determination	测定
+No Override	无覆盖
+Passed	通过
+Failed	失败
+Not Evaluated	未评估
+Ruled Out - Quality Inadequate / Difficult to Assess	排除-质量不足/难以评估
+Ruled Out - Population Variation	排除-人口变异
+Ruled Out - No Gene of Interest Identified	排除-没有发现感兴趣的基因
+Ruled Out - Incorrect Boundary, Fully Intronic	排除-不正确的边界，完全内含子
+Ruled Out - Non-intragenic DUP	排除-非基因内dup
+Ruled Out - Other Reasons	排除-其他原因
+Deferred - Recessive Gene - Look for Compound Het SNV	延迟-隐性基因-寻找复合het snv
+Already Interpreted - Same Variant Identified by Another Caller	已解释-由另一个调用方标识的相同变体
+Further Review - Potentially Reportable	进一步审查-可能需要报告
+Further Review - Not Likely Reportable	进一步审查-不太可能报告
+Notes (Optional)	注释 (可选)
+Optional Notes about the Variant	关于变体的可选说明
+Variant Summary	变体摘要
+Read Depth and Mapping Quality	读取深度和映射质量
+Bin Size	bin大小
+Update Read Depth	更新读取深度
+View Sample Only	仅查看示例
+View Sample with NA12878 Overlaid	查看覆盖了na12878的示例
+View NA12878 Only	仅查看na12878
+Update Mapping Quality	更新映射质量
+Anomalous Reads	异常读取
+Load Anomalous Reads	加载异常读取
+All (Paired-end and Split-reads)	全部 (双端和拆分读取)
+Paired-end Reads Only	双端只读
+Normal Orientation, Small Insert Size Only	正常方向，仅小插入尺寸
+Normal Orientation, Large Insert Size Only	正常方向，仅大插入尺寸
+Abnormal Orientation Only	仅方向异常
+Split-reads Only	拆分-仅读取
+Paired-end Outlier Percentile	双端异常值百分位数
+Insert Size Estimates	插入尺寸估计值
+External and Internal Variant Databases	外部和内部变体数据库
+gnomAD SV Allele Frequency	gnomad sv等位基因频率
+ClinVar - Consequence	clinvar-后果
+No Filter	无筛选器
+P/LP Only	仅p/lp
+Any non-B/LB	任何非b/lb
+B/LB Only	仅b/lb
+ClinVar - Variant Size	clinvar-变体尺寸
+No Filter	无筛选器
+Under 10 Mb	10 mb以下
+Under 5 Mb	5 mb以下
+Under 1 Mb	1 mb以下
+Under 500 kb	500 kb以下
+Under 250 kb	250 kb以下
+Genomic Neighbourhood	基因组邻域
+Plot Genomic Neighbourhood	绘制基因组邻域
+Important Notes	重要说明
+For Manta INS and BND variants: the Read Depth and Mapping Quality section is not applicable. The Anomalous Reads section is experimental. 	对于manta ins和bnd变体: 读取深度和映射质量部分不适用。异常读取部分是实验性的。
+Users are encouraged to double check those variants in IGV.	鼓励用户在igv中仔细检查这些变体。
+In the External and Internal Variant Databases section, CNVs in the opposite direction of the analyzed variant (e.g., DELs when the analyzed variant is a DUP) are not shown.	在外部和内部变体数据库部分中，未显示在所分析的变体的相反方向上的cnv (例如，当所分析的变体是dup时的del)。
+In the Genomic Neighbourhood section, ClinGen HI/TS regions/genes that do not overlap the analyzed variant are not shown. For DELs, TS information are not displayed.	在基因组邻域部分中，未显示与所分析的变体不重叠的clingenhi/ts区域/基因。对于dels，不显示ts信息。
+Version Control	版本控制
+Interface Version 0.1.7 Public (20220202)	接口版本0.1.7 public (20220202)
+Cardiac Genome Clinic, Ted Rogers Centre for Heart Research	心脏基因组诊所，ted罗杰斯心脏研究中心
+Division of Clinical and Metabolic Genetics & The Centre for Applied Genomics, The Hospital for Sick Children. © 2022	临床和代谢遗传学科和应用基因组学中心，病童医院。©2022
+Already at the First Variant	已经在第一个变体
+Interpretation Saved	已保存解释
+Already at the Last Variant	已经在最后一个变体
+No Change from Last Saved	与上次保存时无更改
+Last Interpreted	最后解释
+High	高
+Medium	中
+Low	低
+Quality	质量
+Priority	优先级
+Sample ID	样品编号
+Start	开始
+End	结束
+Type	类型
+Size (kb)	大小 (kb)
+Depth Ratio	深度比
+Mapping Quality	映射质量
+Supporting Pairs	支撑对
+Opposing Pairs	对立对
+Split-reads	拆分-读取
+Positive Information	正面信息
+No Positive Information	无正面信息
+Negative Information	负面信息
+No Negative Information	无负面信息
+Read Depth	读取深度
+Click the "Update Read Depth" button above to show read depth. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新读取深度” 按钮以显示读取深度。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Mapping Quality	映射质量
+Click the "Update Mapping Quality" button above to show mapping quality. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新映射质量” 按钮以显示映射质量。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Lower Bound	下界
+Upper Bound	上界
+Click the "Load Anomalous Reads" button above to load this section.	单击上面的 “加载异常读数” 按钮以加载此部分。
+Anomalous Reads	异常读取
+Click the "Load Anomalous Reads" button above to load this section. Experimental for INS and BND type variants.	单击上面的 “加载异常读数” 按钮以加载此部分。ins和bnd型变体的实验。
+Read_Name	read_name
+Flag	旗标
+Left_Start	left_start
+Left_End	left_end
+Right_Start	right_start
+Right_End	right_end
+Size	尺寸
+Read_Type	read_type
+No reads were found based on the filter(s).	基于过滤器未找到读取。
+No gnomAD-SV variants were found based on the filter(s).	基于过滤器未发现gnomad-sv变体。
+No ClinVar variants were found based on the filter(s).	基于过滤器未发现clinvar变体。
+No variants in other internal samples were found based on the filter(s).	基于过滤器未发现其他内部样品中的变体。
+Internal Cohort	内部队列
+Total	合计
+Same Family	同一个家庭
+No variants in other CGC samples were found based on the filter(s).	基于过滤器未发现其他cgc样品中的变体。
+Strand	钢绞线
+Overlap	重叠
+Expression	表达式
+Links	链接
+Search	搜索
+Transcript Information	成绩单信息
+Genomic Neighbourhood	基因组邻域
+Click the "Plot Genomic Neighbourhood" button above to load this plot.	单击上面的 “绘制基因组邻域” 按钮以加载此图。
+This variant does not overlap with ClinGen HI regions.	此变体与clingen hi区域不重叠。
+TS not applicable because the variant is a DEL.	ts不适用，因为变体是del。
+This variant does not overlap with ClinGen TS regions.	此变体不与clingen ts区域重叠。
+This variant does not overlap with genes with pLI >= 0.1.	该变体与pli >= 0.1的基因不重叠。
+Genes	基因
+Sufficient	足够的
+Emerging	新兴
+Little	小
+Recessive/Unlikely	隐性/不太可能
+SCIP: Suite for CNV Interpretation and Prioritization	scip: 用于cnv解释和优先级排序的套件
+CNV Name (Start Typing to Search)	cnv名称 (开始键入以搜索)
+Save	保存
+Previous	上一个
+Next	下一个
+Variant Quality	变体质量
+Determination	测定
+No Override	无覆盖
+Passed	通过
+Failed	失败
+Not Evaluated	未评估
+Ruled Out - Quality Inadequate / Difficult to Assess	排除-质量不足/难以评估
+Ruled Out - Population Variation	排除-人口变异
+Ruled Out - No Gene of Interest Identified	排除-没有发现感兴趣的基因
+Ruled Out - Incorrect Boundary, Fully Intronic	排除-不正确的边界，完全内含子
+Ruled Out - Non-intragenic DUP	排除-非基因内dup
+Ruled Out - Other Reasons	排除-其他原因
+Deferred - Recessive Gene - Look for Compound Het SNV	延迟-隐性基因-寻找复合het snv
+Already Interpreted - Same Variant Identified by Another Caller	已解释-由另一个调用方标识的相同变体
+Further Review - Potentially Reportable	进一步审查-可能需要报告
+Further Review - Not Likely Reportable	进一步审查-不太可能报告
+Notes (Optional)	注释 (可选)
+Optional Notes about the Variant	关于变体的可选说明
+Variant Summary	变体摘要
+Read Depth and Mapping Quality	读取深度和映射质量
+Bin Size	bin大小
+Update Read Depth	更新读取深度
+View Sample Only	仅查看示例
+View Sample with NA12878 Overlaid	查看覆盖了na12878的示例
+View NA12878 Only	仅查看na12878
+Update Mapping Quality	更新映射质量
+Anomalous Reads	异常读取
+Load Anomalous Reads	加载异常读取
+All (Paired-end and Split-reads)	全部 (双端和拆分读取)
+Paired-end Reads Only	双端只读
+Normal Orientation, Small Insert Size Only	正常方向，仅小插入尺寸
+Normal Orientation, Large Insert Size Only	正常方向，仅大插入尺寸
+Abnormal Orientation Only	仅方向异常
+Split-reads Only	拆分-仅读取
+Paired-end Outlier Percentile	双端异常值百分位数
+Insert Size Estimates	插入尺寸估计值
+External and Internal Variant Databases	外部和内部变体数据库
+gnomAD SV Allele Frequency	gnomad sv等位基因频率
+ClinVar - Consequence	clinvar-后果
+No Filter	无筛选器
+P/LP Only	仅p/lp
+Any non-B/LB	任何非b/lb
+B/LB Only	仅b/lb
+ClinVar - Variant Size	clinvar-变体尺寸
+No Filter	无筛选器
+Under 10 Mb	10 mb以下
+Under 5 Mb	5 mb以下
+Under 1 Mb	1 mb以下
+Under 500 kb	500 kb以下
+Under 250 kb	250 kb以下
+Genomic Neighbourhood	基因组邻域
+Plot Genomic Neighbourhood	绘制基因组邻域
+Important Notes	重要说明
+For Manta INS and BND variants: the Read Depth and Mapping Quality section is not applicable. The Anomalous Reads section is experimental. 	对于manta ins和bnd变体: 读取深度和映射质量部分不适用。异常读取部分是实验性的。
+Users are encouraged to double check those variants in IGV.	鼓励用户在igv中仔细检查这些变体。
+In the External and Internal Variant Databases section, CNVs in the opposite direction of the analyzed variant (e.g., DELs when the analyzed variant is a DUP) are not shown.	在外部和内部变体数据库部分中，未显示在所分析的变体的相反方向上的cnv (例如，当所分析的变体是dup时的del)。
+In the Genomic Neighbourhood section, ClinGen HI/TS regions/genes that do not overlap the analyzed variant are not shown. For DELs, TS information are not displayed.	在基因组邻域部分中，未显示与所分析的变体不重叠的clingenhi/ts区域/基因。对于dels，不显示ts信息。
+Version Control	版本控制
+Interface Version 0.1.7 Public (20220202)	接口版本0.1.7 public (20220202)
+Cardiac Genome Clinic, Ted Rogers Centre for Heart Research	心脏基因组诊所，ted罗杰斯心脏研究中心
+Division of Clinical and Metabolic Genetics & The Centre for Applied Genomics, The Hospital for Sick Children. © 2022	临床和代谢遗传学科和应用基因组学中心，病童医院。©2022
+Already at the First Variant	已经在第一个变体
+Interpretation Saved	已保存解释
+Already at the Last Variant	已经在最后一个变体
+No Change from Last Saved	与上次保存时无更改
+Last Interpreted	最后解释
+High	高
+Medium	中
+Low	低
+Quality	质量
+Priority	优先级
+Sample ID	样品编号
+Start	开始
+End	结束
+Type	类型
+Size (kb)	大小 (kb)
+Depth Ratio	深度比
+Mapping Quality	映射质量
+Supporting Pairs	支撑对
+Opposing Pairs	对立对
+Split-reads	拆分-读取
+Positive Information	正面信息
+No Positive Information	无正面信息
+Negative Information	负面信息
+No Negative Information	无负面信息
+Read Depth	读取深度
+Click the "Update Read Depth" button above to show read depth. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新读取深度” 按钮以显示读取深度。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Mapping Quality	映射质量
+Click the "Update Mapping Quality" button above to show mapping quality. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新映射质量” 按钮以显示映射质量。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Lower Bound	下界
+Upper Bound	上界
+Click the "Load Anomalous Reads" button above to load this section.	单击上面的 “加载异常读数” 按钮以加载此部分。
+Anomalous Reads	异常读取
+Click the "Load Anomalous Reads" button above to load this section. Experimental for INS and BND type variants.	单击上面的 “加载异常读数” 按钮以加载此部分。ins和bnd型变体的实验。
+Read_Name	read_name
+Flag	旗标
+Left_Start	left_start
+Left_End	left_end
+Right_Start	right_start
+Right_End	right_end
+Size	尺寸
+Read_Type	read_type
+No reads were found based on the filter(s).	基于过滤器未找到读取。
+No gnomAD-SV variants were found based on the filter(s).	基于过滤器未发现gnomad-sv变体。
+No ClinVar variants were found based on the filter(s).	基于过滤器未发现clinvar变体。
+No variants in other internal samples were found based on the filter(s).	基于过滤器未发现其他内部样品中的变体。
+Internal Cohort	内部队列
+Total	合计
+Same Family	同一个家庭
+No variants in other CGC samples were found based on the filter(s).	基于过滤器未发现其他cgc样品中的变体。
+Strand	钢绞线
+Overlap	重叠
+Expression	表达式
+Links	链接
+Search	搜索
+Transcript Information	成绩单信息
+Genomic Neighbourhood	基因组邻域
+Click the "Plot Genomic Neighbourhood" button above to load this plot.	单击上面的 “绘制基因组邻域” 按钮以加载此图。
+This variant does not overlap with ClinGen HI regions.	此变体与clingen hi区域不重叠。
+TS not applicable because the variant is a DEL.	ts不适用，因为变体是del。
+This variant does not overlap with ClinGen TS regions.	此变体不与clingen ts区域重叠。
+This variant does not overlap with genes with pLI >= 0.1.	该变体与pli >= 0.1的基因不重叠。
+Genes	基因
+Sufficient	足够的
+Emerging	新兴
+Little	小
+Recessive/Unlikely	隐性/不太可能
+Constraint	约束
+SCIP: Suite for CNV Interpretation and Prioritization	scip: 用于cnv解释和优先级排序的套件
+CNV Name (Start Typing to Search)	cnv名称 (开始键入以搜索)
+Save	保存
+Previous	上一个
+Next	下一个
+Variant Quality	变体质量
+Determination	测定
+No Override	无覆盖
+Passed	通过
+Failed	失败
+Not Evaluated	未评估
+Ruled Out - Quality Inadequate / Difficult to Assess	排除-质量不足/难以评估
+Ruled Out - Population Variation	排除-人口变异
+Ruled Out - No Gene of Interest Identified	排除-没有发现感兴趣的基因
+Ruled Out - Incorrect Boundary, Fully Intronic	排除-不正确的边界，完全内含子
+Ruled Out - Non-intragenic DUP	排除-非基因内dup
+Ruled Out - Other Reasons	排除-其他原因
+Deferred - Recessive Gene - Look for Compound Het SNV	延迟-隐性基因-寻找复合het snv
+Already Interpreted - Same Variant Identified by Another Caller	已解释-由另一个调用方标识的相同变体
+Further Review - Potentially Reportable	进一步审查-可能需要报告
+Further Review - Not Likely Reportable	进一步审查-不太可能报告
+Notes (Optional)	注释 (可选)
+Optional Notes about the Variant	关于变体的可选说明
+Variant Summary	变体摘要
+Read Depth and Mapping Quality	读取深度和映射质量
+Bin Size	bin大小
+Update Read Depth	更新读取深度
+View Sample Only	仅查看示例
+View Sample with NA12878 Overlaid	查看覆盖了na12878的示例
+View NA12878 Only	仅查看na12878
+Update Mapping Quality	更新映射质量
+Anomalous Reads	异常读取
+Load Anomalous Reads	加载异常读取
+All (Paired-end and Split-reads)	全部 (双端和拆分读取)
+Paired-end Reads Only	双端只读
+Normal Orientation, Small Insert Size Only	正常方向，仅小插入尺寸
+Normal Orientation, Large Insert Size Only	正常方向，仅大插入尺寸
+Abnormal Orientation Only	仅方向异常
+Split-reads Only	拆分-仅读取
+Paired-end Outlier Percentile	双端异常值百分位数
+Insert Size Estimates	插入尺寸估计值
+External and Internal Variant Databases	外部和内部变体数据库
+gnomAD SV Allele Frequency	gnomad sv等位基因频率
+ClinVar - Consequence	clinvar-后果
+No Filter	无筛选器
+P/LP Only	仅p/lp
+Any non-B/LB	任何非b/lb
+B/LB Only	仅b/lb
+ClinVar - Variant Size	clinvar-变体尺寸
+No Filter	无筛选器
+Under 10 Mb	10 mb以下
+Under 5 Mb	5 mb以下
+Under 1 Mb	1 mb以下
+Under 500 kb	500 kb以下
+Under 250 kb	250 kb以下
+Genomic Neighbourhood	基因组邻域
+Plot Genomic Neighbourhood	绘制基因组邻域
+Important Notes	重要说明
+For Manta INS and BND variants: the Read Depth and Mapping Quality section is not applicable. The Anomalous Reads section is experimental. 	对于manta ins和bnd变体: 读取深度和映射质量部分不适用。异常读取部分是实验性的。
+Users are encouraged to double check those variants in IGV.	鼓励用户在igv中仔细检查这些变体。
+In the External and Internal Variant Databases section, CNVs in the opposite direction of the analyzed variant (e.g., DELs when the analyzed variant is a DUP) are not shown.	在外部和内部变体数据库部分中，未显示在所分析的变体的相反方向上的cnv (例如，当所分析的变体是dup时的del)。
+In the Genomic Neighbourhood section, ClinGen HI/TS regions/genes that do not overlap the analyzed variant are not shown. For DELs, TS information are not displayed.	在基因组邻域部分中，未显示与所分析的变体不重叠的clingenhi/ts区域/基因。对于dels，不显示ts信息。
+Version Control	版本控制
+Interface Version 0.1.7 Public (20220202)	接口版本0.1.7 public (20220202)
+Cardiac Genome Clinic, Ted Rogers Centre for Heart Research	心脏基因组诊所，ted罗杰斯心脏研究中心
+Division of Clinical and Metabolic Genetics & The Centre for Applied Genomics, The Hospital for Sick Children. © 2022	临床和代谢遗传学科和应用基因组学中心，病童医院。©2022
+Already at the First Variant	已经在第一个变体
+Interpretation Saved	已保存解释
+Already at the Last Variant	已经在最后一个变体
+No Change from Last Saved	与上次保存时无更改
+Last Interpreted	最后解释
+High	高
+Medium	中
+Low	低
+Quality	质量
+Priority	优先级
+Sample ID	样品编号
+Start	开始
+End	结束
+Type	类型
+Size (kb)	大小 (kb)
+Depth Ratio	深度比
+Mapping Quality	映射质量
+Supporting Pairs	支撑对
+Opposing Pairs	对立对
+Split-reads	拆分-读取
+Positive Information	正面信息
+No Positive Information	无正面信息
+Negative Information	负面信息
+No Negative Information	无负面信息
+Read Depth	读取深度
+Click the "Update Read Depth" button above to show read depth. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新读取深度” 按钮以显示读取深度。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Mapping Quality	映射质量
+Click the "Update Mapping Quality" button above to show mapping quality. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新映射质量” 按钮以显示映射质量。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Lower Bound	下界
+Upper Bound	上界
+Click the "Load Anomalous Reads" button above to load this section.	单击上面的 “加载异常读数” 按钮以加载此部分。
+Anomalous Reads	异常读取
+Click the "Load Anomalous Reads" button above to load this section. Experimental for INS and BND type variants.	单击上面的 “加载异常读数” 按钮以加载此部分。ins和bnd型变体的实验。
+Read_Name	read_name
+Flag	旗标
+Left_Start	left_start
+Left_End	left_end
+Right_Start	right_start
+Right_End	right_end
+Size	尺寸
+Read_Type	read_type
+No reads were found based on the filter(s).	基于过滤器未找到读取。
+No gnomAD-SV variants were found based on the filter(s).	基于过滤器未发现gnomad-sv变体。
+No ClinVar variants were found based on the filter(s).	基于过滤器未发现clinvar变体。
+No variants in other internal samples were found based on the filter(s).	基于过滤器未发现其他内部样品中的变体。
+Internal Cohort	内部队列
+Total	合计
+Same Family	同一个家庭
+No variants in other CGC samples were found based on the filter(s).	基于过滤器未发现其他cgc样品中的变体。
+Strand	钢绞线
+Overlap	重叠
+Expression	表达式
+Links	链接
+Search	搜索
+Transcript Information	成绩单信息
+Genomic Neighbourhood	基因组邻域
+Click the "Plot Genomic Neighbourhood" button above to load this plot.	单击上面的 “绘制基因组邻域” 按钮以加载此图。
+This variant does not overlap with ClinGen HI regions.	此变体与clingen hi区域不重叠。
+TS not applicable because the variant is a DEL.	ts不适用，因为变体是del。
+This variant does not overlap with ClinGen TS regions.	此变体不与clingen ts区域重叠。
+This variant does not overlap with genes with pLI >= 0.1.	该变体与pli >= 0.1的基因不重叠。
+Genes	基因
+Sufficient	足够的
+Emerging	新兴
+Little	小
+Recessive/Unlikely	隐性/不太可能
+Constraint	约束
+or	
+deletion	
+SCIP: Suite for CNV Interpretation and Prioritization	scip: 用于cnv解释和优先级排序的套件
+CNV Name (Start Typing to Search)	cnv名称 (开始键入以搜索)
+Save	保存
+Previous	上一个
+Next	下一个
+Variant Quality	变体质量
+Determination	测定
+No Override	无覆盖
+Passed	通过
+Failed	失败
+Not Evaluated	未评估
+Ruled Out - Quality Inadequate / Difficult to Assess	排除-质量不足/难以评估
+Ruled Out - Population Variation	排除-人口变异
+Ruled Out - No Gene of Interest Identified	排除-没有发现感兴趣的基因
+Ruled Out - Incorrect Boundary, Fully Intronic	排除-不正确的边界，完全内含子
+Ruled Out - Non-intragenic DUP	排除-非基因内dup
+Ruled Out - Other Reasons	排除-其他原因
+Deferred - Recessive Gene - Look for Compound Het SNV	延迟-隐性基因-寻找复合het snv
+Already Interpreted - Same Variant Identified by Another Caller	已解释-由另一个调用方标识的相同变体
+Further Review - Potentially Reportable	进一步审查-可能需要报告
+Further Review - Not Likely Reportable	进一步审查-不太可能报告
+Notes (Optional)	注释 (可选)
+Optional Notes about the Variant	关于变体的可选说明
+Variant Summary	变体摘要
+Read Depth and Mapping Quality	读取深度和映射质量
+Bin Size	bin大小
+Update Read Depth	更新读取深度
+View Sample Only	仅查看示例
+View Sample with NA12878 Overlaid	查看覆盖了na12878的示例
+View NA12878 Only	仅查看na12878
+Update Mapping Quality	更新映射质量
+Anomalous Reads	异常读取
+Load Anomalous Reads	加载异常读取
+All (Paired-end and Split-reads)	全部 (双端和拆分读取)
+Paired-end Reads Only	双端只读
+Normal Orientation, Small Insert Size Only	正常方向，仅小插入尺寸
+Normal Orientation, Large Insert Size Only	正常方向，仅大插入尺寸
+Abnormal Orientation Only	仅方向异常
+Split-reads Only	拆分-仅读取
+Paired-end Outlier Percentile	双端异常值百分位数
+Insert Size Estimates	插入尺寸估计值
+External and Internal Variant Databases	外部和内部变体数据库
+gnomAD SV Allele Frequency	gnomad sv等位基因频率
+ClinVar - Consequence	clinvar-后果
+No Filter	无筛选器
+P/LP Only	仅p/lp
+Any non-B/LB	任何非b/lb
+B/LB Only	仅b/lb
+ClinVar - Variant Size	clinvar-变体尺寸
+No Filter	无筛选器
+Under 10 Mb	10 mb以下
+Under 5 Mb	5 mb以下
+Under 1 Mb	1 mb以下
+Under 500 kb	500 kb以下
+Under 250 kb	250 kb以下
+Genomic Neighbourhood	基因组邻域
+Plot Genomic Neighbourhood	绘制基因组邻域
+Important Notes	重要说明
+For Manta INS and BND variants: the Read Depth and Mapping Quality section is not applicable. The Anomalous Reads section is experimental. 	对于manta ins和bnd变体: 读取深度和映射质量部分不适用。异常读取部分是实验性的。
+Users are encouraged to double check those variants in IGV.	鼓励用户在igv中仔细检查这些变体。
+In the External and Internal Variant Databases section, CNVs in the opposite direction of the analyzed variant (e.g., DELs when the analyzed variant is a DUP) are not shown.	在外部和内部变体数据库部分中，未显示在所分析的变体的相反方向上的cnv (例如，当所分析的变体是dup时的del)。
+In the Genomic Neighbourhood section, ClinGen HI/TS regions/genes that do not overlap the analyzed variant are not shown. For DELs, TS information are not displayed.	在基因组邻域部分中，未显示与所分析的变体不重叠的clingenhi/ts区域/基因。对于dels，不显示ts信息。
+Version Control	版本控制
+Interface Version 0.1.7 Public (20220202)	接口版本0.1.7 public (20220202)
+Cardiac Genome Clinic, Ted Rogers Centre for Heart Research	心脏基因组诊所，ted罗杰斯心脏研究中心
+Division of Clinical and Metabolic Genetics & The Centre for Applied Genomics, The Hospital for Sick Children. © 2022	临床和代谢遗传学科和应用基因组学中心，病童医院。©2022
+Already at the First Variant	已经在第一个变体
+Interpretation Saved	已保存解释
+Already at the Last Variant	已经在最后一个变体
+No Change from Last Saved	与上次保存时无更改
+Last Interpreted	最后解释
+High	高
+Medium	中
+Low	低
+Quality	质量
+Priority	优先级
+Sample ID	样品编号
+Start	开始
+End	结束
+Type	类型
+Size (kb)	大小 (kb)
+Depth Ratio	深度比
+Mapping Quality	映射质量
+Supporting Pairs	支撑对
+Opposing Pairs	对立对
+Split-reads	拆分-读取
+Positive Information	正面信息
+No Positive Information	无正面信息
+Negative Information	负面信息
+No Negative Information	无负面信息
+Read Depth	读取深度
+Click the "Update Read Depth" button above to show read depth. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新读取深度” 按钮以显示读取深度。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Mapping Quality	映射质量
+Click the "Update Mapping Quality" button above to show mapping quality. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新映射质量” 按钮以显示映射质量。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Lower Bound	下界
+Upper Bound	上界
+Click the "Load Anomalous Reads" button above to load this section.	单击上面的 “加载异常读数” 按钮以加载此部分。
+Anomalous Reads	异常读取
+Click the "Load Anomalous Reads" button above to load this section. Experimental for INS and BND type variants.	单击上面的 “加载异常读数” 按钮以加载此部分。ins和bnd型变体的实验。
+Read_Name	read_name
+Flag	旗标
+Left_Start	left_start
+Left_End	left_end
+Right_Start	right_start
+Right_End	right_end
+Size	尺寸
+Read_Type	read_type
+No reads were found based on the filter(s).	基于过滤器未找到读取。
+No gnomAD-SV variants were found based on the filter(s).	基于过滤器未发现gnomad-sv变体。
+No ClinVar variants were found based on the filter(s).	基于过滤器未发现clinvar变体。
+No variants in other internal samples were found based on the filter(s).	基于过滤器未发现其他内部样品中的变体。
+Internal Cohort	内部队列
+Total	合计
+Same Family	同一个家庭
+No variants in other CGC samples were found based on the filter(s).	基于过滤器未发现其他cgc样品中的变体。
+Strand	钢绞线
+Overlap	重叠
+Expression	表达式
+Links	链接
+Search	搜索
+Transcript Information	成绩单信息
+Genomic Neighbourhood	基因组邻域
+Click the "Plot Genomic Neighbourhood" button above to load this plot.	单击上面的 “绘制基因组邻域” 按钮以加载此图。
+This variant does not overlap with ClinGen HI regions.	此变体与clingen hi区域不重叠。
+TS not applicable because the variant is a DEL.	ts不适用，因为变体是del。
+This variant does not overlap with ClinGen TS regions.	此变体不与clingen ts区域重叠。
+This variant does not overlap with genes with pLI >= 0.1.	该变体与pli >= 0.1的基因不重叠。
+Genes	基因
+Sufficient	足够的
+Emerging	新兴
+Little	小
+Recessive/Unlikely	隐性/不太可能
+Constraint	约束
+or	或
+deletion	删除
+tandem dup or translocation	串联dup或易位
+inversion	反演
+SCIP: Suite for CNV Interpretation and Prioritization	scip: 用于cnv解释和优先级排序的套件
+CNV Name (Start Typing to Search)	cnv名称 (开始键入以搜索)
+Save	保存
+Previous	上一个
+Next	下一个
+Variant Quality	变体质量
+Determination	测定
+No Override	无覆盖
+Passed	通过
+Failed	失败
+Not Evaluated	未评估
+Ruled Out - Quality Inadequate / Difficult to Assess	排除-质量不足/难以评估
+Ruled Out - Population Variation	排除-人口变异
+Ruled Out - No Gene of Interest Identified	排除-没有发现感兴趣的基因
+Ruled Out - Incorrect Boundary, Fully Intronic	排除-不正确的边界，完全内含子
+Ruled Out - Non-intragenic DUP	排除-非基因内dup
+Ruled Out - Other Reasons	排除-其他原因
+Deferred - Recessive Gene - Look for Compound Het SNV	延迟-隐性基因-寻找复合het snv
+Already Interpreted - Same Variant Identified by Another Caller	已解释-由另一个调用方标识的相同变体
+Further Review - Potentially Reportable	进一步审查-可能需要报告
+Further Review - Not Likely Reportable	进一步审查-不太可能报告
+Notes (Optional)	注释 (可选)
+Optional Notes about the Variant	关于变体的可选说明
+Variant Summary	变体摘要
+Read Depth and Mapping Quality	读取深度和映射质量
+Bin Size	bin大小
+Update Read Depth	更新读取深度
+View Sample Only	仅查看示例
+View Sample with NA12878 Overlaid	查看覆盖了na12878的示例
+View NA12878 Only	仅查看na12878
+Update Mapping Quality	更新映射质量
+Anomalous Reads	异常读取
+Load Anomalous Reads	加载异常读取
+All (Paired-end and Split-reads)	全部 (双端和拆分读取)
+Paired-end Reads Only	双端只读
+Normal Orientation, Small Insert Size Only	正常方向，仅小插入尺寸
+Normal Orientation, Large Insert Size Only	正常方向，仅大插入尺寸
+Abnormal Orientation Only	仅方向异常
+Split-reads Only	拆分-仅读取
+Paired-end Outlier Percentile	双端异常值百分位数
+Insert Size Estimates	插入尺寸估计值
+External and Internal Variant Databases	外部和内部变体数据库
+gnomAD SV Allele Frequency	gnomad sv等位基因频率
+ClinVar - Consequence	clinvar-后果
+No Filter	无筛选器
+P/LP Only	仅p/lp
+Any non-B/LB	任何非b/lb
+B/LB Only	仅b/lb
+ClinVar - Variant Size	clinvar-变体尺寸
+No Filter	无筛选器
+Under 10 Mb	10 mb以下
+Under 5 Mb	5 mb以下
+Under 1 Mb	1 mb以下
+Under 500 kb	500 kb以下
+Under 250 kb	250 kb以下
+Genomic Neighbourhood	基因组邻域
+Plot Genomic Neighbourhood	绘制基因组邻域
+Important Notes	重要说明
+For Manta INS and BND variants: the Read Depth and Mapping Quality section is not applicable. The Anomalous Reads section is experimental. 	对于manta ins和bnd变体: 读取深度和映射质量部分不适用。异常读取部分是实验性的。
+Users are encouraged to double check those variants in IGV.	鼓励用户在igv中仔细检查这些变体。
+In the External and Internal Variant Databases section, CNVs in the opposite direction of the analyzed variant (e.g., DELs when the analyzed variant is a DUP) are not shown.	在外部和内部变体数据库部分中，未显示在所分析的变体的相反方向上的cnv (例如，当所分析的变体是dup时的del)。
+In the Genomic Neighbourhood section, ClinGen HI/TS regions/genes that do not overlap the analyzed variant are not shown. For DELs, TS information are not displayed.	在基因组邻域部分中，未显示与所分析的变体不重叠的clingenhi/ts区域/基因。对于dels，不显示ts信息。
+Version Control	版本控制
+Interface Version 0.1.7 Public (20220202)	接口版本0.1.7 public (20220202)
+Cardiac Genome Clinic, Ted Rogers Centre for Heart Research	心脏基因组诊所，ted罗杰斯心脏研究中心
+Division of Clinical and Metabolic Genetics & The Centre for Applied Genomics, The Hospital for Sick Children. © 2022	临床和代谢遗传学科和应用基因组学中心，病童医院。©2022
+Already at the First Variant	已经在第一个变体
+Interpretation Saved	已保存解释
+Already at the Last Variant	已经在最后一个变体
+No Change from Last Saved	与上次保存时无更改
+Last Interpreted	最后解释
+High	高
+Medium	中
+Low	低
+Quality	质量
+Priority	优先级
+Sample ID	样品编号
+Start	开始
+End	结束
+Type	类型
+Size (kb)	大小 (kb)
+Depth Ratio	深度比
+Mapping Quality	映射质量
+Supporting Pairs	支撑对
+Opposing Pairs	对立对
+Split-reads	拆分-读取
+Positive Information	正面信息
+No Positive Information	无正面信息
+Negative Information	负面信息
+No Negative Information	无负面信息
+Read Depth	读取深度
+Click the "Update Read Depth" button above to show read depth. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新读取深度” 按钮以显示读取深度。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Mapping Quality	映射质量
+Click the "Update Mapping Quality" button above to show mapping quality. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新映射质量” 按钮以显示映射质量。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Lower Bound	下界
+Upper Bound	上界
+Click the "Load Anomalous Reads" button above to load this section.	单击上面的 “加载异常读数” 按钮以加载此部分。
+Anomalous Reads	异常读取
+Click the "Load Anomalous Reads" button above to load this section. Experimental for INS and BND type variants.	单击上面的 “加载异常读数” 按钮以加载此部分。ins和bnd型变体的实验。
+Read_Name	read_name
+Flag	旗标
+Left_Start	left_start
+Left_End	left_end
+Right_Start	right_start
+Right_End	right_end
+Size	尺寸
+Read_Type	read_type
+No reads were found based on the filter(s).	基于过滤器未找到读取。
+No gnomAD-SV variants were found based on the filter(s).	基于过滤器未发现gnomad-sv变体。
+No ClinVar variants were found based on the filter(s).	基于过滤器未发现clinvar变体。
+No variants in other internal samples were found based on the filter(s).	基于过滤器未发现其他内部样品中的变体。
+Internal Cohort	内部队列
+Total	合计
+Same Family	同一个家庭
+No variants in other CGC samples were found based on the filter(s).	基于过滤器未发现其他cgc样品中的变体。
+Strand	钢绞线
+Overlap	重叠
+Expression	表达式
+Links	链接
+Search	搜索
+Transcript Information	成绩单信息
+Genomic Neighbourhood	基因组邻域
+Click the "Plot Genomic Neighbourhood" button above to load this plot.	单击上面的 “绘制基因组邻域” 按钮以加载此图。
+This variant does not overlap with ClinGen HI regions.	此变体与clingen hi区域不重叠。
+TS not applicable because the variant is a DEL.	ts不适用，因为变体是del。
+This variant does not overlap with ClinGen TS regions.	此变体不与clingen ts区域重叠。
+This variant does not overlap with genes with pLI >= 0.1.	该变体与pli >= 0.1的基因不重叠。
+Genes	基因
+Sufficient	足够的
+Emerging	新兴
+Little	小
+Recessive/Unlikely	隐性/不太可能
+Constraint	约束
+or	或
+deletion	删除
+tandem dup or translocation	串联dup或易位
+inversion	反演
+Read Name	读取姓名
+Left Start	左起动
+Left End	左端
+Right Start	右启动
+Right End	右端
+Size	尺寸
+Read Type	读取类型
+SCIP: Suite for CNV Interpretation and Prioritization	scip: 用于cnv解释和优先级排序的套件
+CNV Name (Start Typing to Search)	cnv名称 (开始键入以搜索)
+Save	保存
+Previous	上一个
+Next	下一个
+Variant Quality	变体质量
+Determination	测定
+No Override	无覆盖
+Passed	通过
+Failed	失败
+Not Evaluated	未评估
+Ruled Out - Quality Inadequate / Difficult to Assess	排除-质量不足/难以评估
+Ruled Out - Population Variation	排除-人口变异
+Ruled Out - No Gene of Interest Identified	排除-没有发现感兴趣的基因
+Ruled Out - Incorrect Boundary, Fully Intronic	排除-不正确的边界，完全内含子
+Ruled Out - Non-intragenic DUP	排除-非基因内dup
+Ruled Out - Other Reasons	排除-其他原因
+Deferred - Recessive Gene - Look for Compound Het SNV	延迟-隐性基因-寻找复合het snv
+Already Interpreted - Same Variant Identified by Another Caller	已解释-由另一个调用方标识的相同变体
+Further Review - Potentially Reportable	进一步审查-可能需要报告
+Further Review - Not Likely Reportable	进一步审查-不太可能报告
+Notes (Optional)	注释 (可选)
+Optional Notes about the Variant	关于变体的可选说明
+Variant Summary	变体摘要
+Read Depth and Mapping Quality	读取深度和映射质量
+Bin Size	bin大小
+Update Read Depth	更新读取深度
+View Sample Only	仅查看示例
+View Sample with NA12878 Overlaid	查看覆盖了na12878的示例
+View NA12878 Only	仅查看na12878
+Update Mapping Quality	更新映射质量
+Anomalous Reads	异常读取
+Load Anomalous Reads	加载异常读取
+All (Paired-end and Split-reads)	全部 (双端和拆分读取)
+Paired-end Reads Only	双端只读
+Normal Orientation, Small Insert Size Only	正常方向，仅小插入尺寸
+Normal Orientation, Large Insert Size Only	正常方向，仅大插入尺寸
+Abnormal Orientation Only	仅方向异常
+Split-reads Only	拆分-仅读取
+Paired-end Outlier Percentile	双端异常值百分位数
+Insert Size Estimates	插入尺寸估计值
+External and Internal Variant Databases	外部和内部变体数据库
+gnomAD SV Allele Frequency	gnomad sv等位基因频率
+ClinVar - Consequence	clinvar-后果
+No Filter	无筛选器
+P/LP Only	仅p/lp
+Any non-B/LB	任何非b/lb
+B/LB Only	仅b/lb
+ClinVar - Variant Size	clinvar-变体尺寸
+No Filter	无筛选器
+Under 10 Mb	10 mb以下
+Under 5 Mb	5 mb以下
+Under 1 Mb	1 mb以下
+Under 500 kb	500 kb以下
+Under 250 kb	250 kb以下
+Genomic Neighbourhood	基因组邻域
+Plot Genomic Neighbourhood	绘制基因组邻域
+Important Notes	重要说明
+For Manta INS and BND variants: the Read Depth and Mapping Quality section is not applicable. The Anomalous Reads section is experimental. 	对于manta ins和bnd变体: 读取深度和映射质量部分不适用。异常读取部分是实验性的。
+Users are encouraged to double check those variants in IGV.	鼓励用户在igv中仔细检查这些变体。
+In the External and Internal Variant Databases section, CNVs in the opposite direction of the analyzed variant (e.g., DELs when the analyzed variant is a DUP) are not shown.	在外部和内部变体数据库部分中，未显示在所分析的变体的相反方向上的cnv (例如，当所分析的变体是dup时的del)。
+In the Genomic Neighbourhood section, ClinGen HI/TS regions/genes that do not overlap the analyzed variant are not shown. For DELs, TS information are not displayed.	在基因组邻域部分中，未显示与所分析的变体不重叠的clingenhi/ts区域/基因。对于dels，不显示ts信息。
+Version Control	版本控制
+Interface Version 0.1.7 Public (20220202)	接口版本0.1.7 public (20220202)
+Cardiac Genome Clinic, Ted Rogers Centre for Heart Research	心脏基因组诊所，ted罗杰斯心脏研究中心
+Division of Clinical and Metabolic Genetics & The Centre for Applied Genomics, The Hospital for Sick Children. © 2022	临床和代谢遗传学科和应用基因组学中心，病童医院。©2022
+Already at the First Variant	已经在第一个变体
+Interpretation Saved	已保存解释
+Already at the Last Variant	已经在最后一个变体
+No Change from Last Saved	与上次保存时无更改
+Last Interpreted	最后解释
+High	高
+Medium	中
+Low	低
+Quality	质量
+Priority	优先级
+Sample ID	样品编号
+Start	开始
+End	结束
+Type	类型
+Size (kb)	大小 (kb)
+Depth Ratio	深度比
+Mapping Quality	映射质量
+Supporting Pairs	支撑对
+Opposing Pairs	对立对
+Split-reads	拆分-读取
+Positive Information	正面信息
+No Positive Information	无正面信息
+Negative Information	负面信息
+No Negative Information	无负面信息
+Read Depth	读取深度
+Click the "Update Read Depth" button above to show read depth. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新读取深度” 按钮以显示读取深度。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Mapping Quality	映射质量
+Click the "Update Mapping Quality" button above to show mapping quality. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新映射质量” 按钮以显示映射质量。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Lower Bound	下界
+Upper Bound	上界
+Click the "Load Anomalous Reads" button above to load this section.	单击上面的 “加载异常读数” 按钮以加载此部分。
+Anomalous Reads	异常读取
+Click the "Load Anomalous Reads" button above to load this section. Experimental for INS and BND type variants.	单击上面的 “加载异常读数” 按钮以加载此部分。ins和bnd型变体的实验。
+Read_Name	read_name
+Flag	旗标
+Left_Start	left_start
+Left_End	left_end
+Right_Start	right_start
+Right_End	right_end
+Size	尺寸
+Read_Type	read_type
+No reads were found based on the filter(s).	基于过滤器未找到读取。
+No gnomAD-SV variants were found based on the filter(s).	基于过滤器未发现gnomad-sv变体。
+No ClinVar variants were found based on the filter(s).	基于过滤器未发现clinvar变体。
+No variants in other internal samples were found based on the filter(s).	基于过滤器未发现其他内部样品中的变体。
+Internal Cohort	内部队列
+Total	合计
+Same Family	同一个家庭
+No variants in other CGC samples were found based on the filter(s).	基于过滤器未发现其他cgc样品中的变体。
+Strand	钢绞线
+Overlap	重叠
+Expression	表达式
+Links	链接
+Search	搜索
+Transcript Information	成绩单信息
+Genomic Neighbourhood	基因组邻域
+Click the "Plot Genomic Neighbourhood" button above to load this plot.	单击上面的 “绘制基因组邻域” 按钮以加载此图。
+This variant does not overlap with ClinGen HI regions.	此变体与clingen hi区域不重叠。
+TS not applicable because the variant is a DEL.	ts不适用，因为变体是del。
+This variant does not overlap with ClinGen TS regions.	此变体不与clingen ts区域重叠。
+This variant does not overlap with genes with pLI >= 0.1.	该变体与pli >= 0.1的基因不重叠。
+Genes	基因
+Sufficient	足够的
+Emerging	新兴
+Little	小
+Recessive/Unlikely	隐性/不太可能
+Constraint	约束
+or	或
+deletion	删除
+tandem dup or translocation	串联dup或易位
+inversion	反演
+Read Name	读取姓名
+Left Start	左起动
+Left End	左端
+Right Start	右启动
+Right End	右端
+Size	尺寸
+Read Type	读取类型
+Never	从不
+None	无
+SCIP: Suite for CNV Interpretation and Prioritization	scip: 用于cnv解释和优先级排序的套件
+CNV Name (Start Typing to Search)	cnv名称 (开始键入以搜索)
+Save	保存
+Previous	上一个
+Next	下一个
+Variant Quality	变体质量
+Determination	测定
+No Override	无覆盖
+Passed	通过
+Failed	失败
+Not Evaluated	未评估
+Ruled Out - Quality Inadequate / Difficult to Assess	排除-质量不足/难以评估
+Ruled Out - Population Variation	排除-人口变异
+Ruled Out - No Gene of Interest Identified	排除-没有发现感兴趣的基因
+Ruled Out - Incorrect Boundary, Fully Intronic	排除-不正确的边界，完全内含子
+Ruled Out - Non-intragenic DUP	排除-非基因内dup
+Ruled Out - Other Reasons	排除-其他原因
+Deferred - Recessive Gene - Look for Compound Het SNV	延迟-隐性基因-寻找复合het snv
+Already Interpreted - Same Variant Identified by Another Caller	已解释-由另一个调用方标识的相同变体
+Further Review - Potentially Reportable	进一步审查-可能需要报告
+Further Review - Not Likely Reportable	进一步审查-不太可能报告
+Notes (Optional)	注释 (可选)
+Optional Notes about the Variant	关于变体的可选说明
+Variant Summary	变体摘要
+Read Depth and Mapping Quality	读取深度和映射质量
+Bin Size	bin大小
+Update Read Depth	更新读取深度
+View Sample Only	仅查看示例
+View Sample with NA12878 Overlaid	查看覆盖了na12878的示例
+View NA12878 Only	仅查看na12878
+Update Mapping Quality	更新映射质量
+Anomalous Reads	异常读取
+Load Anomalous Reads	加载异常读取
+All (Paired-end and Split-reads)	全部 (双端和拆分读取)
+Paired-end Reads Only	双端只读
+Normal Orientation, Small Insert Size Only	正常方向，仅小插入尺寸
+Normal Orientation, Large Insert Size Only	正常方向，仅大插入尺寸
+Abnormal Orientation Only	仅方向异常
+Split-reads Only	拆分-仅读取
+Paired-end Outlier Percentile	双端异常值百分位数
+Insert Size Estimates	插入尺寸估计值
+External and Internal Variant Databases	外部和内部变体数据库
+gnomAD SV Allele Frequency	gnomad sv等位基因频率
+ClinVar - Consequence	clinvar-后果
+No Filter	无筛选器
+P/LP Only	仅p/lp
+Any non-B/LB	任何非b/lb
+B/LB Only	仅b/lb
+ClinVar - Variant Size	clinvar-变体尺寸
+No Filter	无筛选器
+Under 10 Mb	10 mb以下
+Under 5 Mb	5 mb以下
+Under 1 Mb	1 mb以下
+Under 500 kb	500 kb以下
+Under 250 kb	250 kb以下
+Genomic Neighbourhood	基因组邻域
+Plot Genomic Neighbourhood	绘制基因组邻域
+Important Notes	重要说明
+For Manta INS and BND variants: the Read Depth and Mapping Quality section is not applicable. The Anomalous Reads section is experimental. 	对于manta ins和bnd变体: 读取深度和映射质量部分不适用。异常读取部分是实验性的。
+Users are encouraged to double check those variants in IGV.	鼓励用户在igv中仔细检查这些变体。
+In the External and Internal Variant Databases section, CNVs in the opposite direction of the analyzed variant (e.g., DELs when the analyzed variant is a DUP) are not shown.	在外部和内部变体数据库部分中，未显示在所分析的变体的相反方向上的cnv (例如，当所分析的变体是dup时的del)。
+In the Genomic Neighbourhood section, ClinGen HI/TS regions/genes that do not overlap the analyzed variant are not shown. For DELs, TS information are not displayed.	在基因组邻域部分中，未显示与所分析的变体不重叠的clingenhi/ts区域/基因。对于dels，不显示ts信息。
+Version Control	版本控制
+Interface Version 0.1.7 Public (20220202)	接口版本0.1.7 public (20220202)
+Cardiac Genome Clinic, Ted Rogers Centre for Heart Research	心脏基因组诊所，ted罗杰斯心脏研究中心
+Division of Clinical and Metabolic Genetics & The Centre for Applied Genomics, The Hospital for Sick Children. © 2022	临床和代谢遗传学科和应用基因组学中心，病童医院。©2022
+Already at the First Variant	已经在第一个变体
+Interpretation Saved	已保存解释
+Already at the Last Variant	已经在最后一个变体
+No Change from Last Saved	与上次保存时无更改
+Last Interpreted	最后解释
+High	高
+Medium	中
+Low	低
+Quality	质量
+Priority	优先级
+Sample ID	样品编号
+Start	开始
+End	结束
+Type	类型
+Size (kb)	大小 (kb)
+Depth Ratio	深度比
+Mapping Quality	映射质量
+Supporting Pairs	支撑对
+Opposing Pairs	对立对
+Split-reads	拆分-读取
+Positive Information	正面信息
+No Positive Information	无正面信息
+Negative Information	负面信息
+No Negative Information	无负面信息
+Read Depth	读取深度
+Click the "Update Read Depth" button above to show read depth. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新读取深度” 按钮以显示读取深度。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Mapping Quality	映射质量
+Click the "Update Mapping Quality" button above to show mapping quality. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新映射质量” 按钮以显示映射质量。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Lower Bound	下界
+Upper Bound	上界
+Click the "Load Anomalous Reads" button above to load this section.	单击上面的 “加载异常读数” 按钮以加载此部分。
+Anomalous Reads	异常读取
+Click the "Load Anomalous Reads" button above to load this section. Experimental for INS and BND type variants.	单击上面的 “加载异常读数” 按钮以加载此部分。ins和bnd型变体的实验。
+Read_Name	read_name
+Flag	旗标
+Left_Start	left_start
+Left_End	left_end
+Right_Start	right_start
+Right_End	right_end
+Size	尺寸
+Read_Type	read_type
+No reads were found based on the filter(s).	基于过滤器未找到读取。
+No gnomAD-SV variants were found based on the filter(s).	基于过滤器未发现gnomad-sv变体。
+No ClinVar variants were found based on the filter(s).	基于过滤器未发现clinvar变体。
+No variants in other internal samples were found based on the filter(s).	基于过滤器未发现其他内部样品中的变体。
+Internal Cohort	内部队列
+Total	合计
+Same Family	同一个家庭
+No variants in other CGC samples were found based on the filter(s).	基于过滤器未发现其他cgc样品中的变体。
+Strand	钢绞线
+Overlap	重叠
+Expression	表达式
+Links	链接
+Search	搜索
+Transcript Information	成绩单信息
+Genomic Neighbourhood	基因组邻域
+Click the "Plot Genomic Neighbourhood" button above to load this plot.	单击上面的 “绘制基因组邻域” 按钮以加载此图。
+This variant does not overlap with ClinGen HI regions.	此变体与clingen hi区域不重叠。
+TS not applicable because the variant is a DEL.	ts不适用，因为变体是del。
+This variant does not overlap with ClinGen TS regions.	此变体不与clingen ts区域重叠。
+This variant does not overlap with genes with pLI >= 0.1.	该变体与pli >= 0.1的基因不重叠。
+Genes	基因
+Sufficient	足够的
+Emerging	新兴
+Little	小
+Recessive/Unlikely	隐性/不太可能
+Constraint	约束
+or	或
+deletion	删除
+tandem dup or translocation	串联dup或易位
+inversion	反演
+Read Name	读取姓名
+Left Start	左起动
+Left End	左端
+Right Start	右启动
+Right End	右端
+Size	尺寸
+Read Type	读取类型
+Never	从不
+None	无
+QC Flag	qc标志
+SCIP: Suite for CNV Interpretation and Prioritization	scip: 用于cnv解释和优先级排序的套件
+CNV Name (Start Typing to Search)	cnv名称 (开始键入以搜索)
+Save	保存
+Previous	上一个
+Next	下一个
+Variant Quality	变体质量
+Determination	测定
+No Override	无覆盖
+Passed	通过
+Failed	失败
+Not Evaluated	未评估
+Ruled Out - Quality Inadequate / Difficult to Assess	排除-质量不足/难以评估
+Ruled Out - Population Variation	排除-人口变异
+Ruled Out - No Gene of Interest Identified	排除-没有发现感兴趣的基因
+Ruled Out - Incorrect Boundary, Fully Intronic	排除-不正确的边界，完全内含子
+Ruled Out - Non-intragenic DUP	排除-非基因内dup
+Ruled Out - Other Reasons	排除-其他原因
+Deferred - Recessive Gene - Look for Compound Het SNV	延迟-隐性基因-寻找复合het snv
+Already Interpreted - Same Variant Identified by Another Caller	已解释-由另一个调用方标识的相同变体
+Further Review - Potentially Reportable	进一步审查-可能需要报告
+Further Review - Not Likely Reportable	进一步审查-不太可能报告
+Notes (Optional)	注释 (可选)
+Optional Notes about the Variant	关于变体的可选说明
+Variant Summary	变体摘要
+Read Depth and Mapping Quality	读取深度和映射质量
+Bin Size	bin大小
+Update Read Depth	更新读取深度
+View Sample Only	仅查看示例
+View Sample with NA12878 Overlaid	查看覆盖了na12878的示例
+View NA12878 Only	仅查看na12878
+Update Mapping Quality	更新映射质量
+Anomalous Reads	异常读取
+Load Anomalous Reads	加载异常读取
+All (Paired-end and Split-reads)	全部 (双端和拆分读取)
+Paired-end Reads Only	双端只读
+Normal Orientation, Small Insert Size Only	正常方向，仅小插入尺寸
+Normal Orientation, Large Insert Size Only	正常方向，仅大插入尺寸
+Abnormal Orientation Only	仅方向异常
+Split-reads Only	拆分-仅读取
+Paired-end Outlier Percentile	双端异常值百分位数
+Insert Size Estimates	插入尺寸估计值
+External and Internal Variant Databases	外部和内部变体数据库
+gnomAD SV Allele Frequency	gnomad sv等位基因频率
+ClinVar - Consequence	clinvar-后果
+No Filter	无筛选器
+P/LP Only	仅p/lp
+Any non-B/LB	任何非b/lb
+B/LB Only	仅b/lb
+ClinVar - Variant Size	clinvar-变体尺寸
+No Filter	无筛选器
+Under 10 Mb	10 mb以下
+Under 5 Mb	5 mb以下
+Under 1 Mb	1 mb以下
+Under 500 kb	500 kb以下
+Under 250 kb	250 kb以下
+Genomic Neighbourhood	基因组邻域
+Plot Genomic Neighbourhood	绘制基因组邻域
+Important Notes	重要说明
+For Manta INS and BND variants: the Read Depth and Mapping Quality section is not applicable. The Anomalous Reads section is experimental. 	对于manta ins和bnd变体: 读取深度和映射质量部分不适用。异常读取部分是实验性的。
+Users are encouraged to double check those variants in IGV.	鼓励用户在igv中仔细检查这些变体。
+In the External and Internal Variant Databases section, CNVs in the opposite direction of the analyzed variant (e.g., DELs when the analyzed variant is a DUP) are not shown.	在外部和内部变体数据库部分中，未显示在所分析的变体的相反方向上的cnv (例如，当所分析的变体是dup时的del)。
+In the Genomic Neighbourhood section, ClinGen HI/TS regions/genes that do not overlap the analyzed variant are not shown. For DELs, TS information are not displayed.	在基因组邻域部分中，未显示与所分析的变体不重叠的clingenhi/ts区域/基因。对于dels，不显示ts信息。
+Version Control	版本控制
+Interface Version 0.1.7 Public (20220202)	接口版本0.1.7 public (20220202)
+Cardiac Genome Clinic, Ted Rogers Centre for Heart Research	心脏基因组诊所，ted罗杰斯心脏研究中心
+Division of Clinical and Metabolic Genetics & The Centre for Applied Genomics, The Hospital for Sick Children. © 2022	临床和代谢遗传学科和应用基因组学中心，病童医院。©2022
+Already at the First Variant	已经在第一个变体
+Interpretation Saved	已保存解释
+Already at the Last Variant	已经在最后一个变体
+No Change from Last Saved	与上次保存时无更改
+Last Interpreted	最后解释
+High	高
+Medium	中
+Low	低
+Quality	质量
+Priority	优先级
+Sample ID	样品编号
+Start	开始
+End	结束
+Type	类型
+Size (kb)	大小 (kb)
+Depth Ratio	深度比
+Mapping Quality	映射质量
+Supporting Pairs	支撑对
+Opposing Pairs	对立对
+Split-reads	拆分-读取
+Positive Information	正面信息
+No Positive Information	无正面信息
+Negative Information	负面信息
+No Negative Information	无负面信息
+Read Depth	读取深度
+Click the "Update Read Depth" button above to show read depth. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新读取深度” 按钮以显示读取深度。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Mapping Quality	映射质量
+Click the "Update Mapping Quality" button above to show mapping quality. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新映射质量” 按钮以显示映射质量。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Lower Bound	下界
+Upper Bound	上界
+Click the "Load Anomalous Reads" button above to load this section.	单击上面的 “加载异常读数” 按钮以加载此部分。
+Anomalous Reads	异常读取
+Click the "Load Anomalous Reads" button above to load this section. Experimental for INS and BND type variants.	单击上面的 “加载异常读数” 按钮以加载此部分。ins和bnd型变体的实验。
+Read_Name	read_name
+Flag	旗标
+Left_Start	left_start
+Left_End	left_end
+Right_Start	right_start
+Right_End	right_end
+Size	尺寸
+Read_Type	read_type
+No reads were found based on the filter(s).	基于过滤器未找到读取。
+No gnomAD-SV variants were found based on the filter(s).	基于过滤器未发现gnomad-sv变体。
+No ClinVar variants were found based on the filter(s).	基于过滤器未发现clinvar变体。
+No variants in other internal samples were found based on the filter(s).	基于过滤器未发现其他内部样品中的变体。
+Internal Cohort	内部队列
+Total	合计
+Same Family	同一个家庭
+No variants in other CGC samples were found based on the filter(s).	基于过滤器未发现其他cgc样品中的变体。
+Strand	钢绞线
+Overlap	重叠
+Expression	表达式
+Links	链接
+Search	搜索
+Transcript Information	成绩单信息
+Genomic Neighbourhood	基因组邻域
+Click the "Plot Genomic Neighbourhood" button above to load this plot.	单击上面的 “绘制基因组邻域” 按钮以加载此图。
+This variant does not overlap with ClinGen HI regions.	此变体与clingen hi区域不重叠。
+TS not applicable because the variant is a DEL.	ts不适用，因为变体是del。
+This variant does not overlap with ClinGen TS regions.	此变体不与clingen ts区域重叠。
+This variant does not overlap with genes with pLI >= 0.1.	该变体与pli >= 0.1的基因不重叠。
+Genes	基因
+Sufficient	足够的
+Emerging	新兴
+Little	小
+Recessive/Unlikely	隐性/不太可能
+Constraint	约束
+or	或
+deletion	删除
+tandem dup or translocation	串联dup或易位
+inversion	反演
+Read Name	读取姓名
+Left Start	左起动
+Left End	左端
+Right Start	右启动
+Right End	右端
+Size	尺寸
+Read Type	读取类型
+Never	从不
+None	无
+QC Flag	qc标志
+Interpretation	口译
+Condition	条件
+Allele Origin	等位基因起源
+SCIP: Suite for CNV Interpretation and Prioritization	scip: 用于cnv解释和优先级排序的套件
+CNV Name (Start Typing to Search)	cnv名称 (开始键入以搜索)
+Save	保存
+Previous	上一个
+Next	下一个
+Variant Quality	变体质量
+Determination	测定
+No Override	无覆盖
+Passed	通过
+Failed	失败
+Not Evaluated	未评估
+Ruled Out - Quality Inadequate / Difficult to Assess	排除-质量不足/难以评估
+Ruled Out - Population Variation	排除-人口变异
+Ruled Out - No Gene of Interest Identified	排除-没有发现感兴趣的基因
+Ruled Out - Incorrect Boundary, Fully Intronic	排除-不正确的边界，完全内含子
+Ruled Out - Non-intragenic DUP	排除-非基因内dup
+Ruled Out - Other Reasons	排除-其他原因
+Deferred - Recessive Gene - Look for Compound Het SNV	延迟-隐性基因-寻找复合het snv
+Already Interpreted - Same Variant Identified by Another Caller	已解释-由另一个调用方标识的相同变体
+Further Review - Potentially Reportable	进一步审查-可能需要报告
+Further Review - Not Likely Reportable	进一步审查-不太可能报告
+Notes (Optional)	注释 (可选)
+Optional Notes about the Variant	关于变体的可选说明
+Variant Summary	变体摘要
+Read Depth and Mapping Quality	读取深度和映射质量
+Bin Size	bin大小
+Update Read Depth	更新读取深度
+View Sample Only	仅查看示例
+View Sample with NA12878 Overlaid	查看覆盖了na12878的示例
+View NA12878 Only	仅查看na12878
+Update Mapping Quality	更新映射质量
+Anomalous Reads	异常读取
+Load Anomalous Reads	加载异常读取
+All (Paired-end and Split-reads)	全部 (双端和拆分读取)
+Paired-end Reads Only	双端只读
+Normal Orientation, Small Insert Size Only	正常方向，仅小插入尺寸
+Normal Orientation, Large Insert Size Only	正常方向，仅大插入尺寸
+Abnormal Orientation Only	仅方向异常
+Split-reads Only	拆分-仅读取
+Paired-end Outlier Percentile	双端异常值百分位数
+Insert Size Estimates	插入尺寸估计值
+External and Internal Variant Databases	外部和内部变体数据库
+gnomAD SV Allele Frequency	gnomad sv等位基因频率
+ClinVar - Consequence	clinvar-后果
+No Filter	无筛选器
+P/LP Only	仅p/lp
+Any non-B/LB	任何非b/lb
+B/LB Only	仅b/lb
+ClinVar - Variant Size	clinvar-变体尺寸
+No Filter	无筛选器
+Under 10 Mb	10 mb以下
+Under 5 Mb	5 mb以下
+Under 1 Mb	1 mb以下
+Under 500 kb	500 kb以下
+Under 250 kb	250 kb以下
+Genomic Neighbourhood	基因组邻域
+Plot Genomic Neighbourhood	绘制基因组邻域
+Important Notes	重要说明
+For Manta INS and BND variants: the Read Depth and Mapping Quality section is not applicable. The Anomalous Reads section is experimental. 	对于manta ins和bnd变体: 读取深度和映射质量部分不适用。异常读取部分是实验性的。
+Users are encouraged to double check those variants in IGV.	鼓励用户在igv中仔细检查这些变体。
+In the External and Internal Variant Databases section, CNVs in the opposite direction of the analyzed variant (e.g., DELs when the analyzed variant is a DUP) are not shown.	在外部和内部变体数据库部分中，未显示在所分析的变体的相反方向上的cnv (例如，当所分析的变体是dup时的del)。
+In the Genomic Neighbourhood section, ClinGen HI/TS regions/genes that do not overlap the analyzed variant are not shown. For DELs, TS information are not displayed.	在基因组邻域部分中，未显示与所分析的变体不重叠的clingenhi/ts区域/基因。对于dels，不显示ts信息。
+Version Control	版本控制
+Interface Version 0.1.7 Public (20220202)	接口版本0.1.7 public (20220202)
+Cardiac Genome Clinic, Ted Rogers Centre for Heart Research	心脏基因组诊所，ted罗杰斯心脏研究中心
+Division of Clinical and Metabolic Genetics & The Centre for Applied Genomics, The Hospital for Sick Children. © 2022	临床和代谢遗传学科和应用基因组学中心，病童医院。©2022
+Already at the First Variant	已经在第一个变体
+Interpretation Saved	已保存解释
+Already at the Last Variant	已经在最后一个变体
+No Change from Last Saved	与上次保存时无更改
+Last Interpreted	最后解释
+High	高
+Medium	中
+Low	低
+Quality	质量
+Priority	优先级
+Sample ID	样品编号
+Start	开始
+End	结束
+Type	类型
+Size (kb)	大小 (kb)
+Depth Ratio	深度比
+Mapping Quality	映射质量
+Supporting Pairs	支撑对
+Opposing Pairs	对立对
+Split-reads	拆分-读取
+Positive Information	正面信息
+No Positive Information	无正面信息
+Negative Information	负面信息
+No Negative Information	无负面信息
+Read Depth	读取深度
+Click the "Update Read Depth" button above to show read depth. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新读取深度” 按钮以显示读取深度。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Mapping Quality	映射质量
+Click the "Update Mapping Quality" button above to show mapping quality. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新映射质量” 按钮以显示映射质量。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Lower Bound	下界
+Upper Bound	上界
+Click the "Load Anomalous Reads" button above to load this section.	单击上面的 “加载异常读数” 按钮以加载此部分。
+Anomalous Reads	异常读取
+Click the "Load Anomalous Reads" button above to load this section. Experimental for INS and BND type variants.	单击上面的 “加载异常读数” 按钮以加载此部分。ins和bnd型变体的实验。
+Read_Name	read_name
+Flag	旗标
+Left_Start	left_start
+Left_End	left_end
+Right_Start	right_start
+Right_End	right_end
+Size	尺寸
+Read_Type	read_type
+No reads were found based on the filter(s).	基于过滤器未找到读取。
+No gnomAD-SV variants were found based on the filter(s).	基于过滤器未发现gnomad-sv变体。
+No ClinVar variants were found based on the filter(s).	基于过滤器未发现clinvar变体。
+No variants in other internal samples were found based on the filter(s).	基于过滤器未发现其他内部样品中的变体。
+Internal Cohort	内部队列
+Total	合计
+Same Family	同一个家庭
+No variants in other CGC samples were found based on the filter(s).	基于过滤器未发现其他cgc样品中的变体。
+Strand	钢绞线
+Overlap	重叠
+Expression	表达式
+Links	链接
+Search	搜索
+Transcript Information	成绩单信息
+Genomic Neighbourhood	基因组邻域
+Click the "Plot Genomic Neighbourhood" button above to load this plot.	单击上面的 “绘制基因组邻域” 按钮以加载此图。
+This variant does not overlap with ClinGen HI regions.	此变体与clingen hi区域不重叠。
+TS not applicable because the variant is a DEL.	ts不适用，因为变体是del。
+This variant does not overlap with ClinGen TS regions.	此变体不与clingen ts区域重叠。
+This variant does not overlap with genes with pLI >= 0.1.	该变体与pli >= 0.1的基因不重叠。
+Genes	基因
+Sufficient	足够的
+Emerging	新兴
+Little	小
+Recessive/Unlikely	隐性/不太可能
+Constraint	约束
+or	或
+deletion	删除
+tandem dup or translocation	串联dup或易位
+inversion	反演
+Read Name	读取姓名
+Left Start	左起动
+Left End	左端
+Right Start	右启动
+Right End	右端
+Size	尺寸
+Read Type	读取类型
+Never	从不
+None	无
+QC Flag	qc标志
+Interpretation	口译
+Condition	条件
+Allele Origin	等位基因起源
+Sample	样品
+Algorithm	算法
+SCIP: Suite for CNV Interpretation and Prioritization	scip: 用于cnv解释和优先级排序的套件
+CNV Name (Start Typing to Search)	cnv名称 (开始键入以搜索)
+Save	保存
+Previous	上一个
+Next	下一个
+Variant Quality	变体质量
+Determination	测定
+No Override	无覆盖
+Passed	通过
+Failed	失败
+Not Evaluated	未评估
+Ruled Out - Quality Inadequate / Difficult to Assess	排除-质量不足/难以评估
+Ruled Out - Population Variation	排除-人口变异
+Ruled Out - No Gene of Interest Identified	排除-没有发现感兴趣的基因
+Ruled Out - Incorrect Boundary, Fully Intronic	排除-不正确的边界，完全内含子
+Ruled Out - Non-intragenic DUP	排除-非基因内dup
+Ruled Out - Other Reasons	排除-其他原因
+Deferred - Recessive Gene - Look for Compound Het SNV	延迟-隐性基因-寻找复合het snv
+Already Interpreted - Same Variant Identified by Another Caller	已解释-由另一个调用方标识的相同变体
+Further Review - Potentially Reportable	进一步审查-可能需要报告
+Further Review - Not Likely Reportable	进一步审查-不太可能报告
+Notes (Optional)	注释 (可选)
+Optional Notes about the Variant	关于变体的可选说明
+Variant Summary	变体摘要
+Read Depth and Mapping Quality	读取深度和映射质量
+Bin Size	bin大小
+Update Read Depth	更新读取深度
+View Sample Only	仅查看示例
+View Sample with NA12878 Overlaid	查看覆盖了na12878的示例
+View NA12878 Only	仅查看na12878
+Update Mapping Quality	更新映射质量
+Anomalous Reads	异常读取
+Load Anomalous Reads	加载异常读取
+All (Paired-end and Split-reads)	全部 (双端和拆分读取)
+Paired-end Reads Only	双端只读
+Normal Orientation, Small Insert Size Only	正常方向，仅小插入尺寸
+Normal Orientation, Large Insert Size Only	正常方向，仅大插入尺寸
+Abnormal Orientation Only	仅方向异常
+Split-reads Only	拆分-仅读取
+Paired-end Outlier Percentile	双端异常值百分位数
+Insert Size Estimates	插入尺寸估计值
+External and Internal Variant Databases	外部和内部变体数据库
+gnomAD SV Allele Frequency	gnomad sv等位基因频率
+ClinVar - Consequence	clinvar-后果
+No Filter	无筛选器
+P/LP Only	仅p/lp
+Any non-B/LB	任何非b/lb
+B/LB Only	仅b/lb
+ClinVar - Variant Size	clinvar-变体尺寸
+No Filter	无筛选器
+Under 10 Mb	10 mb以下
+Under 5 Mb	5 mb以下
+Under 1 Mb	1 mb以下
+Under 500 kb	500 kb以下
+Under 250 kb	250 kb以下
+Genomic Neighbourhood	基因组邻域
+Plot Genomic Neighbourhood	绘制基因组邻域
+Important Notes	重要说明
+For Manta INS and BND variants: the Read Depth and Mapping Quality section is not applicable. The Anomalous Reads section is experimental. 	对于manta ins和bnd变体: 读取深度和映射质量部分不适用。异常读取部分是实验性的。
+Users are encouraged to double check those variants in IGV.	鼓励用户在igv中仔细检查这些变体。
+In the External and Internal Variant Databases section, CNVs in the opposite direction of the analyzed variant (e.g., DELs when the analyzed variant is a DUP) are not shown.	在外部和内部变体数据库部分中，未显示在所分析的变体的相反方向上的cnv (例如，当所分析的变体是dup时的del)。
+In the Genomic Neighbourhood section, ClinGen HI/TS regions/genes that do not overlap the analyzed variant are not shown. For DELs, TS information are not displayed.	在基因组邻域部分中，未显示与所分析的变体不重叠的clingenhi/ts区域/基因。对于dels，不显示ts信息。
+Version Control	版本控制
+Interface Version 0.1.7 Public (20220202)	接口版本0.1.7 public (20220202)
+Cardiac Genome Clinic, Ted Rogers Centre for Heart Research	心脏基因组诊所，ted罗杰斯心脏研究中心
+Division of Clinical and Metabolic Genetics & The Centre for Applied Genomics, The Hospital for Sick Children. © 2022	临床和代谢遗传学科和应用基因组学中心，病童医院。©2022
+Already at the First Variant	已经在第一个变体
+Interpretation Saved	已保存解释
+Already at the Last Variant	已经在最后一个变体
+No Change from Last Saved	与上次保存时无更改
+Last Interpreted	最后解释
+High	高
+Medium	中
+Low	低
+Quality	质量
+Priority	优先级
+Sample ID	样品编号
+Start	开始
+End	结束
+Type	类型
+Size (kb)	大小 (kb)
+Depth Ratio	深度比
+Mapping Quality	映射质量
+Supporting Pairs	支撑对
+Opposing Pairs	对立对
+Split-reads	拆分-读取
+Positive Information	正面信息
+No Positive Information	无正面信息
+Negative Information	负面信息
+No Negative Information	无负面信息
+Read Depth	读取深度
+Click the "Update Read Depth" button above to show read depth. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新读取深度” 按钮以显示读取深度。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Mapping Quality	映射质量
+Click the "Update Mapping Quality" button above to show mapping quality. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新映射质量” 按钮以显示映射质量。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Lower Bound	下界
+Upper Bound	上界
+Click the "Load Anomalous Reads" button above to load this section.	单击上面的 “加载异常读数” 按钮以加载此部分。
+Anomalous Reads	异常读取
+Click the "Load Anomalous Reads" button above to load this section. Experimental for INS and BND type variants.	单击上面的 “加载异常读数” 按钮以加载此部分。ins和bnd型变体的实验。
+Read_Name	read_name
+Flag	旗标
+Left_Start	left_start
+Left_End	left_end
+Right_Start	right_start
+Right_End	right_end
+Size	尺寸
+Read_Type	read_type
+No reads were found based on the filter(s).	基于过滤器未找到读取。
+No gnomAD-SV variants were found based on the filter(s).	基于过滤器未发现gnomad-sv变体。
+No ClinVar variants were found based on the filter(s).	基于过滤器未发现clinvar变体。
+No variants in other internal samples were found based on the filter(s).	基于过滤器未发现其他内部样品中的变体。
+Internal Cohort	内部队列
+Total	合计
+Same Family	同一个家庭
+No variants in other CGC samples were found based on the filter(s).	基于过滤器未发现其他cgc样品中的变体。
+Strand	钢绞线
+Overlap	重叠
+Expression	表达式
+Links	链接
+Search	搜索
+Transcript Information	成绩单信息
+Genomic Neighbourhood	基因组邻域
+Click the "Plot Genomic Neighbourhood" button above to load this plot.	单击上面的 “绘制基因组邻域” 按钮以加载此图。
+This variant does not overlap with ClinGen HI regions.	此变体与clingen hi区域不重叠。
+TS not applicable because the variant is a DEL.	ts不适用，因为变体是del。
+This variant does not overlap with ClinGen TS regions.	此变体不与clingen ts区域重叠。
+This variant does not overlap with genes with pLI >= 0.1.	该变体与pli >= 0.1的基因不重叠。
+Genes	基因
+Sufficient	足够的
+Emerging	新兴
+Little	小
+Recessive/Unlikely	隐性/不太可能
+Constraint	约束
+or	或
+deletion	删除
+tandem dup or translocation	串联dup或易位
+inversion	反演
+Read Name	读取姓名
+Left Start	左起动
+Left End	左端
+Right Start	右启动
+Right End	右端
+Size	尺寸
+Read Type	读取类型
+Never	从不
+None	无
+QC Flag	qc标志
+Interpretation	口译
+Condition	条件
+Allele Origin	等位基因起源
+Sample	样品
+Algorithm	算法
+Name	姓名
+SCIP: Suite for CNV Interpretation and Prioritization	scip: 用于cnv解释和优先级排序的套件
+CNV Name (Start Typing to Search)	cnv名称 (开始键入以搜索)
+Save	保存
+Previous	上一个
+Next	下一个
+Variant Quality	变体质量
+Determination	测定
+No Override	无覆盖
+Passed	通过
+Failed	失败
+Not Evaluated	未评估
+Ruled Out - Quality Inadequate / Difficult to Assess	排除-质量不足/难以评估
+Ruled Out - Population Variation	排除-人口变异
+Ruled Out - No Gene of Interest Identified	排除-没有发现感兴趣的基因
+Ruled Out - Incorrect Boundary, Fully Intronic	排除-不正确的边界，完全内含子
+Ruled Out - Non-intragenic DUP	排除-非基因内dup
+Ruled Out - Other Reasons	排除-其他原因
+Deferred - Recessive Gene - Look for Compound Het SNV	延迟-隐性基因-寻找复合het snv
+Already Interpreted - Same Variant Identified by Another Caller	已解释-由另一个调用方标识的相同变体
+Further Review - Potentially Reportable	进一步审查-可能需要报告
+Further Review - Not Likely Reportable	进一步审查-不太可能报告
+Notes (Optional)	注释 (可选)
+Optional Notes about the Variant	关于变体的可选说明
+Variant Summary	变体摘要
+Read Depth and Mapping Quality	读取深度和映射质量
+Bin Size	bin大小
+Update Read Depth	更新读取深度
+View Sample Only	仅查看示例
+View Sample with NA12878 Overlaid	查看覆盖了na12878的示例
+View NA12878 Only	仅查看na12878
+Update Mapping Quality	更新映射质量
+Anomalous Reads	异常读取
+Load Anomalous Reads	加载异常读取
+All (Paired-end and Split-reads)	全部 (双端和拆分读取)
+Paired-end Reads Only	双端只读
+Normal Orientation, Small Insert Size Only	正常方向，仅小插入尺寸
+Normal Orientation, Large Insert Size Only	正常方向，仅大插入尺寸
+Abnormal Orientation Only	仅方向异常
+Split-reads Only	拆分-仅读取
+Paired-end Outlier Percentile	双端异常值百分位数
+Insert Size Estimates	插入尺寸估计值
+External and Internal Variant Databases	外部和内部变体数据库
+gnomAD SV Allele Frequency	gnomad sv等位基因频率
+ClinVar - Consequence	clinvar-后果
+No Filter	无筛选器
+P/LP Only	仅p/lp
+Any non-B/LB	任何非b/lb
+B/LB Only	仅b/lb
+ClinVar - Variant Size	clinvar-变体尺寸
+No Filter	无筛选器
+Under 10 Mb	10 mb以下
+Under 5 Mb	5 mb以下
+Under 1 Mb	1 mb以下
+Under 500 kb	500 kb以下
+Under 250 kb	250 kb以下
+Genomic Neighbourhood	基因组邻域
+Plot Genomic Neighbourhood	绘制基因组邻域
+Important Notes	重要说明
+For Manta INS and BND variants: the Read Depth and Mapping Quality section is not applicable. The Anomalous Reads section is experimental. 	对于manta ins和bnd变体: 读取深度和映射质量部分不适用。异常读取部分是实验性的。
+Users are encouraged to double check those variants in IGV.	鼓励用户在igv中仔细检查这些变体。
+In the External and Internal Variant Databases section, CNVs in the opposite direction of the analyzed variant (e.g., DELs when the analyzed variant is a DUP) are not shown.	在外部和内部变体数据库部分中，未显示在所分析的变体的相反方向上的cnv (例如，当所分析的变体是dup时的del)。
+In the Genomic Neighbourhood section, ClinGen HI/TS regions/genes that do not overlap the analyzed variant are not shown. For DELs, TS information are not displayed.	在基因组邻域部分中，未显示与所分析的变体不重叠的clingenhi/ts区域/基因。对于dels，不显示ts信息。
+Version Control	版本控制
+Interface Version 0.1.7 Public (20220202)	接口版本0.1.7 public (20220202)
+Cardiac Genome Clinic, Ted Rogers Centre for Heart Research	心脏基因组诊所，ted罗杰斯心脏研究中心
+Division of Clinical and Metabolic Genetics & The Centre for Applied Genomics, The Hospital for Sick Children. © 2022	临床和代谢遗传学科和应用基因组学中心，病童医院。©2022
+Already at the First Variant	已经在第一个变体
+Interpretation Saved	已保存解释
+Already at the Last Variant	已经在最后一个变体
+No Change from Last Saved	与上次保存时无更改
+Last Interpreted	最后解释
+High	高
+Medium	中
+Low	低
+Quality	质量
+Priority	优先级
+Sample ID	样品编号
+Start	开始
+End	结束
+Type	类型
+Size (kb)	大小 (kb)
+Depth Ratio	深度比
+Mapping Quality	映射质量
+Supporting Pairs	支撑对
+Opposing Pairs	对立对
+Split-reads	拆分-读取
+Positive Information	正面信息
+No Positive Information	无正面信息
+Negative Information	负面信息
+No Negative Information	无负面信息
+Read Depth	读取深度
+Click the "Update Read Depth" button above to show read depth. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新读取深度” 按钮以显示读取深度。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Mapping Quality	映射质量
+Click the "Update Mapping Quality" button above to show mapping quality. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新映射质量” 按钮以显示映射质量。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Lower Bound	下界
+Upper Bound	上界
+Click the "Load Anomalous Reads" button above to load this section.	单击上面的 “加载异常读数” 按钮以加载此部分。
+Anomalous Reads	异常读取
+Click the "Load Anomalous Reads" button above to load this section. Experimental for INS and BND type variants.	单击上面的 “加载异常读数” 按钮以加载此部分。ins和bnd型变体的实验。
+Read_Name	read_name
+Flag	旗标
+Left_Start	left_start
+Left_End	left_end
+Right_Start	right_start
+Right_End	right_end
+Size	尺寸
+Read_Type	read_type
+No reads were found based on the filter(s).	基于过滤器未找到读取。
+No gnomAD-SV variants were found based on the filter(s).	基于过滤器未发现gnomad-sv变体。
+No ClinVar variants were found based on the filter(s).	基于过滤器未发现clinvar变体。
+No variants in other internal samples were found based on the filter(s).	基于过滤器未发现其他内部样品中的变体。
+Internal Cohort	内部队列
+Total	合计
+Same Family	同一个家庭
+No variants in other CGC samples were found based on the filter(s).	基于过滤器未发现其他cgc样品中的变体。
+Strand	钢绞线
+Overlap	重叠
+Expression	表达式
+Links	链接
+Search	搜索
+Transcript Information	成绩单信息
+Genomic Neighbourhood	基因组邻域
+Click the "Plot Genomic Neighbourhood" button above to load this plot.	单击上面的 “绘制基因组邻域” 按钮以加载此图。
+This variant does not overlap with ClinGen HI regions.	此变体与clingen hi区域不重叠。
+TS not applicable because the variant is a DEL.	ts不适用，因为变体是del。
+This variant does not overlap with ClinGen TS regions.	此变体不与clingen ts区域重叠。
+This variant does not overlap with genes with pLI >= 0.1.	该变体与pli >= 0.1的基因不重叠。
+Genes	基因
+Sufficient	足够的
+Emerging	新兴
+Little	小
+Recessive/Unlikely	隐性/不太可能
+Constraint	约束
+or	或
+deletion	删除
+tandem dup or translocation	串联dup或易位
+inversion	反演
+Read Name	读取姓名
+Left Start	左起动
+Left End	左端
+Right Start	右启动
+Right End	右端
+Size	尺寸
+Read Type	读取类型
+Never	从不
+None	无
+QC Flag	qc标志
+Interpretation	口译
+Condition	条件
+Allele Origin	等位基因起源
+Sample	样品
+Algorithm	算法
+Name	姓名
+First	第一
+Last	最后一个
+SCIP: Suite for CNV Interpretation and Prioritization	scip: 用于cnv解释和优先级排序的套件
+CNV Name (Start Typing to Search)	cnv名称 (开始键入以搜索)
+Save	保存
+Previous	上一个
+Next	下一个
+Variant Quality	变体质量
+Determination	测定
+No Override	无覆盖
+Passed	通过
+Failed	失败
+Not Evaluated	未评估
+Ruled Out - Quality Inadequate / Difficult to Assess	排除-质量不足/难以评估
+Ruled Out - Population Variation	排除-人口变异
+Ruled Out - No Gene of Interest Identified	排除-没有发现感兴趣的基因
+Ruled Out - Incorrect Boundary, Fully Intronic	排除-不正确的边界，完全内含子
+Ruled Out - Non-intragenic DUP	排除-非基因内dup
+Ruled Out - Other Reasons	排除-其他原因
+Deferred - Recessive Gene - Look for Compound Het SNV	延迟-隐性基因-寻找复合het snv
+Already Interpreted - Same Variant Identified by Another Caller	已解释-由另一个调用方标识的相同变体
+Further Review - Potentially Reportable	进一步审查-可能需要报告
+Further Review - Not Likely Reportable	进一步审查-不太可能报告
+Notes (Optional)	注释 (可选)
+Optional Notes about the Variant	关于变体的可选说明
+Variant Summary	变体摘要
+Read Depth and Mapping Quality	读取深度和映射质量
+Bin Size	bin大小
+Update Read Depth	更新读取深度
+View Sample Only	仅查看示例
+View Sample with NA12878 Overlaid	查看覆盖了na12878的示例
+View NA12878 Only	仅查看na12878
+Update Mapping Quality	更新映射质量
+Anomalous Reads	异常读取
+Load Anomalous Reads	加载异常读取
+All (Paired-end and Split-reads)	全部 (双端和拆分读取)
+Paired-end Reads Only	双端只读
+Normal Orientation, Small Insert Size Only	正常方向，仅小插入尺寸
+Normal Orientation, Large Insert Size Only	正常方向，仅大插入尺寸
+Abnormal Orientation Only	仅方向异常
+Split-reads Only	拆分-仅读取
+Paired-end Outlier Percentile	双端异常值百分位数
+Insert Size Estimates	插入尺寸估计值
+External and Internal Variant Databases	外部和内部变体数据库
+gnomAD SV Allele Frequency	gnomad sv等位基因频率
+ClinVar - Consequence	clinvar-后果
+No Filter	无筛选器
+P/LP Only	仅p/lp
+Any non-B/LB	任何非b/lb
+B/LB Only	仅b/lb
+ClinVar - Variant Size	clinvar-变体尺寸
+No Filter	无筛选器
+Under 10 Mb	10 mb以下
+Under 5 Mb	5 mb以下
+Under 1 Mb	1 mb以下
+Under 500 kb	500 kb以下
+Under 250 kb	250 kb以下
+Genomic Neighbourhood	基因组邻域
+Plot Genomic Neighbourhood	绘制基因组邻域
+Important Notes	重要说明
+For Manta INS and BND variants: the Read Depth and Mapping Quality section is not applicable. The Anomalous Reads section is experimental. 	对于manta ins和bnd变体: 读取深度和映射质量部分不适用。异常读取部分是实验性的。
+Users are encouraged to double check those variants in IGV.	鼓励用户在igv中仔细检查这些变体。
+In the External and Internal Variant Databases section, CNVs in the opposite direction of the analyzed variant (e.g., DELs when the analyzed variant is a DUP) are not shown.	在外部和内部变体数据库部分中，未显示在所分析的变体的相反方向上的cnv (例如，当所分析的变体是dup时的del)。
+In the Genomic Neighbourhood section, ClinGen HI/TS regions/genes that do not overlap the analyzed variant are not shown. For DELs, TS information are not displayed.	在基因组邻域部分中，未显示与所分析的变体不重叠的clingenhi/ts区域/基因。对于dels，不显示ts信息。
+Version Control	版本控制
+Interface Version 0.1.7 Public (20220202)	接口版本0.1.7 public (20220202)
+Cardiac Genome Clinic, Ted Rogers Centre for Heart Research	心脏基因组诊所，ted罗杰斯心脏研究中心
+Division of Clinical and Metabolic Genetics & The Centre for Applied Genomics, The Hospital for Sick Children. © 2022	临床和代谢遗传学科和应用基因组学中心，病童医院。©2022
+Already at the First Variant	已经在第一个变体
+Interpretation Saved	已保存解释
+Already at the Last Variant	已经在最后一个变体
+No Change from Last Saved	与上次保存时无更改
+Last Interpreted	最后解释
+High	高
+Medium	中
+Low	低
+Quality	质量
+Priority	优先级
+Sample ID	样品编号
+Start	开始
+End	结束
+Type	类型
+Size (kb)	大小 (kb)
+Depth Ratio	深度比
+Mapping Quality	映射质量
+Supporting Pairs	支撑对
+Opposing Pairs	对立对
+Split-reads	拆分-读取
+Positive Information	正面信息
+No Positive Information	无正面信息
+Negative Information	负面信息
+No Negative Information	无负面信息
+Read Depth	读取深度
+Click the "Update Read Depth" button above to show read depth. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新读取深度” 按钮以显示读取深度。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Mapping Quality	映射质量
+Click the "Update Mapping Quality" button above to show mapping quality. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新映射质量” 按钮以显示映射质量。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Lower Bound	下界
+Upper Bound	上界
+Click the "Load Anomalous Reads" button above to load this section.	单击上面的 “加载异常读数” 按钮以加载此部分。
+Anomalous Reads	异常读取
+Click the "Load Anomalous Reads" button above to load this section. Experimental for INS and BND type variants.	单击上面的 “加载异常读数” 按钮以加载此部分。ins和bnd型变体的实验。
+Read_Name	read_name
+Flag	旗标
+Left_Start	left_start
+Left_End	left_end
+Right_Start	right_start
+Right_End	right_end
+Size	尺寸
+Read_Type	read_type
+No reads were found based on the filter(s).	基于过滤器未找到读取。
+No gnomAD-SV variants were found based on the filter(s).	基于过滤器未发现gnomad-sv变体。
+No ClinVar variants were found based on the filter(s).	基于过滤器未发现clinvar变体。
+No variants in other internal samples were found based on the filter(s).	基于过滤器未发现其他内部样品中的变体。
+Internal Cohort	内部队列
+Total	合计
+Same Family	同一个家庭
+No variants in other CGC samples were found based on the filter(s).	基于过滤器未发现其他cgc样品中的变体。
+Strand	钢绞线
+Overlap	重叠
+Expression	表达式
+Links	链接
+Search	搜索
+Transcript Information	成绩单信息
+Genomic Neighbourhood	基因组邻域
+Click the "Plot Genomic Neighbourhood" button above to load this plot.	单击上面的 “绘制基因组邻域” 按钮以加载此图。
+This variant does not overlap with ClinGen HI regions.	此变体与clingen hi区域不重叠。
+TS not applicable because the variant is a DEL.	ts不适用，因为变体是del。
+This variant does not overlap with ClinGen TS regions.	此变体不与clingen ts区域重叠。
+This variant does not overlap with genes with pLI >= 0.1.	该变体与pli >= 0.1的基因不重叠。
+Genes	基因
+Sufficient	足够的
+Emerging	新兴
+Little	小
+Recessive/Unlikely	隐性/不太可能
+Constraint	约束
+or	或
+deletion	删除
+tandem dup or translocation	串联dup或易位
+inversion	反演
+Read Name	读取姓名
+Left Start	左起动
+Left End	左端
+Right Start	右启动
+Right End	右端
+Size	尺寸
+Read Type	读取类型
+Never	从不
+None	无
+QC Flag	qc标志
+Interpretation	口译
+Condition	条件
+Allele Origin	等位基因起源
+Sample	样品
+Algorithm	算法
+Name	姓名
+First	第一
+Last	最后一个
+showing 1 to 2 of 2 entries	显示2个条目中的1到2个
+search	搜索
+show 10 entries	显示10个条目
+SCIP: Suite for CNV Interpretation and Prioritization	scip: 用于cnv解释和优先级排序的套件
+CNV Name (Start Typing to Search)	cnv名称 (开始键入以搜索)
+Save	保存
+Previous	上一个
+Next	下一个
+Variant Quality	变体质量
+Determination	测定
+No Override	无覆盖
+Passed	通过
+Failed	失败
+Not Evaluated	未评估
+Ruled Out - Quality Inadequate / Difficult to Assess	排除-质量不足/难以评估
+Ruled Out - Population Variation	排除-人口变异
+Ruled Out - No Gene of Interest Identified	排除-没有发现感兴趣的基因
+Ruled Out - Incorrect Boundary, Fully Intronic	排除-不正确的边界，完全内含子
+Ruled Out - Non-intragenic DUP	排除-非基因内dup
+Ruled Out - Other Reasons	排除-其他原因
+Deferred - Recessive Gene - Look for Compound Het SNV	延迟-隐性基因-寻找复合het snv
+Already Interpreted - Same Variant Identified by Another Caller	已解释-由另一个调用方标识的相同变体
+Further Review - Potentially Reportable	进一步审查-可能需要报告
+Further Review - Not Likely Reportable	进一步审查-不太可能报告
+Notes (Optional)	注释 (可选)
+Optional Notes about the Variant	关于变体的可选说明
+Variant Summary	变体摘要
+Read Depth and Mapping Quality	读取深度和映射质量
+Bin Size	bin大小
+Update Read Depth	更新读取深度
+View Sample Only	仅查看示例
+View Sample with NA12878 Overlaid	查看覆盖了na12878的示例
+View NA12878 Only	仅查看na12878
+Update Mapping Quality	更新映射质量
+Anomalous Reads	异常读取
+Load Anomalous Reads	加载异常读取
+All (Paired-end and Split-reads)	全部 (双端和拆分读取)
+Paired-end Reads Only	双端只读
+Normal Orientation, Small Insert Size Only	正常方向，仅小插入尺寸
+Normal Orientation, Large Insert Size Only	正常方向，仅大插入尺寸
+Abnormal Orientation Only	仅方向异常
+Split-reads Only	拆分-仅读取
+Paired-end Outlier Percentile	双端异常值百分位数
+Insert Size Estimates	插入尺寸估计值
+External and Internal Variant Databases	外部和内部变体数据库
+gnomAD SV Allele Frequency	gnomad sv等位基因频率
+ClinVar - Consequence	clinvar-后果
+No Filter	无筛选器
+P/LP Only	仅p/lp
+Any non-B/LB	任何非b/lb
+B/LB Only	仅b/lb
+ClinVar - Variant Size	clinvar-变体尺寸
+No Filter	无筛选器
+Under 10 Mb	10 mb以下
+Under 5 Mb	5 mb以下
+Under 1 Mb	1 mb以下
+Under 500 kb	500 kb以下
+Under 250 kb	250 kb以下
+Genomic Neighbourhood	基因组邻域
+Plot Genomic Neighbourhood	绘制基因组邻域
+Important Notes	重要说明
+For Manta INS and BND variants: the Read Depth and Mapping Quality section is not applicable. The Anomalous Reads section is experimental. 	对于manta ins和bnd变体: 读取深度和映射质量部分不适用。异常读取部分是实验性的。
+Users are encouraged to double check those variants in IGV.	鼓励用户在igv中仔细检查这些变体。
+In the External and Internal Variant Databases section, CNVs in the opposite direction of the analyzed variant (e.g., DELs when the analyzed variant is a DUP) are not shown.	在外部和内部变体数据库部分中，未显示在所分析的变体的相反方向上的cnv (例如，当所分析的变体是dup时的del)。
+In the Genomic Neighbourhood section, ClinGen HI/TS regions/genes that do not overlap the analyzed variant are not shown. For DELs, TS information are not displayed.	在基因组邻域部分中，未显示与所分析的变体不重叠的clingenhi/ts区域/基因。对于dels，不显示ts信息。
+Version Control	版本控制
+Interface Version 0.1.7 Public (20220202)	接口版本0.1.7 public (20220202)
+Cardiac Genome Clinic, Ted Rogers Centre for Heart Research	心脏基因组诊所，ted罗杰斯心脏研究中心
+Division of Clinical and Metabolic Genetics & The Centre for Applied Genomics, The Hospital for Sick Children. © 2022	临床和代谢遗传学科和应用基因组学中心，病童医院。©2022
+Already at the First Variant	已经在第一个变体
+Interpretation Saved	已保存解释
+Already at the Last Variant	已经在最后一个变体
+No Change from Last Saved	与上次保存时无更改
+Last Interpreted	最后解释
+High	高
+Medium	中
+Low	低
+Quality	质量
+Priority	优先级
+Sample ID	样品编号
+Start	开始
+End	结束
+Type	类型
+Size (kb)	大小 (kb)
+Depth Ratio	深度比
+Mapping Quality	映射质量
+Supporting Pairs	支撑对
+Opposing Pairs	对立对
+Split-reads	拆分-读取
+Positive Information	正面信息
+No Positive Information	无正面信息
+Negative Information	负面信息
+No Negative Information	无负面信息
+Read Depth	读取深度
+Click the "Update Read Depth" button above to show read depth. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新读取深度” 按钮以显示读取深度。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Mapping Quality	映射质量
+Click the "Update Mapping Quality" button above to show mapping quality. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新映射质量” 按钮以显示映射质量。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+This section is not applicable for INS or BND type variants.	本节不适用于ins或bnd类型变体。
+Lower Bound	下界
+Upper Bound	上界
+Click the "Load Anomalous Reads" button above to load this section.	单击上面的 “加载异常读数” 按钮以加载此部分。
+Anomalous Reads	异常读取
+Click the "Load Anomalous Reads" button above to load this section. Experimental for INS and BND type variants.	单击上面的 “加载异常读数” 按钮以加载此部分。ins和bnd型变体的实验。
+Read_Name	read_name
+Flag	旗标
+Left_Start	left_start
+Left_End	left_end
+Right_Start	right_start
+Right_End	right_end
+Size	尺寸
+Read_Type	read_type
+No reads were found based on the filter(s).	基于过滤器未找到读取。
+No gnomAD-SV variants were found based on the filter(s).	基于过滤器未发现gnomad-sv变体。
+No ClinVar variants were found based on the filter(s).	基于过滤器未发现clinvar变体。
+No variants in other internal samples were found based on the filter(s).	基于过滤器未发现其他内部样品中的变体。
+Internal Cohort	内部队列
+Total	合计
+Same Family	同一个家庭
+No variants in other CGC samples were found based on the filter(s).	基于过滤器未发现其他cgc样品中的变体。
+Strand	钢绞线
+Overlap	重叠
+Expression	表达式
+Links	链接
+Search	搜索
+Transcript Information	成绩单信息
+Genomic Neighbourhood	基因组邻域
+Click the "Plot Genomic Neighbourhood" button above to load this plot.	单击上面的 “绘制基因组邻域” 按钮以加载此图。
+This variant does not overlap with ClinGen HI regions.	此变体与clingen hi区域不重叠。
+TS not applicable because the variant is a DEL.	ts不适用，因为变体是del。
+This variant does not overlap with ClinGen TS regions.	此变体不与clingen ts区域重叠。
+This variant does not overlap with genes with pLI >= 0.1.	该变体与pli >= 0.1的基因不重叠。
+Genes	基因
+Sufficient	足够的
+Emerging	新兴
+Little	小
+Recessive/Unlikely	隐性/不太可能
+Constraint	约束
+or	或
+deletion	删除
+tandem dup or translocation	串联dup或易位
+inversion	反演
+Read Name	读取姓名
+Left Start	左起动
+Left End	左端
+Right Start	右启动
+Right End	右端
+Size	尺寸
+Read Type	读取类型
+Never	从不
+None	无
+QC Flag	qc标志
+Interpretation	口译
+Condition	条件
+Allele Origin	等位基因起源
+Sample	样品
+Algorithm	算法
+Name	姓名
+First	第一
+Last	最后一个
+showing 1 to 2 of 2 entries	显示2个条目中的1到2个
+search	搜索
+show 10 entries	显示10个条目
+ClinGen Dosage Map	clingen剂量图

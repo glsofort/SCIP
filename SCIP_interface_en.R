@@ -12,10 +12,10 @@ BinMean <- function (vec, every, na.rm = TRUE) {
   x
 }
 
-config_file=read.table("./interface_config.txt",comment.char="",sep="\t",quote="")
-temp_file_dir=config_file[2,2]
-username=config_file[4,2]
-regions_list=read.table(paste(temp_file_dir,"/../user_data/",config_file[1,2],".pipeline_summary.txt",sep=""),comment.char="",sep="\t",quote="")
+# config_file=read.table("./interface_config.txt",comment.char="",sep="\t",quote="")
+# temp_file_dir=config_file[2,2]
+# username=config_file[4,2]
+# regions_list=read.table(paste(temp_file_dir,"/../user_data/",config_file[1,2],".pipeline_summary.txt",sep=""),comment.char="",sep="\t",quote="")
 
 # https://stackoverflow.com/questions/63882483
 mymodal <- function (..., title = NULL, footer = modalButton("Dismiss"), 
@@ -44,12 +44,12 @@ mymodal <- function (..., title = NULL, footer = modalButton("Dismiss"),
 }
 
 # sort by priority, then by size
-regions_name_sort1=regions_list[sort(regions_list$V5-regions_list$V4+1,index.return=T,decreasing=T)$ix,]
-regions_name=regions_name_sort1$V17[sort(regions_name_sort1$V18,index.return=T)$ix]
-results_out=paste(config_file[3,2],"/SCIP_results.txt",sep="")
-if (file.exists(results_out)==F){
-  file.create(results_out)
-}
+# regions_name_sort1=regions_list[sort(regions_list$V5-regions_list$V4+1,index.return=T,decreasing=T)$ix,]
+# regions_name=regions_name_sort1$V17[sort(regions_name_sort1$V18,index.return=T)$ix]
+# results_out=paste(config_file[3,2],"/SCIP_results.txt",sep="")
+# if (file.exists(results_out)==F){
+#   file.create(results_out)
+# }
 
 ui=fluidPage(
   tags$head(
@@ -61,8 +61,8 @@ ui=fluidPage(
   titlePanel("SCIP: Suite for CNV Interpretation and Prioritization"),
   
   fluidRow(
-    column(6,selectInput(inputId="cnv_name",label="CNV Name (Start Typing to Search)",
-           choice=regions_name,width="100%")),
+    column(6,selectInput(inputId="cnv_name",label="CNV Name (Start Typing to Search)", 
+              choices=NULL,width="100%")),
     column(2,actionButton(inputId="save",label="Save",width="100%"),style="margin-top:25px;"),
     column(2,actionButton(inputId="prev_var",label="Previous",width="100%"),style="margin-top:25px;"),
     column(2,actionButton(inputId="next_var",label="Next",width="100%"),style="margin-top:25px"),
@@ -70,14 +70,14 @@ ui=fluidPage(
   
   fluidRow(
     column(2,selectInput(inputId="qual_override",label="Variant Quality",
-           choices=c("No Override","Passed","Failed"),selected="No Override",width="100%")),
+           choices=c("No Override"="No Override","Passed"="Passed","Failed"="Failed"),selected="No Override",width="100%")),
     
     column(4,selectInput(inputId="decision",label="Determination",
-                         choices=c("Not Evaluated","Ruled Out - Quality Inadequate / Difficult to Assess","Ruled Out - Population Variation",
-                                   "Ruled Out - No Gene of Interest Identified","Ruled Out - Incorrect Boundary, Fully Intronic",
-                                   "Ruled Out - Non-intragenic DUP","Ruled Out - Other Reasons",
-                                   "Deferred - Recessive Gene - Look for Compound Het SNV", "Already Interpreted - Same Variant Identified by Another Caller",
-                                   "Further Review - Potentially Reportable","Further Review - Not Likely Reportable"),selected="Not Evaluated",width="100%")),
+                         choices=c("Not Evaluated"="Not Evaluated","Ruled Out - Quality Inadequate / Difficult to Assess"="Ruled Out - Quality Inadequate / Difficult to Assess","Ruled Out - Population Variation"="Ruled Out - Population Variation",
+                                   "Ruled Out - No Gene of Interest Identified"= "Ruled Out - No Gene of Interest Identified","Ruled Out - Incorrect Boundary, Fully Intronic"="Ruled Out - Incorrect Boundary, Fully Intronic",
+                                   "Ruled Out - Non-intragenic DUP"="Ruled Out - Non-intragenic DUP","Ruled Out - Other Reasons"="Ruled Out - Other Reasons",
+                                   "Deferred - Recessive Gene - Look for Compound Het SNV"= "Deferred - Recessive Gene - Look for Compound Het SNV", "Already Interpreted - Same Variant Identified by Another Caller"="Already Interpreted - Same Variant Identified by Another Caller",
+                                   "Further Review - Potentially Reportable"="Further Review - Potentially Reportable","Further Review - Not Likely Reportable"="Further Review - Not Likely Reportable"),selected="Not Evaluated",width="100%")),
     
     column(6,textAreaInput(inputId="comment",label="Notes (Optional)",placeholder="Optional Notes about the Variant",
                        width="100%")),
@@ -169,12 +169,100 @@ ui=fluidPage(
   p("Division of Clinical and Metabolic Genetics & The Centre for Applied Genomics, The Hospital for Sick Children. © 2022"),
 )
 
-server=function(input,output){
+get_scip_cnv_name <- function(sample_id, cnv_param) {
+  # Split the input by "-"
+  parts <- unlist(strsplit(cnv_param, "-"))
+  
+  # Extract components
+  chrom <- parts[1]     # 13
+  start <- parts[2]     # 35698501
+  end <- parts[3]       # 35731500
+  cnv_type <- parts[4]  # DEL
+  
+  # Construct the new format
+  cnv_name <- sprintf("%s-001-001.%s.%s.%s.%s", sample_id, chrom, start, end, cnv_type)
+  
+  return(cnv_name)
+}
+
+server=function(input,output,session){
+  # Reactive values to store dynamic data
+  rv <- reactiveValues(
+    config_file = NULL,
+    temp_file_dir = NULL,
+    username = NULL,
+    regions_list = NULL,
+    regions_name = NULL,
+    config_loaded = FALSE,
+    cnv_name = NULL,
+    sample_id = NULL,
+    assembly = NULL
+  )
+
+  # Read URL parameters and update config
+  observe({
+    query <- parseQueryString(session$clientData$url_search)
+    
+    # Use config file from URL, or fallback to default
+    # Default config path
+    config_path <- "./interface_config.txt"
+
+    # If sample_id exists in the URL, update config_path and store sample_id
+    if (!is.null(query$sample_id)) {
+      rv$sample_id <- query$sample_id
+      config_path <- paste0("/highspeed-data/samples/", query$sample_id, "/SCIP/interface_config.txt")
+    }
+    
+    rv$assembly <- "hg19"
+    if (!is.null(query$sample_id)) {
+      rv$assembly <- query$assembly
+    }
+
+    # Read config file dynamically
+    rv$config_file <- read.table(config_path, comment.char = "", sep = "\t", quote = "")
+    
+    # Extract file paths from config
+    rv$temp_file_dir <- rv$config_file[2, 2]
+    rv$username <- rv$config_file[4, 2]
+    
+    # Load CNV regions list dynamically
+    rv$regions_list <- read.table(
+      paste0(rv$temp_file_dir, "/../user_data/", rv$config_file[1, 2], ".pipeline_summary.txt"),
+      comment.char = "", sep = "\t", quote = ""
+    )
+
+    # Sort and update regions_name dynamically
+    regions_sorted <- rv$regions_list[sort(rv$regions_list$V5 - rv$regions_list$V4 + 1, 
+                                           index.return = TRUE, decreasing = TRUE)$ix,]
+    rv$regions_name <- regions_sorted$V17[sort(regions_sorted$V18, index.return = TRUE)$ix]
+    results_out=paste(rv$config_file[3,2],"/SCIP_results.txt",sep="")
+    if (file.exists(results_out)==F){
+      file.create(results_out)
+    }
+
+    # Get CNV
+    if (is.null(query$cnv)) {
+      rv$cnv_name <- rv$regions_name[1]
+    } else {
+      print(rv$sample_id)
+      rv$cnv_name <- get_scip_cnv_name(rv$sample_id, query$cnv)
+      print(rv$cnv_name)
+    }
+
+    updateSelectInput(session, "cnv_name", choices = rv$regions_name)
+    updateSelectInput(session, "cnv_name", choices = rv$regions_name, selected = rv$cnv_name) 
+    print(rv$cnv_name)
+
+    # Mark config as ready
+    rv$config_loaded <- TRUE
+
+  })
+
   # reactive values
   ranges=reactiveValues(x=NULL,y1=NULL,name=NULL)
   ranges_default=reactiveValues(x=NULL,y1=NULL)
   load=reactiveValues(depth=0,mq=0,reads=0,gene=0)
-  master_info=reactiveValues(chr=NULL,start=NULL,end=NULL,proband=NULL,type=NULL)
+  master_info=reactiveValues(chr=NULL,start=NULL,end=NULL,proband=NULL,type=NULL,loaded=FALSE)
   
   latest_interpretation=reactiveValues(qual_override=NULL,decision=NULL,comment=NULL,time="Never",user="None")
   insert_size=reactiveValues(lower=NULL,upper=NULL,name=NULL,percentile=NULL)
@@ -184,10 +272,11 @@ server=function(input,output){
   # end reactive values
   
   observeEvent(input$prev_var,{
-    current_var=which(regions_name==input$cnv_name)
+    req(rv$config_loaded)
+    current_var=which(rv$regions_name==input$cnv_name)
     st2=0
     if (current_var>1){
-      updateSelectInput(inputId="cnv_name",selected=regions_name[current_var-1])
+      updateSelectInput(inputId="cnv_name",selected=rv$regions_name[current_var-1])
     } else{
       showNotification("Already at the First Variant",type="error",duration=15)
       st2=1
@@ -195,7 +284,7 @@ server=function(input,output){
     
     if ((input$qual_override!="No Override" && input$qual_override!=latest_interpretation$qual_override) || 
         (input$decision!="Not Evaluated" && input$decision!=latest_interpretation$decision) || (input$comment!="" && input$comment!=latest_interpretation$comment)){
-      write(paste(as.numeric(Sys.time()),input$cnv_name,input$qual_override,input$decision,input$comment,Sys.time(),username,sep="\t"),
+      write(paste(as.numeric(Sys.time()),input$cnv_name,input$qual_override,input$decision,input$comment,Sys.time(),rv$username,sep="\t"),
             file=results_out,append=T)
       if (st2==0){
         showNotification("Interpretation Saved",type="message",duration=2)
@@ -204,17 +293,18 @@ server=function(input,output){
         latest_interpretation$decision=input$decision
         latest_interpretation$comment=input$comment
         latest_interpretation$time=Sys.time()
-        latest_interpretation$user=username
+        latest_interpretation$user=rv$username
         showNotification("Interpretation Saved",type="message",duration=1)
       }
     }
   })
   
   observeEvent(input$next_var,{
-    current_var=which(regions_name==input$cnv_name)
+    req(rv$config_loaded)
+    current_var=which(rv$regions_name==input$cnv_name)
     st2=0
-    if (current_var<length(regions_name)){
-      updateSelectInput(inputId="cnv_name",selected=regions_name[current_var+1])
+    if (current_var<length(rv$regions_name)){
+      updateSelectInput(inputId="cnv_name",selected=rv$regions_name[current_var+1])
     } else{
       showNotification("Already at the Last Variant",type="error",duration=15)
       st2=1
@@ -222,7 +312,7 @@ server=function(input,output){
     
     if ((input$qual_override!="No Override" && input$qual_override!=latest_interpretation$qual_override) || 
         (input$decision!="Not Evaluated" && input$decision!=latest_interpretation$decision) || (input$comment!="" && input$comment!=latest_interpretation$comment)){
-      write(paste(as.numeric(Sys.time()),input$cnv_name,input$qual_override,input$decision,input$comment,Sys.time(),username,sep="\t"),
+      write(paste(as.numeric(Sys.time()),input$cnv_name,input$qual_override,input$decision,input$comment,Sys.time(),rv$username,sep="\t"),
             file=results_out,append=T)
       if (st2==0){
         showNotification("Interpretation Saved",type="message",duration=2)
@@ -231,22 +321,23 @@ server=function(input,output){
         latest_interpretation$decision=input$decision
         latest_interpretation$comment=input$comment
         latest_interpretation$time=Sys.time()
-        latest_interpretation$user=username
+        latest_interpretation$user=rv$username
         showNotification("Interpretation Saved",type="message",duration=1)
       }
     }
   })
   
   observeEvent(input$save,{
+    req(rv$config_loaded)
     if ((input$qual_override!="No Override" && input$qual_override!=latest_interpretation$qual_override) || 
         (input$decision!="Not Evaluated" && input$decision!=latest_interpretation$decision) || (input$comment!="" && input$comment!=latest_interpretation$comment)){
-      write(paste(as.numeric(Sys.time()),input$cnv_name,input$qual_override,input$decision,input$comment,Sys.time(),username,sep="\t"),
+      write(paste(as.numeric(Sys.time()),input$cnv_name,input$qual_override,input$decision,input$comment,Sys.time(),rv$username,sep="\t"),
             file=results_out,append=T)
       latest_interpretation$qual_override=input$qual_override
       latest_interpretation$decision=input$decision
       latest_interpretation$comment=input$comment
       latest_interpretation$time=Sys.time()
-      latest_interpretation$user=username
+      latest_interpretation$user=rv$username
       showNotification("Interpretation Saved",type="message",duration=2)
     } else{
       showNotification("No Change from Last Saved",type="message",duration=2)
@@ -254,12 +345,14 @@ server=function(input,output){
   })
 
   observeEvent(input$cnv_name,{
+    req(rv$config_loaded, input$cnv_name)
     info=as.data.frame(strsplit(input$cnv_name,"\\."))[,1]
     master_info$proband=info[1]
     master_info$chr=info[2]
     master_info$start=as.numeric(info[3])
     master_info$end=as.numeric(info[4])
     master_info$type=info[5]
+    master_info$loaded <- TRUE
 
     updateSelectInput(inputId="use_12878",selected="both")
     updateSelectInput(inputId="read_type",selected="all")
@@ -290,11 +383,11 @@ server=function(input,output){
       updateSelectInput(inputId="binsize",selected="99999.999")
     }
     
-    current_var=which(regions_name==input$cnv_name)
+    current_var=which(rv$regions_name==input$cnv_name)
     x1=try(read.table(results_out,comment.char="",sep="\t",quote=""),silent=T)
     st1=0
     if(class(x1)=="data.frame"){
-      x1_sub=x1[which(x1$V2==regions_name[current_var]),]
+      x1_sub=x1[which(x1$V2==rv$regions_name[current_var]),]
       if(length(x1_sub[,1])>0){
         x1_sub_sorted=x1_sub[sort(x1_sub$V1,index.return=T,decreasing=T)$ix,]
         updateSelectInput(inputId="qual_override",selected=x1_sub_sorted[1,3])
@@ -320,7 +413,7 @@ server=function(input,output){
     }
     
     if(is.null(ranges$x)==T || ranges$name!=input$cnv_name){
-      x2=read.table(paste(temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script05_file1.txt.gz",sep=""),comment.char="",sep="\t",quote="")
+      x2=read.table(paste(rv$temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script05_file1.txt.gz",sep=""),comment.char="",sep="\t",quote="")
       ranges$name=input$cnv_name
       ranges$x=c(min(x2$V1,na.rm=T),max(x2$V1,na.rm=T))
       ranges$y1=c(0,quantile(x2$V2,.95,na.rm=T)*1.5)
@@ -331,18 +424,22 @@ server=function(input,output){
   
   # action buttons for loading specific section of the webpage
   observeEvent(input$render_depth,{
+    req(rv$config_loaded)
     load$depth=load$depth+1
   })
   
   observeEvent(input$render_mq,{
+    req(rv$config_loaded)
     load$mq=load$mq+1
   })
   
   observeEvent(input$render_reads,{
+    req(rv$config_loaded)
     load$reads=load$reads+1
   })
   
   observeEvent(input$render_genes,{
+    req(rv$config_loaded)
     load$genes=load$genes+1
   })
   ### end action buttons
@@ -350,7 +447,8 @@ server=function(input,output){
   output$last_edit_info=renderText(paste("Last Interpreted: ",latest_interpretation$time," (",latest_interpretation$user,")",sep=""))
   
   output$basic_info=DT::renderDataTable({
-    x3=regions_list[which(regions_list$V17==input$cnv_name),]
+    req(rv$config_loaded, input$cnv_name)
+    x3=rv$regions_list[which(rv$regions_list$V17==input$cnv_name),]
     auto_result=as.data.frame(strsplit(as.character(x3[1]),"\\s"))[1,1]
     length=x3[5]-x3[4]+1
 
@@ -370,13 +468,20 @@ server=function(input,output){
   },options=list(dom="t",ordering=F,headerCallback=JS("function(thead, data, start, end, display){","$(thead).remove();", "}")),rownames=F,selection='none')
   
   output$basic_links=DT::renderDataTable({
-    as.data.frame(cbind(paste("<a href='https://www.deciphergenomics.org/browser#q/grch37:",master_info$chr,":",master_info$start,"-",master_info$end,"/location/grch37' target='_blank'>DECIPHER</a>",sep=""),
+    req(rv$config_loaded, master_info$loaded)
+    if (rv$assembly == "hg19") {
+      as.data.frame(cbind(paste("<a href='https://www.deciphergenomics.org/browser#q/grch37:",master_info$chr,":",master_info$start,"-",master_info$end,"/location/grch37' target='_blank'>DECIPHER</a>",sep=""),
                     paste("<a href='https://gnomad.broadinstitute.org/region/",master_info$chr,"-",master_info$start,"-",master_info$end,"?dataset=gnomad_sv_r2_1' target='_blank'>gnomAD SV</a>",sep=""),
                     paste("<a href='http://dgv.tcag.ca/gb2/gbrowse/dgv2_hg19/?name=chr",master_info$chr,"%3A",master_info$start,"-",master_info$end,";search=Search' target='_blank'>DGV</a>",sep="")))
+    } else {
+      as.data.frame(cbind(paste("<a href='https://www.deciphergenomics.org/browser#q/",master_info$chr,":",master_info$start,"-",master_info$end,"/location/grch38' target='_blank'>DECIPHER</a>",sep=""),
+                    paste("<a href='http://dgv.tcag.ca/gb2/gbrowse/dgv2_hg38/?name=chr",master_info$chr,"%3A",master_info$start,"-",master_info$end,";search=Search' target='_blank'>DGV</a>",sep="")))
+    }
   },options=list(dom="t",ordering=F,headerCallback=JS("function(thead, data, start, end, display){","$(thead).remove();", "}")),rownames=F,escape=F,selection='none')
   
   output$highlights1=DT::renderDataTable({
-    x18=read.table(paste(temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script08_file2.txt.gz",sep=""),comment.char="",sep="\t",quote="")
+    req(rv$config_loaded, input$cnv_name, master_info$loaded)
+    x18=read.table(paste(rv$temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script08_file2.txt.gz",sep=""),comment.char="",sep="\t",quote="")
     if (length(x18$V1[which(x18$V2==1)])>=1){
       datatable(rbind("Positive Information:",as.data.frame(x18$V1[which(x18$V2==1)])),class="compact",selection='none',
                 options=list(dom="t",ordering=F,headerCallback=JS("function(thead, data, start, end, display){","$(thead).remove();", "}")),rownames=F,escape=F) %>% DT::formatStyle(1,color="#ef6548",fontSize="110%")
@@ -387,7 +492,8 @@ server=function(input,output){
   }) 
   
   output$highlights2=DT::renderDataTable({
-    x18=read.table(paste(temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script08_file2.txt.gz",sep=""),comment.char="",sep="\t",quote="")
+    req(rv$config_loaded, input$cnv_name, master_info$loaded)
+    x18=read.table(paste(rv$temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script08_file2.txt.gz",sep=""),comment.char="",sep="\t",quote="")
     if (length(x18$V1[which(x18$V2==2)])>=1){
       datatable(rbind("Negative Information:",as.data.frame(x18$V1[which(x18$V2==2)])),class="compact",selection='none',
                 options=list(dom="t",ordering=F,headerCallback=JS("function(thead, data, start, end, display){","$(thead).remove();", "}")),rownames=F) %>% DT::formatStyle(1,color="#02818a",fontSize="110%")
@@ -398,9 +504,10 @@ server=function(input,output){
   })
   
   output$depth=renderPlot({
+    req(rv$config_loaded, input$cnv_name, master_info$loaded)
     par(mgp=c(2.1,1,0),mai=c(0.4,0.62,0.5,0.1))
     length=as.numeric(master_info$end)-as.numeric(master_info$start)+1
-    x6=read.table(paste(temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script05_file1.txt.gz",sep=""),comment.char="",sep="\t",quote="")
+    x6=read.table(paste(rv$temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script05_file1.txt.gz",sep=""),comment.char="",sep="\t",quote="")
     
     plot(0,0,col=rgb(0,0,0,0),
          xlab="",xlim=ranges$x,ylab="Read Depth",ylim=ranges$y1,xaxs="i",yaxs="i",main="Read Depth")
@@ -422,7 +529,7 @@ server=function(input,output){
       x6_sub=x6[intersect(which(x6$V1>=ranges$x[1]-as.numeric(isolate(input$binsize))*2),which(x6$V1<=ranges$x[2]+as.numeric(isolate(input$binsize))*2)),]
       
       if (input$use_12878=="both" || input$use_12878=="12878_only"){
-        x7=read.table(paste(temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script04_file1.txt.gz",sep=""),comment.char="",sep="\t",quote="")
+        x7=read.table(paste(rv$temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script04_file1.txt.gz",sep=""),comment.char="",sep="\t",quote="")
         norm_rd_12878=median(x7$V2[c(which(x7$V1<=master_info$start),which(x7$V1>=master_info$end))],na.rm=T)/median(x6$V2[c(which(x6$V1<=master_info$start),which(x6$V1>=master_info$end))],na.rm=T)
         x7_sub=x7[intersect(which(x7$V1>=ranges$x[1]-as.numeric(isolate(input$binsize))*2),which(x7$V1<=ranges$x[2]+as.numeric(isolate(input$binsize))*2)),]
         par(new=T)
@@ -470,6 +577,7 @@ server=function(input,output){
   })
   
   output$mq=renderPlot({
+    req(rv$config_loaded, input$cnv_name, master_info$loaded)
     par(mgp=c(2.1,1,0),mai=c(0.4,0.62,0.5,0.1))
 
     plot(0,0,col=rgb(0,0,0,0),
@@ -488,7 +596,7 @@ server=function(input,output){
       box()
     } else if (load$mq>0){
       if (input$use_12878=="both" || input$use_12878=="12878_only"){
-        x7=read.table(paste(temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script04_file1.txt.gz",sep=""),comment.char="",sep="\t",quote="")
+        x7=read.table(paste(rv$temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script04_file1.txt.gz",sep=""),comment.char="",sep="\t",quote="")
         x7_sub=x7[intersect(which(x7$V1>=ranges$x[1]-as.numeric(isolate(input$binsize))*2),which(x7$V1<=ranges$x[2]+as.numeric(isolate(input$binsize))*2)),]
         
         # speed up using BinMean and plotH
@@ -502,7 +610,7 @@ server=function(input,output){
       }
       
       if(input$use_12878=="both" || input$use_12878=="sample_only"){
-        x6=read.table(paste(temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script05_file1.txt.gz",sep=""),comment.char="",sep="\t",quote="")
+        x6=read.table(paste(rv$temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script05_file1.txt.gz",sep=""),comment.char="",sep="\t",quote="")
         x6_sub=x6[intersect(which(x6$V1>=ranges$x[1]-as.numeric(isolate(input$binsize))*2),which(x6$V1<=ranges$x[2]+as.numeric(isolate(input$binsize))*2)),]
         
         # speed up using BinMean and plotH
@@ -516,6 +624,7 @@ server=function(input,output){
   })
   
   observeEvent(input$click_depth,{
+    req(rv$config_loaded)
     brush=input$brush_depth
     if (!is.null(brush)){
       ranges$x=c(brush$xmin,brush$xmax)
@@ -527,6 +636,7 @@ server=function(input,output){
   })
   
   observeEvent(input$click_mq,{
+    req(rv$config_loaded)
     brush=input$brush_mq
     if (!is.null(brush)){
       ranges$x=c(brush$xmin,brush$xmax)
@@ -536,8 +646,9 @@ server=function(input,output){
   })
   
   output$insert_size_estimates=renderTable({
+    req(rv$config_loaded, input$cnv_name)
     if (load$reads>0){
-      x8=read.table(paste(temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script05_file2.txt.gz",sep=""),comment.char="",sep="\t",quote="")
+      x8=read.table(paste(rv$temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script05_file2.txt.gz",sep=""),comment.char="",sep="\t",quote="")
       # added to remove read pairs/split-reads that have one part completely outside the extended CNV region
       # x8=x8[intersect(which(x8$V5>=ranges_default$x[1]),which(x8$V6<=ranges_default$x[2])),]
       
@@ -560,6 +671,7 @@ server=function(input,output){
   },colnames=F,spacing="s",digits=2,striped=T,bordered=T,align="c")
   
   output$reads=renderPlot({
+    req(rv$config_loaded, master_info$loaded, input$read_type)
     par(mgp=c(2.1,1,0),mai=c(0.4,0.62,0.5,0.1))
     if (load$reads==0){
       plot(0,0,col=rgb(0,0,0,0),xlim=c(0,1),ylim=c(0,1),axes=F,xlab="",ylab="",main="Anomalous Reads")
@@ -675,6 +787,7 @@ server=function(input,output){
   })
 
   observeEvent(input$click_reads,{
+    req(rv$config_loaded)
     brush=input$brush_reads
     if (!is.null(brush)){
       ranges$x=c(brush$xmin,brush$xmax)
@@ -684,17 +797,19 @@ server=function(input,output){
   })
     
   output$reads_table=DT::renderDataTable({
+    req(rv$config_loaded)
     if (load$reads>0){
       out_reads$table[sort(out_reads$table$Left_Start,index.return=T,decreasing=F)$ix,]
     }
   },rownames=F,selection='none')
   
   output$gnomadsv_clinvar=renderPlot({
+    req(rv$config_loaded, input$cnv_name, master_info$loaded)
     sv1$gnomad=NULL
     sv1$clinvar=NULL
     sv1$cgc=NULL
     
-    x9=read.table(paste(temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script06_file1.txt.gz",sep=""),comment.char="",sep="\t",fill=T)
+    x9=read.table(paste(rv$temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script06_file1.txt.gz",sep=""),comment.char="",sep="\t",fill=T)
     x9_gnomad=x9[which(x9$V1=="gnomAD_SV"),]
     
     if (length(as.data.frame(x9_gnomad)[,1])>0){
@@ -727,7 +842,7 @@ server=function(input,output){
       sv1$clinvar=clinvar_interval
     }
     
-    x9=read.table(paste(temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script06_file1.txt.gz",sep=""),comment.char="",sep="\t",quote="",fill=T)
+    x9=read.table(paste(rv$temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script06_file1.txt.gz",sep=""),comment.char="",sep="\t",quote="",fill=T)
     x9_cgc=x9[which(x9$V1=="cohort_CNV"),]
     
     if (length(as.data.frame(x9_cgc)[,1])>0){
@@ -818,6 +933,7 @@ server=function(input,output){
   })
 
   observeEvent(input$click_gnomadsv_clinvar,{
+    req(rv$config_loaded)
     brush=input$brush_gnomadsv_clinvar
     if (!is.null(brush)){
       ranges$x=c(brush$xmin,brush$xmax)
@@ -827,6 +943,7 @@ server=function(input,output){
   })
   
   output$gnomadsv_table=DT::renderDataTable({
+    req(rv$config_loaded)
     if(is.null(sv1$gnomad)==F){
       x10=sv1$gnomad[,c(3:8,2)]
       colnames(x10)=c("Chr","Start","End","Type","Popmax AF","QC Flag","ID")
@@ -838,6 +955,7 @@ server=function(input,output){
   },escape=F,rownames=F,selection='none')
   
   output$clinvar_table=DT::renderDataTable({
+    req(rv$config_loaded)
     if(is.null(sv1$clinvar)==F){
       x11=sv1$clinvar[,c(2:4,6,5,7:10)]
       colnames(x11)=c("Chr","Start","End","Type","Interpretation","Condition","Allele Origin","Genes","ID")
@@ -860,7 +978,8 @@ server=function(input,output){
   },escape=F,rownames=F,selection='none')
   
   output$genes_table=DT::renderDataTable({
-    x13=read.table(paste(temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script07_file1.txt.gz",sep=""),comment.char="",sep="\t",quote="")
+    req(rv$config_loaded, input$cnv_name, master_info$loaded)
+    x13=read.table(paste(rv$temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script07_file1.txt.gz",sep=""),comment.char="",sep="\t",quote="")
     x13=x13[,c(1,19,5:17)]
     colnames(x13)=c("Name","Strand","Overlap","HI","TS","pLI","LOEUF","pRec","pNull","Expression","GO","OMIM","GenCC","Links","Search")
     
@@ -874,7 +993,8 @@ server=function(input,output){
   })
 
   observeEvent(input$genes_table_cells_selected,{
-    x13_v1=read.table(paste(temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script07_file1.txt.gz",sep=""),comment.char="",sep="\t",quote="")
+    req(rv$config_loaded, input$cnv_name, master_info$loaded)
+    x13_v1=read.table(paste(rv$temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script07_file1.txt.gz",sep=""),comment.char="",sep="\t",quote="")
     coord=unlist(input$genes_table_cells_selected)
     if (length(coord)==2){
       if (coord[2]==1-1 || coord[2]==2-1 || coord[2]==3-1){
@@ -885,7 +1005,8 @@ server=function(input,output){
   })
     
   output$dosage_table=DT::renderDataTable({
-    x9=read.table(paste(temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script06_file1.txt.gz",sep=""),comment.char="",sep="\t",quote="",fill=T)
+    req(rv$config_loaded, input$cnv_name, master_info$loaded)
+    x9=read.table(paste(rv$temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script06_file1.txt.gz",sep=""),comment.char="",sep="\t",quote="",fill=T)
     x9_dosage=x9[which(x9$V1=="ClinGen_Region"),]
     hi_region_index=c(which(x9_dosage$V6=="Sufficient (3)"),which(x9_dosage$V6=="Emerging (2)"),which(x9_dosage$V6=="Little (1)"),
                       which(x9_dosage$V6=="Recessive (30)"),which(x9_dosage$V6=="Unlikely (40)"))
@@ -907,6 +1028,7 @@ server=function(input,output){
   },escape=F,rownames=F,options=list(pageLength=25),selection='none')
   
   output$genes=renderPlot({
+    req(rv$config_loaded, input$cnv_name, master_info$loaded)
     par(mgp=c(2.1,1,0),mai=c(0.4,0.62,0.5,0.1))
     
     plot(0,0,col=rgb(0,0,0,0),
@@ -917,7 +1039,7 @@ server=function(input,output){
       text((as.numeric(ranges$x[1])+as.numeric(ranges$x[2]))/2,1.75,"Click the \"Plot Genomic Neighbourhood\" button above to load this plot.",cex=2)
     }
     if (load$genes>0){
-      x9=read.table(paste(temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script06_file1.txt.gz",sep=""),comment.char="",sep="\t",quote="",fill=T)
+      x9=read.table(paste(rv$temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script06_file1.txt.gz",sep=""),comment.char="",sep="\t",quote="",fill=T)
       x9_dosage=x9[which(x9$V1=="ClinGen_Region"),]
       if (length(as.data.frame(x9_dosage)[,1])>0){
         hi_region_index=c(which(x9_dosage$V6=="Sufficient (3)"),which(x9_dosage$V6=="Emerging (2)"),which(x9_dosage$V6=="Little (1)"),
@@ -992,7 +1114,7 @@ server=function(input,output){
         }
       }
       
-      x15=read.table(paste(temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script05_file3.txt.gz",sep=""),comment.char="",sep="\t",quote="")
+      x15=read.table(paste(rv$temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script05_file3.txt.gz",sep=""),comment.char="",sep="\t",quote="")
       y_step=1/(max(x15$V2)+2)
       for (i in 1:length(x15$V1)){
         level=1+y_step*(x15$V2[i]+1)
@@ -1012,7 +1134,7 @@ server=function(input,output){
         }
       }
       
-      x14=read.table(paste(temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script05_file1.txt.gz",sep=""))
+      x14=read.table(paste(rv$temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script05_file1.txt.gz",sep=""))
       x14sub1=x14$V1[is.na(x14$V4)==F]
       x14sub4=x14$V4[is.na(x14$V4)==F]
       
@@ -1027,7 +1149,7 @@ server=function(input,output){
       par(new=T)
       plotH(x14sub1,x14sub4,width=1,col="#756bb1",xlab="",ylab="",xlim=ranges$x,ylim=c(0,3.5),xaxs="i",yaxs="i",axes=F,border="#756bb1")
 
-      x17=read.table(paste(temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script07_file1.txt.gz",sep=""),comment.char="",sep="\t",quote="")
+      x17=read.table(paste(rv$temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script07_file1.txt.gz",sep=""),comment.char="",sep="\t",quote="")
       gnomad_pli_gene=c()
       gnomad_pli_start=c()
       gnomad_pli_end=c()
@@ -1086,6 +1208,7 @@ server=function(input,output){
   })
   
   observeEvent(input$click_genes,{
+    req(rv$config_loaded)
     brush=input$brush_genes
     if (!is.null(brush)){
       ranges$x=c(brush$xmin,brush$xmax)
@@ -1095,14 +1218,16 @@ server=function(input,output){
   })
   
   output$version_control1=renderTable({
-    x16=read.table(paste(temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".log.txt.gz",sep=""),fill=T,comment.char="",sep="\t",quote="",head=F)
+    req(rv$config_loaded, input$cnv_name, master_info$loaded)
+    x16=read.table(paste(rv$temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".log.txt.gz",sep=""),fill=T,comment.char="",sep="\t",quote="",head=F)
     x16[1:3,1:2]
   },colnames=F,spacing="s",striped=T,bordered=T)
 
   output$version_control2=renderTable({
-    x16=read.table(paste(temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".log.txt.gz",sep=""),fill=T,comment.char="",sep="\t",quote="",head=F)
+    req(rv$config_loaded, input$cnv_name, master_info$loaded)
+    x16=read.table(paste(rv$temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".log.txt.gz",sep=""),fill=T,comment.char="",sep="\t",quote="",head=F)
     x16[4:length(x16$V1),1:3]
   },colnames=F,spacing="s",striped=T,bordered=T)
 }
 
-shinyApp(ui=ui,server=server)
+shinyApp(ui=ui,server=server,options = list(port = 4704, host = "0.0.0.0"))

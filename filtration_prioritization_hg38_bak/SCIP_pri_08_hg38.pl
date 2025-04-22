@@ -68,7 +68,7 @@ foreach my $jct (@jct){
 
 open out1, ">$dir/app_temp_file/$proband/$proband.$chr.$start.$end.$type.script08_file1.txt";
 open out2, ">$dir/app_temp_file/$proband/$proband.$chr.$start.$end.$type.script08_file2.txt";
-print out2 "HEADER\t0\tHEADER_EN\n";
+print out2 "HEADER\t0\n";
 my @flag; my $clingen_reg_full=0;
 if ($type eq "DEL" || $type eq "INS" || $type eq "BND"){
  my $clingen_hi_region=0; my $clingen_hi_gene=0; my $can_gene=0; my $pli9_loeuf35=0;
@@ -179,32 +179,32 @@ if ($type eq "DEL" || $type eq "INS" || $type eq "BND"){
  print out1 "$proband.$chr.$start.$end.$type\t$order\t";
  if ($clingen_hi_region ne 0){
   push @flag, "ClinGen_HI_Region";
-  print out2 "此 $type 完全包含在clingen hi区域 ($clingen_hi_region) 中\t1\tThis $type is fully contained in ClinGen HI region(s) ($clingen_hi_region)\n";
+  print out2 "This $type is fully contained in ClinGen HI region(s) ($clingen_hi_region)\t1\n";
   $clingen_reg_full=1;
  }
  if ($clingen_hi_gene ne 0){
   push @flag, "ClinGen_HI_Gene";
-  print out2 "这个 $type 重叠clingen hi基因 (s) ($clingen_hi_gene)\t1\tThis $type overlaps ClinGen HI gene(s) ($clingen_hi_gene)\n";
+  print out2 "This $type overlaps ClinGen HI gene(s) ($clingen_hi_gene)\t1\n";
  }
  if ($can_gene ne 0){
   push @flag, "Candidate_Gene";
-  print out2 "这个 $type 重叠候选基因 ($can_gene)\t1\tThis $type overlaps candidate gene(s) ($can_gene)\n";
+  print out2 "This $type overlaps candidate gene(s) ($can_gene)\t1\n";
  }
  if ($pli9_loeuf35 ne 0){
   push @flag, "pLI_0.9_LOEUF_0.35";
-  print out2 "这个 $type 与pLI >= 0.9和/或LOEUF <= 0.35 ($pli9_loeuf35) 重叠的基因\t1\tThis $type overlaps gene(s) with pLI >= 0.9 and/or LOEUF <= 0.35 ($pli9_loeuf35)\n";
+  print out2 "This $type overlaps gene(s) with pLI >= 0.9 and/or LOEUF <= 0.35 ($pli9_loeuf35)\t1\n";
  }
  elsif ($pli5 ne 0){
   push @flag, "pLI_0.5";
-  print out2 "这个 $type 与pli >= 0.5但 <0.9 ($pli5) 重叠的基因\t1\tThis $type overlaps gene(s) with pLI >= 0.5 but < 0.9 ($pli5)\n";
+  print out2 "This $type overlaps gene(s) with pLI >= 0.5 but < 0.9 ($pli5)\t1\n";
  }
  if ($dis_dom==1){
   push @flag, "Dom_Disease";
-  print out2 "这个 $type 与显性疾病相关的基因重叠: $dis_any\t1\tThis $type overlaps gene(s) associated with dominant disorder(s): $dis_any\n";
+  print out2 "This $type overlaps gene(s) associated with dominant disorder(s): $dis_any\t1\n";
  }
  elsif ($dis_any ne 0){
   push @flag, "NonDom_Disease";
-  print out2 "这个 $type 重叠基因 (s) 仅与非显性疾病 (s) 相关: $dis_any\t1\tThis $type overlaps gene(s) associated with only non-dominant disorder(s): $dis_any\n";
+  print out2 "This $type overlaps gene(s) associated with only non-dominant disorder(s): $dis_any\t1\n";
  }
 }
 
@@ -374,44 +374,44 @@ if ($type eq "DUP"){
  print out1 "$proband.$chr.$start.$end.$type\t$order\t";
  if ($clingen_ts_full ne 0){
   push @flag, "ClinGen_TS_Contained";
-  print out2 "此DUP完全包含clingen ts区域或基因 ($clingen_ts_full)\t1\tThis DUP fully contains ClinGen TS region(s) or gene(s) ($clingen_ts_full)\n";
+  print out2 "This DUP fully contains ClinGen TS region(s) or gene(s) ($clingen_ts_full)\t1\n";
   $clingen_reg_full=1;
  } 
  if ($clingen_ts_overlap ne 0){
   push @flag, "ClinGen_TS_Gene_Overlap";
-  print out2 "此DUP重叠clingen ts基因 (s) ($clingen_ts_overlap)\t1\tThis DUP overlaps ClinGen TS gene(s) ($clingen_ts_overlap)\n";
+  print out2 "This DUP overlaps ClinGen TS gene(s) ($clingen_ts_overlap)\t1\n";
  }
  if ($clingen_intragenic_hi ne 0){
   push @flag, "ClinGen_Intragenic_HI_Gene";
-  print out2 "该基因内DUP与clingen hi基因 (s) 重叠 ($clingen_intragenic_hi)\t1\tThis intragenic DUP overlaps ClinGen HI gene(s) ($clingen_intragenic_hi)\n";
+  print out2 "This intragenic DUP overlaps ClinGen HI gene(s) ($clingen_intragenic_hi)\t1\n";
  }
  if ($can_gene ne 0){
   push @flag, "Candidate_Gene";
-  print out2 "这个dup重叠候选基因 ($can_gene)\t1\tThis DUP overlaps candidate gene(s) ($can_gene)\n";
+  print out2 "This DUP overlaps candidate gene(s) ($can_gene)\t1\n";
  }
  if ($intragenic_pli9_loeuf35 ne 0){
   push @flag, "Intragenic_pLI_0.9_LOEUF_0.35";
-  print out2 "该基因内DUP与pLI >= 0.9和/或LOEUF <= 0.35 ($intragenic_pli9_loeuf35) 的基因重叠\t1\tThis intragenic DUP overlaps gene(s) with pLI >= 0.9 and/or LOEUF <= 0.35 ($intragenic_pli9_loeuf35)\n";
+  print out2 "This intragenic DUP overlaps gene(s) with pLI >= 0.9 and/or LOEUF <= 0.35 ($intragenic_pli9_loeuf35)\t1\n";
  }
  elsif ($intragenic_pli5 ne 0){
   push @flag, "Intragenic_pLI_0.5";
-  print out2 "该基因内DUP与pLI >= 0.5 ($intragenic_pli5) 的基因重叠\t1\tThis intragenic DUP overlaps gene(s) with pLI >= 0.5 ($intragenic_pli5)\n";
+  print out2 "This intragenic DUP overlaps gene(s) with pLI >= 0.5 ($intragenic_pli5)\t1\n";
  }
  if ($intragenic_dis_dom==1){
   push @flag, "Intragenic_Dom_Disease";
-  print out2 "这种基因内DUP与显性疾病相关的基因重叠: $intragenic_dis_any\t1\tThis intragenic DUP overlaps gene(s) associated with dominant disorder(s): $intragenic_dis_any\n";
+  print out2 "This intragenic DUP overlaps gene(s) associated with dominant disorder(s): $intragenic_dis_any\t1\n";
  }
  elsif ($intragenic_dis_any ne 0){
   push @flag, "Intragenic_NonDom_Disease";
-  print out2 "这种基因内DUP与仅与非显性疾病相关的基因重叠: $intragenic_dis_any\t1\tThis intragenic DUP overlaps gene(s) associated with only non-dominant disorder(s): $intragenic_dis_any\n";
+  print out2 "This intragenic DUP overlaps gene(s) associated with only non-dominant disorder(s): $intragenic_dis_any\t1\n";
  }
  if ($nonintragenic_dis_dom==1){
   push @flag, "NonIntragenic_Dom_Disease";
-  print out2 "这种非基因内DUP与显性疾病相关的基因重叠: $nonintragenic_dis_any\t1\tThis non-intragenic DUP overlaps gene(s) associated with dominant disorder(s): $nonintragenic_dis_any\n";
+  print out2 "This non-intragenic DUP overlaps gene(s) associated with dominant disorder(s): $nonintragenic_dis_dom\t1\n";
  }
  elsif ($nonintragenic_dis_any ne 0){
   push @flag, "NonIntragenic_NonDom_Disease";
-  print out2 "这种非基因内DUP与仅与非显性疾病相关的基因重叠: $nonintragenic_dis_any\t1\tThis non-intragenic DUP overlaps gene(s) associated with only non-dominant disorder(s): $nonintragenic_dis_any\n";
+  print out2 "This non-intragenic DUP overlaps gene(s) associated with only non-dominant disorder(s): $nonintragenic_dis_any\t1\n";
  }
 }
 
@@ -435,7 +435,7 @@ my $gnomad_overlap=($#gnomad_dedup+1)/($end-$start+1);
 if ($gnomad_overlap>=0.5){
  $neg_info=1;
  my $gnomad_overlap_percent=int($gnomad_overlap*1e2*1e2)/1e2;
- print out2 "这个 $type 有 $gnomad_overlap_percent% 与gnomad $type(s) 重叠，popmax >= 1%\t2\tThis $type has $gnomad_overlap_percent% overlap with gnomAD $type(s) with popmax >= 1%\n";
+ print out2 "This $type has $gnomad_overlap_percent% overlap with gnomAD $type(s) with popmax >= 1%\t2\n";
  push @flag, "HIGH_gnomAD_SV_common_var_OVERLAP";
  if ($gnomad_overlap==1){
   push @flag, "FULL_gnomAD_SV_common_var_OVERLAP";
@@ -445,7 +445,7 @@ if ($gnomad_overlap>=0.5){
 if ($leftjct==1 && $rightjct==1 && $type eq "DEL"){
  $neg_info=1;
  push @flag, "BOTH_BND_NEAR_JCT_DEL";
- print out2 "此 $type 在内含子-外显子连接的10 bp内具有两个断点-排除假基因插入\t2\tThis $type has both breakpoints within 10 bp of an intron-exon junction - rule out pseudogene insertion\n";
+ print out2 "This $type has both breakpoints within 10 bp of an intron-exon junction - rule out pseudogene insertion\t2\n";
 }
 
 my %erdsp_dedup; my $manta_break=0; my $manta_ext=5000;
@@ -480,12 +480,12 @@ my $erdsp_overlap=($#erdsp_dedup+1)/($end-$start+1);
 if ($erdsp_overlap>=0.5){
  $neg_info=1;
  my $erdsp_overlap_percent=int($erdsp_overlap*1e2*1e2)/1e2;
- print out2 "此 $type 与erds + $type 复发区域或其他低质量区域有 $erdsp_overlap_percent% 重叠\t2\tThis $type has $erdsp_overlap_percent% overlap with ERDS+ $type recurrence region(s) or other low quality region(s)\n";
+ print out2 "This $type has $erdsp_overlap_percent% overlap with ERDS+ $type recurrence region(s) or other low quality region(s)\t2\n";
  push @flag, "HIGH_ERDS+_OVERLAP";
 }
 if ($manta_break==1){
  $neg_info=1;
- print out2 "此 $type 在manta $type 重复区域的 $manta_ext bp内具有两个断点\t2\tThis $type has both breakpoints within $manta_ext bp of Manta $type recurrence region(s)\n";
+ print out2 "This $type has both breakpoints within $manta_ext bp of Manta $type recurrence region(s)\t2\n";
  push @flag, "HIGH_MANTA_OVERLAP";
 }
 
@@ -510,7 +510,7 @@ if ($max_pext<=0.4){
  #$neg_info=1;
  #my $med_pext_round=int($med_pext*1e2)/1e2;
  my $max_pext_round=int($max_pext*1e2)/1e2;
- print out2 "$type 内的最大pext低 ($max_pext_round) -双重检查: 基因可能具有高度表达的非编码转录本或在gtex组织中不表达\t2\tThe maximum pext within the $type is low ($max_pext_round) - double check: gene may have a highly expressed non-coding transcript or not expressed in GTEx tissues\n";
+ print out2 "The maximum pext within the $type is low ($max_pext_round) - double check: gene may have a highly expressed non-coding transcript or not expressed in GTEx tissues\t2\n";
  push @flag, "LOW_PEXT";
 }
 if ($max_pext<=0.2){
@@ -531,15 +531,15 @@ while (<file1>){
  if ($split1[6]>0){
   $anomalous=1;
   push @flag, "PAIR_READ_SUPPORT";
-  print out2 "$split1[6] 异常读取对支持此 $type\t1\tThis $type is supported by $split1[6] anomalous read pair(s)\n";
+  print out2 "This $type is supported by $split1[6] anomalous read pair(s)\t1\n";
  } 
  if ($split1[9]>0){
   $anomalous=1;
   push @flag, "SPLIT_READ_SUPPORT";
-  print out2 "此 $type 由 $split1[9] 异常分裂读 (s) 支持\t1\tThis $type is supported by $split1[9] anomalous split-read(s)\n";
+  print out2 "This $type is supported by $split1[9] anomalous split-read(s)\t1\n";
  }
  if ($split1[6]==0 && $split1[9]==0 && ($type eq "DEL" || $type eq "DUP")){
-  print out2 "没有异常读取 (s) 支持此 $type\t2\tThere are no anomalous read(s) supporting this $type\n";
+  print out2 "There are no anomalous read(s) supporting this $type\t2\n";
  }
  last;
 }

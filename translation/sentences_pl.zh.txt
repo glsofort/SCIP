@@ -1,0 +1,50 @@
+This [DEL] is fully contained in ClinGen HI region(s) ([ABC])
+-----> 此 [del] 完全包含在clingen hi区域 ([abc]) 中
+This [DEL] overlaps ClinGen HI gene(s) ([ABC])
+-----> 这个 [del] 重叠clingen hi基因 (s) ([abc])
+This [DEL] overlaps candidate gene(s) ([ABC])
+-----> 这个 [del] 重叠候选基因 ([abc])
+This [DEL] overlaps gene(s) with pLI >= 0.9 and/or LOEUF <= 0.35 ([ABC])
+-----> 这个 [del] 与pli >= 0.9和/或loeuf <= 0.35 ([abc]) 重叠的基因
+This [DEL] overlaps gene(s) with pLI >= 0.5 but < 0.9 ([ABC])
+-----> 这个 [del] 与pli >= 0.5但 <0.9 ([abc]) 重叠的基因
+This [DEL] overlaps gene(s) associated with dominant disorder(s): [ABC]
+-----> 这个 [del] 与显性疾病相关的基因重叠: [abc]
+This [DEL] overlaps gene(s) associated with only non-dominant disorder(s): [ABC]
+-----> 这个 [del] 重叠基因 (s) 仅与非显性疾病 (s) 相关: [abc]
+This DUP fully contains ClinGen TS region(s) or gene(s) ([ABC])
+-----> 此dup完全包含clingen ts区域或基因 ([abc])
+This DUP overlaps ClinGen TS gene(s) ([ABC])
+-----> 此dup重叠clingen ts基因 (s) ([abc])
+This intragenic DUP overlaps ClinGen HI gene(s) ([ABC])
+-----> 该基因内dup与clingen hi基因 (s) 重叠 ([abc])
+This DUP overlaps candidate gene(s) ([ABC])
+-----> 这个dup重叠候选基因 ([abc])
+This intragenic DUP overlaps gene(s) with pLI >= 0.9 and/or LOEUF <= 0.35 ([ABC])
+-----> 该基因内dup与pli >= 0.9和/或loeuf <= 0.35 ([abc]) 的基因重叠
+This intragenic DUP overlaps gene(s) with pLI >= 0.5 ([ABC])
+-----> 该基因内dup与pli >= 0.5 ([abc]) 的基因重叠
+This intragenic DUP overlaps gene(s) associated with dominant disorder(s): [ABC]
+-----> 这种基因内dup与显性疾病相关的基因重叠: [abc]
+This intragenic DUP overlaps gene(s) associated with only non-dominant disorder(s): [ABC]
+-----> 这种基因内dup与仅与非显性疾病相关的基因重叠: [abc]
+This non-intragenic DUP overlaps gene(s) associated with dominant disorder(s): [ABC]
+-----> 这种非基因内dup与显性疾病相关的基因重叠: [abc]
+This non-intragenic DUP overlaps gene(s) associated with only non-dominant disorder(s): [ABC]
+-----> 这种非基因内dup与仅与非显性疾病相关的基因重叠: [abc]
+This [DEL] has [ABC]% overlap with gnomAD [DEL](s) with popmax >= 1%
+-----> 这个 [del] 有 [abc]% 与gnomad [del](s) 重叠，popmax >= 1%
+This [DEL] has both breakpoints within 10 bp of an intron-exon junction - rule out pseudogene insertion
+-----> 此 [del] 在内含子-外显子连接的10 bp内具有两个断点-排除假基因插入
+This [DEL] has [ABC]% overlap with ERDS+ [DEL] recurrence region(s) or other low quality region(s)
+-----> 此 [del] 与erds + [del] 复发区域或其他低质量区域有 [abc]% 重叠
+This [DEL] has both breakpoints within [ABC] bp of Manta [DEL] recurrence region(s)
+-----> 此 [del] 在manta [del] 重复区域的 [abc] bp内具有两个断点
+The maximum pext within the [DEL] is low ([ABC]) - double check: gene may have a highly expressed non-coding transcript or not expressed in GTEx tissues
+-----> [del] 内的最大pext低 ([abc]) -双重检查: 基因可能具有高度表达的非编码转录本或在gtex组织中不表达
+This [DEL] is supported by [ABC] anomalous read pair(s)
+-----> [abc] 异常读取对支持此 [del]
+This [DEL] is supported by [ABC] anomalous split-read(s)
+-----> 此 [del] 由 [abc] 异常分裂读 (s) 支持
+There are no anomalous read(s) supporting this [DEL]
+-----> 没有异常读取 (s) 支持此 [del]

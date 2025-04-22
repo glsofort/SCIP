@@ -2,6 +2,9 @@ library(shiny)
 library(DT)
 library(plotrix)
 options(warn=-1)
+options(encoding = "UTF-8")
+
+Sys.setlocale("LC_ALL", "en_US.UTF-8")
 
 # https://stackoverflow.com/questions/43635846/
 BinMean <- function (vec, every, na.rm = TRUE) {
@@ -57,35 +60,36 @@ ui=fluidPage(
       HTML(".shiny-notification{position:fixed;top:calc(2.5%);left:calc(60%);
            width:280px;height:50px;font-size:17px;opacity:1;font-family:'Verdana',sans-serif}"))),
   tags$head(tags$style(".modal-dialog.xl1{width:95%}")),
+  tags$head(tags$meta(charset="UTF-8")),
 
-  titlePanel("SCIP: Suite for CNV Interpretation and Prioritization"),
+  # titlePanel("SCIP: Suite for CNV Interpretation and Prioritization"),
   
   fluidRow(
-    column(6,selectInput(inputId="cnv_name",label="CNV Name (Start Typing to Search)", 
+    column(6,selectInput(inputId="cnv_name",label="CNV名称 (开始键入以搜索)", 
               choices=NULL,width="100%")),
-    column(2,actionButton(inputId="save",label="Save",width="100%"),style="margin-top:25px;"),
-    column(2,actionButton(inputId="prev_var",label="Previous",width="100%"),style="margin-top:25px;"),
-    column(2,actionButton(inputId="next_var",label="Next",width="100%"),style="margin-top:25px"),
+    column(2,actionButton(inputId="save",label="保存",width="100%"),style="margin-top:25px;"),
+    column(2,actionButton(inputId="prev_var",label="上一个",width="100%"),style="margin-top:25px;"),
+    column(2,actionButton(inputId="next_var",label="下一个",width="100%"),style="margin-top:25px"),
   ),
   
   fluidRow(
-    column(2,selectInput(inputId="qual_override",label="Variant Quality",
-           choices=c("No Override","Passed","Failed"),selected="No Override",width="100%")),
+    column(2,selectInput(inputId="qual_override",label="变体质量",
+           choices=c("无覆盖"="No Override","通过"="Passed","失败"="Failed"),selected="No Override",width="100%")),
     
-    column(4,selectInput(inputId="decision",label="Determination",
-                         choices=c("Not Evaluated","Ruled Out - Quality Inadequate / Difficult to Assess","Ruled Out - Population Variation",
-                                   "Ruled Out - No Gene of Interest Identified","Ruled Out - Incorrect Boundary, Fully Intronic",
-                                   "Ruled Out - Non-intragenic DUP","Ruled Out - Other Reasons",
-                                   "Deferred - Recessive Gene - Look for Compound Het SNV", "Already Interpreted - Same Variant Identified by Another Caller",
-                                   "Further Review - Potentially Reportable","Further Review - Not Likely Reportable"),selected="Not Evaluated",width="100%")),
+    column(4,selectInput(inputId="decision",label="测定",
+                         choices=c("未评估"="Not Evaluated","排除-质量不足/难以评估"="Ruled Out - Quality Inadequate / Difficult to Assess","排除-人口变异"="Ruled Out - Population Variation",
+                                   "排除-没有发现感兴趣的基因"= "Ruled Out - No Gene of Interest Identified","排除-不正确的边界，完全内含子"="Ruled Out - Incorrect Boundary, Fully Intronic",
+                                   "排除-非基因内DUP"="Ruled Out - Non-intragenic DUP","排除-其他原因"="Ruled Out - Other Reasons",
+                                   "延迟-隐性基因-寻找复合Het SNV"= "Deferred - Recessive Gene - Look for Compound Het SNV", "已解释-由另一个调用方标识的相同变体"="Already Interpreted - Same Variant Identified by Another Caller",
+                                   "进一步审查-可能需要报告"="Further Review - Potentially Reportable","进一步审查-不太可能报告"="Further Review - Not Likely Reportable"),selected="Not Evaluated",width="100%")),
     
-    column(6,textAreaInput(inputId="comment",label="Notes (Optional)",placeholder="Optional Notes about the Variant",
+    column(6,textAreaInput(inputId="comment",label="注释 (可选)",placeholder="关于变体的可选说明",
                        width="100%")),
   ),
   textOutput("last_edit_info"),
   hr(),
   
-  h4("Variant Summary"), 
+  h4("变体摘要"), 
   DT::dataTableOutput("basic_info",width="1250px"),
   DT::dataTableOutput("basic_links",width="250px"),
   br(),
@@ -93,80 +97,78 @@ ui=fluidPage(
   DT::dataTableOutput("highlights2",width="800px"),
   
   hr(),
-  h4("Read Depth and Mapping Quality"),
+  h4("读取深度和映射质量"),
   fluidRow(
-    column(2,selectInput(inputId="binsize",label="Bin Size",choices=c("1 bp"=1,"10 bp"=10,"25 bp"=25,"50 bp"=50,"100 bp"=100,"250 bp"=250,"500 bp"=500,
+    column(2,selectInput(inputId="binsize",label="bin大小",choices=c("1 bp"=1,"10 bp"=10,"25 bp"=25,"50 bp"=50,"100 bp"=100,"250 bp"=250,"500 bp"=500,
                                                                       "1 kb"=1000,"5 kb"=5000,"10 kb"=10000,"50 kb"=50000,"100 kb"=99999.999),selected="1000",width="100%")),
-    column(2,actionButton(inputId="render_depth",label="Update Read Depth",width="100%"),style="margin-top:25px;"),
-    column(3,selectInput(inputId="use_12878",label="NA12878",choices=c("View Sample Only"="sample_only","View Sample with NA12878 Overlaid"="both","View NA12878 Only"="12878_only"),
+    column(2,actionButton(inputId="render_depth",label="更新读取深度",width="100%"),style="margin-top:25px;"),
+    column(3,selectInput(inputId="use_12878",label="NA12878",choices=c("仅查看示例"="sample_only","查看覆盖了NA12878的示例"="both","仅查看NA12878"="12878_only"),
                          selected="both",width="100%")),
-    column(2,actionButton(inputId="render_mq",label="Update Mapping Quality",width="100%"),style="margin-top:25px;"),
+    column(2,actionButton(inputId="render_mq",label="更新映射质量",width="100%"),style="margin-top:25px;"),
   ),
   
   plotOutput('depth',dblclick='click_depth',brush=brushOpts(id="brush_depth",resetOnNew=T),height="250px"),
   plotOutput('mq',dblclick='click_mq',brush=brushOpts(id="brush_mq",resetOnNew=T),height="250px"),
   
   hr(),
-  h4("Anomalous Reads"),
+  h4("异常读取"),
   fluidRow(
-    column(2,actionButton(inputId="render_reads",label="Load Anomalous Reads",width="100%"),style="margin-top:25px;"),
-    column(3,selectInput(inputId="read_type",label="Read Type",choices=c("All (Paired-end and Split-reads)"="all","Paired-end Reads Only"="pe",
-                                                                    "Normal Orientation, Small Insert Size Only"="si","Normal Orientation, Large Insert Size Only"="li",
-                                                                    "Abnormal Orientation Only"="pe_abnormal_orientation",
-                                                                    "Split-reads Only"="sr"),selected="all",width="100%")),
-    column(3,sliderInput(inputId="pe_percentile",label="Paired-end Outlier Percentile",value=99.5,min=90,max=99.9,step=0.1)),
+    column(2,actionButton(inputId="render_reads",label="加载异常读取",width="100%"),style="margin-top:25px;"),
+    column(3,selectInput(inputId="read_type",label="读取类型",choices=c("全部 (双端和拆分读取)"="all","双端只读"="pe",
+                                                                    "正常方向，仅小插入尺寸"="si","正常方向，仅大插入尺寸"="pe_abnormal_orientation",
+                                                                    "拆分-仅读取"="sr"),selected="all",width="100%")),
+    column(3,sliderInput(inputId="pe_percentile",label="双端异常值百分位数",value=99.5,min=90,max=99.9,step=0.1)),
   ),
-  p("Insert Size Estimates"),
+  p("插入尺寸估计值"),
   tableOutput("insert_size_estimates"),
   plotOutput("reads",dblclick='click_reads',brush=brushOpts(id="brush_reads",resetOnNew=T),height="400px"),
   DT::dataTableOutput("reads_table",width="100%"),
   
   hr(),
-  h4("External and Internal Variant Databases"),
+  h4("外部和内部变体数据库"),
   fluidRow(
-    column(3,selectInput(inputId="gnomad_af",label="gnomAD SV Allele Frequency",choices=c("No Filter"=0,"Above 0.01%"=1e-4,"Above 0.05%"=5e-4,"Above 0.1%"=1e-3,
+    column(3,selectInput(inputId="gnomad_af",label="gnomAD SV等位基因频率",choices=c("No Filter"=0,"Above 0.01%"=1e-4,"Above 0.05%"=5e-4,"Above 0.1%"=1e-3,
                                                                                                                 "Above 0.5%"=5e-3,"Above 1%"=0.01,"Above 5%"=0.05),selected=0,width="100%")),
-    column(2,selectInput(inputId="clinvar_subset",label="ClinVar - Consequence",choices=c("No Filter"="all","P/LP Only"="p","Any non-B/LB"="non-b",
-                                                                                          "B/LB Only"="b"),selected="all",width="100%")),
-    column(2,selectInput(inputId="clinvar_size",label="ClinVar - Variant Size",choices=c("No Filter"=1e20,"Under 10 Mb"=10e6,"Under 5 Mb"=5e6,"Under 1 Mb"=1e6,
-                                                                                         "Under 500 kb"=5e5,"Under 250 kb"=2.5e5),selected=5e6,width="100%")),
+    column(2,selectInput(inputId="clinvar_subset",label="Clinvar-后果",choices=c("无筛选器"="all","仅P/LP"="p","任何非B/LB"="non-b",
+                                                                                          "仅B/LB"="b"),selected="all",width="100%")),
+    column(2,selectInput(inputId="clinvar_size",label="Clinvar-变体尺寸",choices=c("No Filter"=1e20,"10 Mb以下"=10e6,"5 Mb以下"=5e6,"1 Mb以下"=1e6,
+                                                                                         "500 Kb以下"=5e5,"250 Kb以下"=2.5e5),selected=5e6,width="100%")),
   ),
   plotOutput("gnomadsv_clinvar",dblclick='click_gnomadsv_clinvar',brush=brushOpts(id="brush_gnomadsv_clinvar",resetOnNew=T),height="600px"),
   br(),
   tabsetPanel(type="tabs",
               tabPanel("gnomAD SV",DT::dataTableOutput("gnomadsv_table",width="800px")),
               tabPanel("ClinVar",DT::dataTableOutput("clinvar_table",width="100%")),
-              tabPanel("Internal Cohort",DT::dataTableOutput("cgc_table",width="800px")),
+              tabPanel("内部队列",DT::dataTableOutput("cgc_table",width="800px")),
               selected="gnomAD SV"
   ),
   
   hr(),
-  h4("Genomic Neighbourhood"),
+  h4("基因组邻域"),
   fluidRow(
-    column(3,actionButton(inputId="render_genes",label="Plot Genomic Neighbourhood",width="100%"))),
+    column(3,actionButton(inputId="render_genes",label="绘制基因组邻域",width="100%"))),
   plotOutput("genes",dblclick='click_genes',brush=brushOpts(id="brush_genes",resetOnNew=T),height="400px"),
   tabsetPanel(type="tabs",
-              tabPanel("Genes",DT::dataTableOutput("genes_table",width="100%")),
-              tabPanel("ClinGen Dosage Map",DT::dataTableOutput("dosage_table",width="1000px")),
-              selected="Genes"
+              tabPanel("基因",DT::dataTableOutput("genes_table",width="100%")),
+              tabPanel("Clingen剂量图",DT::dataTableOutput("dosage_table",width="1000px")),
+              selected="基因"
   ),
 
   hr(),
-  h4("Important Notes"),
-  p("For Manta INS and BND variants: the Read Depth and Mapping Quality section is not applicable. The Anomalous Reads section is experimental. 
-    Users are encouraged to double check those variants in IGV."),
-  p("In the External and Internal Variant Databases section, CNVs in the opposite direction of the analyzed variant (e.g., DELs when the analyzed variant is a DUP) are not shown."),
-  p("In the Genomic Neighbourhood section, ClinGen HI/TS regions/genes that do not overlap the analyzed variant are not shown. For DELs, TS information are not displayed."),
+  h4("重要说明"),
+  p("对于Manta INS和BND变体: 读取深度和映射质量部分不适用。异常读取部分是实验性的。鼓励用户在IGV中仔细检查这些变体。"),
+  p("在外部和内部变体数据库部分中，未显示在所分析的变体的相反方向上的CNV (例如，当所分析的变体是DUP时的DEL)。"),
+  p("在基因组邻域部分中，未显示与所分析的变体不重叠的Clingen HI/TS区域/基因。对于DELS，不显示TS信息。"),
     
   hr(),
-  h4("Version Control"),
-  tableOutput("version_control1"),
+  h4("版本控制"),
+  # tableOutput("version_control1"),
   tableOutput("version_control2"),
   
-  hr(),
-  p("Interface Version 0.1.7 Public (20220202)"),
-  p("Cardiac Genome Clinic, Ted Rogers Centre for Heart Research"),
-  p("Division of Clinical and Metabolic Genetics & The Centre for Applied Genomics, The Hospital for Sick Children. © 2022"),
+  # hr(),
+  # p("Interface Version 0.1.7 Public (20220202)"),
+  # p("Cardiac Genome Clinic, Ted Rogers Centre for Heart Research"),
+  # p("Division of Clinical and Metabolic Genetics & The Centre for Applied Genomics, The Hospital for Sick Children. © 2022"),
 )
 
 get_scip_cnv_name <- function(sample_id, cnv_param) {
@@ -264,7 +266,7 @@ server=function(input,output,session){
   load=reactiveValues(depth=0,mq=0,reads=0,gene=0)
   master_info=reactiveValues(chr=NULL,start=NULL,end=NULL,proband=NULL,type=NULL,loaded=FALSE)
   
-  latest_interpretation=reactiveValues(qual_override=NULL,decision=NULL,comment=NULL,time="Never",user="None")
+  latest_interpretation=reactiveValues(qual_override=NULL,decision=NULL,comment=NULL,time="从不",user="无")
   insert_size=reactiveValues(lower=NULL,upper=NULL,name=NULL,percentile=NULL)
   abnormal_reads=reactiveValues(pe_orientation=NULL,pe_small=NULL,pe_large=NULL,se=NULL)
   out_reads=reactiveValues(table=NULL)
@@ -278,7 +280,7 @@ server=function(input,output,session){
     if (current_var>1){
       updateSelectInput(inputId="cnv_name",selected=rv$regions_name[current_var-1])
     } else{
-      showNotification("Already at the First Variant",type="error",duration=15)
+      showNotification("已经在第一个变体",type="error",duration=15)
       st2=1
     }
     
@@ -287,14 +289,14 @@ server=function(input,output,session){
       write(paste(as.numeric(Sys.time()),input$cnv_name,input$qual_override,input$decision,input$comment,Sys.time(),rv$username,sep="\t"),
             file=results_out,append=T)
       if (st2==0){
-        showNotification("Interpretation Saved",type="message",duration=2)
+        showNotification("已保存解释",type="message",duration=2)
       } else{
         latest_interpretation$qual_override=input$qual_override
         latest_interpretation$decision=input$decision
         latest_interpretation$comment=input$comment
         latest_interpretation$time=Sys.time()
         latest_interpretation$user=rv$username
-        showNotification("Interpretation Saved",type="message",duration=1)
+        showNotification("已保存解释",type="message",duration=1)
       }
     }
   })
@@ -306,7 +308,7 @@ server=function(input,output,session){
     if (current_var<length(rv$regions_name)){
       updateSelectInput(inputId="cnv_name",selected=rv$regions_name[current_var+1])
     } else{
-      showNotification("Already at the Last Variant",type="error",duration=15)
+      showNotification("已经在最后一个变体",type="error",duration=15)
       st2=1
     }
     
@@ -315,14 +317,14 @@ server=function(input,output,session){
       write(paste(as.numeric(Sys.time()),input$cnv_name,input$qual_override,input$decision,input$comment,Sys.time(),rv$username,sep="\t"),
             file=results_out,append=T)
       if (st2==0){
-        showNotification("Interpretation Saved",type="message",duration=2)
+        showNotification("已保存解释",type="message",duration=2)
       } else{
         latest_interpretation$qual_override=input$qual_override
         latest_interpretation$decision=input$decision
         latest_interpretation$comment=input$comment
         latest_interpretation$time=Sys.time()
         latest_interpretation$user=rv$username
-        showNotification("Interpretation Saved",type="message",duration=1)
+        showNotification("已保存解释",type="message",duration=1)
       }
     }
   })
@@ -338,9 +340,9 @@ server=function(input,output,session){
       latest_interpretation$comment=input$comment
       latest_interpretation$time=Sys.time()
       latest_interpretation$user=rv$username
-      showNotification("Interpretation Saved",type="message",duration=2)
+      showNotification("已保存解释",type="message",duration=2)
     } else{
-      showNotification("No Change from Last Saved",type="message",duration=2)
+      showNotification("与上次保存时无更改",type="message",duration=2)
     }
   })
 
@@ -408,8 +410,8 @@ server=function(input,output,session){
       latest_interpretation$qual_override="No Override"
       latest_interpretation$decision="Not Evaluated"
       latest_interpretation$comment=""
-      latest_interpretation$time="Never"
-      latest_interpretation$user="None"
+      latest_interpretation$time="从不"
+      latest_interpretation$user="无"
     }
     
     if(is.null(ranges$x)==T || ranges$name!=input$cnv_name){
@@ -444,7 +446,7 @@ server=function(input,output,session){
   })
   ### end action buttons
   
-  output$last_edit_info=renderText(paste("Last Interpreted: ",latest_interpretation$time," (",latest_interpretation$user,")",sep=""))
+  output$last_edit_info=renderText(paste("最后解释: ",latest_interpretation$time," (",latest_interpretation$user,")",sep=""))
   
   output$basic_info=DT::renderDataTable({
     req(rv$config_loaded, input$cnv_name)
@@ -453,19 +455,19 @@ server=function(input,output,session){
     length=x3[5]-x3[4]+1
 
     if (x3[18]<99){
-      priority_print=paste(x3[18],"  ","<span class='label label-danger'>High</span>",sep="")
+      priority_print=paste(x3[18],"  ","<span class='label label-danger'>高</span>",sep="")
     }
     else if (x3[18]==99){
-      priority_print=paste(x3[18],"  ","<span class='label label-warning'>Medium</span>",sep="")
+      priority_print=paste(x3[18],"  ","<span class='label label-warning'>中</span>",sep="")
     }
     else{
-      priority_print=paste(x3[18],"  ","<span class='label label-info'>Low</span>",sep="")
+      priority_print=paste(x3[18],"  ","<span class='label label-info'>低</span>",sep="")
     }
     
-    as.data.frame(rbind(c("Quality","Priority","Sample ID","Chr","Start","End","Type","Size (kb)","Depth Ratio","Mapping Quality",
-                    "Supporting Pairs","Opposing Pairs","Split-reads"),
+    as.data.frame(rbind(c("质量","优先级","ID","Chr","开始","结束","类型","大小 (kb)","深度比","映射质量",
+                    "支撑对","对立对","拆分-读取"),
                   c(auto_result,priority_print,x3[2],x3[3],x3[4],x3[5],x3[6],round(length*1e3/1e3)/1e3,round(x3[9]*1e3)/1e3,round(x3[10]*1e3)/1e3,x3[13],x3[14],x3[16])))
-  },options=list(dom="t",ordering=F,headerCallback=JS("function(thead, data, start, end, display){","$(thead).remove();", "}")),rownames=F,selection='none')
+  },options=list(dom="t",language=list(info="显示 _START_ 个条目中的 _END_ 到 _TOTAL_ 个",paginate=list(previous="上一个",`next`="下一个"),search = "搜索:",lengthMenu ="显示 _MENU_ 个条目"),ordering=F,headerCallback=JS("function(thead, data, start, end, display){","$(thead).remove();", "}")),rownames=F,selection='none')
   
   output$basic_links=DT::renderDataTable({
     req(rv$config_loaded, master_info$loaded)
@@ -477,16 +479,16 @@ server=function(input,output,session){
       as.data.frame(cbind(paste("<a href='https://www.deciphergenomics.org/browser#q/",master_info$chr,":",master_info$start,"-",master_info$end,"/location/grch38' target='_blank'>DECIPHER</a>",sep=""),
                     paste("<a href='http://dgv.tcag.ca/gb2/gbrowse/dgv2_hg38/?name=chr",master_info$chr,"%3A",master_info$start,"-",master_info$end,";search=Search' target='_blank'>DGV</a>",sep="")))
     }
-  },options=list(dom="t",ordering=F,headerCallback=JS("function(thead, data, start, end, display){","$(thead).remove();", "}")),rownames=F,escape=F,selection='none')
+  },options=list(dom="t",language=list(info="显示 _START_ 个条目中的 _END_ 到 _TOTAL_ 个",paginate=list(previous="上一个",`next`="下一个"),search = "搜索:",lengthMenu ="显示 _MENU_ 个条目"),ordering=F,headerCallback=JS("function(thead, data, start, end, display){","$(thead).remove();", "}")),rownames=F,escape=F,selection='none')
   
   output$highlights1=DT::renderDataTable({
     req(rv$config_loaded, input$cnv_name, master_info$loaded)
     x18=read.table(paste(rv$temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script08_file2.txt.gz",sep=""),comment.char="",sep="\t",quote="")
     if (length(x18$V1[which(x18$V2==1)])>=1){
-      datatable(rbind("Positive Information:",as.data.frame(x18$V1[which(x18$V2==1)])),class="compact",selection='none',
-                options=list(dom="t",ordering=F,headerCallback=JS("function(thead, data, start, end, display){","$(thead).remove();", "}")),rownames=F,escape=F) %>% DT::formatStyle(1,color="#ef6548",fontSize="110%")
+      datatable(rbind("正面信息:",as.data.frame(x18$V1[which(x18$V2==1)])),class="compact",selection='none',
+                options=list(dom="t",language=list(info="显示 _START_ 个条目中的 _END_ 到 _TOTAL_ 个",paginate=list(previous="上一个",`next`="下一个"),search = "搜索:",lengthMenu ="显示 _MENU_ 个条目"),ordering=F,headerCallback=JS("function(thead, data, start, end, display){","$(thead).remove();", "}")),rownames=F,escape=F) %>% DT::formatStyle(1,color="#ef6548",fontSize="110%")
     } else{
-      datatable(as.data.frame("No Positive Information"),class="compact",selection='none',
+      datatable(as.data.frame("无正面信息"),class="compact",selection='none',
                 options=list(dom="t",ordering=F,headerCallback=JS("function(thead, data, start, end, display){","$(thead).remove();", "}")),rownames=F) %>% DT::formatStyle(1,color="#ef6548",fontSize="110%")
     }
   }) 
@@ -495,10 +497,10 @@ server=function(input,output,session){
     req(rv$config_loaded, input$cnv_name, master_info$loaded)
     x18=read.table(paste(rv$temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script08_file2.txt.gz",sep=""),comment.char="",sep="\t",quote="")
     if (length(x18$V1[which(x18$V2==2)])>=1){
-      datatable(rbind("Negative Information:",as.data.frame(x18$V1[which(x18$V2==2)])),class="compact",selection='none',
-                options=list(dom="t",ordering=F,headerCallback=JS("function(thead, data, start, end, display){","$(thead).remove();", "}")),rownames=F) %>% DT::formatStyle(1,color="#02818a",fontSize="110%")
+      datatable(rbind("负面信息:",as.data.frame(x18$V1[which(x18$V2==2)])),class="compact",selection='none',
+                options=list(dom="t",language=list(info="显示 _START_ 个条目中的 _END_ 到 _TOTAL_ 个",paginate=list(previous="上一个",`next`="下一个"),search = "搜索:",lengthMenu ="显示 _MENU_ 个条目"),ordering=F,headerCallback=JS("function(thead, data, start, end, display){","$(thead).remove();", "}")),rownames=F) %>% DT::formatStyle(1,color="#02818a",fontSize="110%")
     } else{
-      datatable(as.data.frame("No Negative Information"),class="compact",selection='none',
+      datatable(as.data.frame("无负面信息"),class="compact",selection='none',
                 options=list(dom="t",ordering=F,headerCallback=JS("function(thead, data, start, end, display){","$(thead).remove();", "}")),rownames=F) %>% DT::formatStyle(1,color="#02818a",fontSize="110%")  
     }
   })
@@ -510,18 +512,18 @@ server=function(input,output,session){
     x6=read.table(paste(rv$temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script05_file1.txt.gz",sep=""),comment.char="",sep="\t",quote="")
     
     plot(0,0,col=rgb(0,0,0,0),
-         xlab="",xlim=ranges$x,ylab="Read Depth",ylim=ranges$y1,xaxs="i",yaxs="i",main="Read Depth")
+         xlab="",xlim=ranges$x,ylab="读取深度",ylim=ranges$y1,xaxs="i",yaxs="i",main="读取深度")
     if (load$depth==0){
       par(new=T)
       plot(0,0,col=rgb(0,0,0,0),xlim=c(0,1),ylim=c(0,1),axes=F,xlab="",ylab="")
-      text(0.5,0.5,"Click the \"Update Read Depth\" button above to show read depth.\n
-           For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.",cex=1.5)
+      text(0.5,0.5,"单击上面的 \"更新读取深度\" 按钮以显示读取深度。\n
+           对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。",cex=1.5)
     } else if (master_info$type=="BND" || master_info$type=="INS"){
       plot(0,0,col=rgb(0,0,0,0),
-           xlab="",xlim=ranges$x,ylab="Read Depth",ylim=ranges$y1,xaxs="i",yaxs="i",main="Read Depth")
+           xlab="",xlim=ranges$x,ylab="读取深度",ylim=ranges$y1,xaxs="i",yaxs="i",main="读取深度")
       par(new=T)
       plot(0,0,col=rgb(0,0,0,0),xlim=c(0,1),ylim=c(0,1),axes=F,xlab="",ylab="")
-      text(0.5,0.5,"This section is not applicable for INS or BND type variants.",cex=1.5)
+      text(0.5,0.5,"本节不适用于INS或BND类型变体。",cex=1.5)
       box()
     } else if (load$depth>0){
       # speed up using BinMean and plotH
@@ -581,18 +583,18 @@ server=function(input,output,session){
     par(mgp=c(2.1,1,0),mai=c(0.4,0.62,0.5,0.1))
 
     plot(0,0,col=rgb(0,0,0,0),
-         xlab="",xlim=ranges$x,ylab="Mapping Quality",ylim=c(0,65),xaxs="i",yaxs="i",main="Mapping Quality")
+         xlab="",xlim=ranges$x,ylab="映射质量",ylim=c(0,65),xaxs="i",yaxs="i",main="映射质量")
     if (load$mq==0){
       par(new=T)
       plot(0,0,col=rgb(0,0,0,0),xlim=c(0,1),ylim=c(0,1),axes=F,xlab="",ylab="")
-      text(0.5,0.5,"Click the \"Update Mapping Quality\" button above to show mapping quality.\n
-           For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.",cex=1.5)
+      text(0.5,0.5,"单击上面的 \"更新映射质量\" 按钮以显示映射质量。\n
+           对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。",cex=1.5)
     } else if (master_info$type=="BND" || master_info$type=="INS"){
       plot(0,0,col=rgb(0,0,0,0),
-           xlab="",xlim=ranges$x,ylab="Mapping Quality",ylim=c(0,65),xaxs="i",yaxs="i",main="Mapping Quality")
+           xlab="",xlim=ranges$x,ylab="映射质量",ylim=c(0,65),xaxs="i",yaxs="i",main="映射质量")
       par(new=T)
       plot(0,0,col=rgb(0,0,0,0),xlim=c(0,1),ylim=c(0,1),axes=F,xlab="",ylab="")
-      text(0.5,0.5,"This section is not applicable for INS or BND type variants.",cex=1.5)
+      text(0.5,0.5,"本节不适用于INS或BND类型变体。",cex=1.5)
       box()
     } else if (load$mq>0){
       if (input$use_12878=="both" || input$use_12878=="12878_only"){
@@ -664,9 +666,9 @@ server=function(input,output,session){
       abnormal_reads$pe_large=x8[intersect(which(x8$V11=="FR_inward"),which(x8$V8>=insert_size$higher)),]
       abnormal_reads$pe_small=x8[intersect(which(x8$V11=="FR_inward"),which(x8$V8<=insert_size$lower)),]
       abnormal_reads$sr=x8[which(x8$V11=="SR"),]
-      as.data.frame(rbind(c("Lower Bound",round(insert_size$lower*1e2)/1e2),c("Upper Bound",round(insert_size$higher*1e2)/1e2)))
+      as.data.frame(rbind(c("下界",round(insert_size$lower*1e2)/1e2),c("上界",round(insert_size$higher*1e2)/1e2)))
     } else{
-      as.data.frame(c("Click the \"Load Anomalous Reads\" button above to load this section."))
+      as.data.frame(c("单击上面的 \"加载异常读数\" 按钮以加载此部分。"))
     }
   },colnames=F,spacing="s",digits=2,striped=T,bordered=T,align="c")
   
@@ -674,9 +676,9 @@ server=function(input,output,session){
     req(rv$config_loaded, master_info$loaded, input$read_type)
     par(mgp=c(2.1,1,0),mai=c(0.4,0.62,0.5,0.1))
     if (load$reads==0){
-      plot(0,0,col=rgb(0,0,0,0),xlim=c(0,1),ylim=c(0,1),axes=F,xlab="",ylab="",main="Anomalous Reads")
+      plot(0,0,col=rgb(0,0,0,0),xlim=c(0,1),ylim=c(0,1),axes=F,xlab="",ylab="",main="异常读取")
       box()
-      text(0.5,0.5,"Click the \"Load Anomalous Reads\" button above to load this section.\n\nExperimental for INS and BND type variants.",cex=2)
+      text(0.5,0.5,"单击上面的 \"加载异常读数\" 按钮以加载此部分。\n\nINS和BND型变体的实验。",cex=2)
     }
     
     if (load$reads>0){
@@ -695,6 +697,7 @@ server=function(input,output,session){
         table_out=abnormal_reads$sr
       }
       colnames(table_out)=c("Read_Name","Flag","Chr","Left_Start","Left_End","Right_Start","Right_End","Size","MQ","CIGAR","Read_Type")
+
       # table_out_interval=table_out[union(intersect(which(table_out$Left_Start>=ranges$x[1]),which(table_out$Right_End<=ranges$x[2])),
       #                                    intersect(which(table_out$Left_Start>=ranges$x[1]),which(table_out$Right_End<=ranges$x[2]))),]
       # table_out_interval=table_out[intersect(which(table_out$Left_Start<=ranges$x[2]),which(table_out$Right_End>=ranges$x[1])),]
@@ -706,7 +709,7 @@ server=function(input,output,session){
       out_reads$table=table_out_interval
       
       if (length(table_out_interval$Chr)>=1){
-        plot(0,0,col=rgb(0,0,0,0),xlim=ranges$x,ylim=c(0,(length(table_out_interval$Chr)+1)),axes=F,xlab="",ylab="",xaxs="i",yaxs="i",main="Anomalous Reads")
+        plot(0,0,col=rgb(0,0,0,0),xlim=ranges$x,ylim=c(0,(length(table_out_interval$Chr)+1)),axes=F,xlab="",ylab="",xaxs="i",yaxs="i",main="异常读取")
         box()
         axis(1)
   
@@ -776,12 +779,12 @@ server=function(input,output,session){
         }
         
         rect(master_info$start,-100,master_info$end,length(table_out_interval$Chr)*2.1,col="#8dd3c71A",border="#8dd3c74D")
-        legend("bottomleft",legend=c("-->  <-- [deletion]","<--  --> [tandem dup or translocation]","-->  --> or <--  <-- [inversion]","Split-reads"),
+        legend("bottomleft",legend=c("-->  <-- [删除]","<--  --> [串联dup或易位]","-->  --> or <--  <-- [反演]","拆分-读取"),
                fill=c("#e41a1c","#377eb8","#7bccc4","#984ea3"),border=NA,cex=0.8,bg="white")
       } else{
         plot(0,0,col=rgb(0,0,0,0),xlim=c(0,1),ylim=c(0,1),axes=F,xlab="",ylab="")
         box()
-        text(0.5,0.5,"No reads were found based on the filter(s).",cex=2)
+        text(0.5,0.5,"基于过滤器未找到读取。",cex=2)
       }
     }
   })
@@ -798,10 +801,15 @@ server=function(input,output,session){
     
   output$reads_table=DT::renderDataTable({
     req(rv$config_loaded)
-    if (load$reads>0){
-      out_reads$table[sort(out_reads$table$Left_Start,index.return=T,decreasing=F)$ix,]
+    if (load$reads > 0) {
+      sorted_table <- out_reads$table[sort(out_reads$table$Left_Start,index.return=T,decreasing=F)$ix,]
+      # Change the column names for display purposes only (not affecting the data)
+      colnames(sorted_table) <- c("读取姓名", "旗标", "Chr", "左起动", "左端", "右启动", "右端", "大小", "MQ", "CIGAR", "读取类型")
+      sorted_table
     }
-  },rownames=F,selection='none')
+  },options = list(pageLength = 10, language=list(info="显示 _START_ 个条目中的 _END_ 到 _TOTAL_ 个",paginate=list(previous="上一个",`next`="下一个"),search = "搜索:",lengthMenu ="显示 _MENU_ 个条目")),
+    rownames = FALSE,
+    selection = 'none')
   
   output$gnomadsv_clinvar=renderPlot({
     req(rv$config_loaded, input$cnv_name, master_info$loaded)
@@ -854,7 +862,7 @@ server=function(input,output,session){
     }
     
     par(mgp=c(2.1,1,0),mai=c(0.4,0.62,0.5,0.1))
-    plot(0,0,col=rgb(0,0,0,0),xlim=ranges$x,ylim=c(-20,10),axes=F,xlab="",ylab="",xaxs="i",yaxs="i",main="External and Internal Variant Databases")
+    plot(0,0,col=rgb(0,0,0,0),xlim=ranges$x,ylim=c(-20,10),axes=F,xlab="",ylab="",xaxs="i",yaxs="i",main="外部和内部变体数据库")
     box()
     axis(1)
     abline(h=0)
@@ -874,7 +882,7 @@ server=function(input,output,session){
         }
       }
     } else{
-      text((ranges$x[1]+ranges$x[2])/2,5,"No gnomAD-SV variants were found based on the filter(s).",cex=2)
+      text((ranges$x[1]+ranges$x[2])/2,5,"基于过滤器未发现gnomAD-SV变体。",cex=2)
     }
     
     if (length(sv1$clinvar[,1])>0){
@@ -899,7 +907,7 @@ server=function(input,output,session){
         }
       }
     } else{
-      text((ranges$x[1]+ranges$x[2])/2,-5,"No ClinVar variants were found based on the filter(s).",cex=2)
+      text((ranges$x[1]+ranges$x[2])/2,-5,"基于过滤器未发现Clinvar变体。",cex=2)
     }
     
     if (length(sv1$cgc[,1])>0){
@@ -921,14 +929,14 @@ server=function(input,output,session){
         }
       }
     } else{
-      text((ranges$x[1]+ranges$x[2])/2,-15,"No variants in other internal samples were found based on the filter(s).",cex=2)
+      text((ranges$x[1]+ranges$x[2])/2,-15,"基于过滤器未发现其他内部样品中的变体。",cex=2)
     }
 
     text(ranges$x[1],0.8,"gnomAD-SV",pos=4)
     text(ranges$x[1],-0.8,"ClinVar",pos=4)
-    text(ranges$x[1],-10.8,paste("Internal Cohort (Total=",length(sv1$cgc[,1]),")",sep=""),pos=4)
+    text(ranges$x[1],-10.8,paste("内部队列(合计=",length(sv1$cgc[,1]),")",sep=""),pos=4)
     
-    legend("bottomleft",legend=c("ClinVar P/LP","ClinVar B/LB","Same Family"),fill=c("#f781bf","#e6f5c9","#fb8072"),cex=0.8,bg="white",border=NA)
+    legend("bottomleft",legend=c("ClinVar P/LP","ClinVar B/LB","同一个家庭"),fill=c("#f781bf","#e6f5c9","#fb8072"),cex=0.8,bg="white",border=NA)
     rect(master_info$start,-1000,master_info$end,1000,col="#8dd3c71A",border="#8dd3c74D")
   })
 
@@ -946,44 +954,44 @@ server=function(input,output,session){
     req(rv$config_loaded)
     if(is.null(sv1$gnomad)==F){
       x10=sv1$gnomad[,c(3:8,2)]
-      colnames(x10)=c("Chr","Start","End","Type","Popmax AF","QC Flag","ID")
+      colnames(x10)=c("Chr","开始","结束","类型","Popmax AF","QC标志","ID")
       x10
     } else{
-      datatable(as.data.frame("No gnomAD-SV variants were found based on the filter(s)."),selection='none',options=list(dom="t",ordering=F,
+      datatable(as.data.frame("基于过滤器未发现gnomAD-SV变体。"),selection='none',options=list(dom="t",ordering=F,
                                                                                                        headerCallback=JS("function(thead, data, start, end, display){","$(thead).remove();", "}")),rownames=F)
     }
-  },escape=F,rownames=F,selection='none')
+  },escape=F,rownames=F,selection='none',options = list(pageLength = 10, language=list(info="显示 _START_ 个条目中的 _END_ 到 _TOTAL_ 个",paginate=list(previous="上一个",`next`="下一个"),search = "搜索:",lengthMenu ="显示 _MENU_ 个条目")))
   
   output$clinvar_table=DT::renderDataTable({
     req(rv$config_loaded)
     if(is.null(sv1$clinvar)==F){
       x11=sv1$clinvar[,c(2:4,6,5,7:10)]
-      colnames(x11)=c("Chr","Start","End","Type","Interpretation","Condition","Allele Origin","Genes","ID")
+      colnames(x11)=c("Chr","开始","结束","类型","口译","条件","等位基因起源","基因","ID")
       x11
     } else{
-      datatable(as.data.frame("No ClinVar variants were found based on the filter(s)."),selection='none',options=list(dom="t",ordering=F,
+      datatable(as.data.frame("基于过滤器未发现Clinvar变体。"),selection='none',options=list(dom="t",ordering=F,
                                                                                                        headerCallback=JS("function(thead, data, start, end, display){","$(thead).remove();", "}")),rownames=F)
     }
-  },escape=F,rownames=F,selection='none')
+  },escape=F,rownames=F,selection='none',options = list(pageLength = 10, language=list(info="显示 _START_ 个条目中的 _END_ 到 _TOTAL_ 个",paginate=list(previous="上一个",`next`="下一个"),search = "搜索:",lengthMenu ="显示 _MENU_ 个条目")))
   
   output$cgc_table=DT::renderDataTable({
     if(is.null(sv1$cgc)==F){
       x12=sv1$cgc[,c(2:7)]
-      colnames(x12)=c("Chr","Start","End","Type","Sample","Algorithm")
+      colnames(x12)=c("Chr","开始","结束","类型","样品","算法")
       x12
     } else{
-      datatable(as.data.frame("No variants in other CGC samples were found based on the filter(s)."),selection='none',options=list(dom="t",ordering=F,
+      datatable(as.data.frame("基于过滤器未发现其他CGC样品中的变体。"),selection='none',options=list(dom="t",ordering=F,
                                                                                                      headerCallback=JS("function(thead, data, start, end, display){","$(thead).remove();", "}")),rownames=F)
     }
-  },escape=F,rownames=F,selection='none')
+  },escape=F,rownames=F,selection='none',options = list(pageLength = 10, language=list(info="显示 _START_ 个条目中的 _END_ 到 _TOTAL_ 个",paginate=list(previous="上一个",`next`="下一个"),search = "搜索:",lengthMenu ="显示 _MENU_ 个条目")))
   
   output$genes_table=DT::renderDataTable({
     req(rv$config_loaded, input$cnv_name, master_info$loaded)
     x13=read.table(paste(rv$temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script07_file1.txt.gz",sep=""),comment.char="",sep="\t",quote="")
     x13=x13[,c(1,19,5:17)]
-    colnames(x13)=c("Name","Strand","Overlap","HI","TS","pLI","LOEUF","pRec","pNull","Expression","GO","OMIM","GenCC","Links","Search")
+    colnames(x13)=c("姓名","钢绞线","重叠","HI","TS","pLI","LOEUF","pRec","pNull","表达式","GO","OMIM","GenCC","链接","搜索")
     
-    datatable(x13,escape=F,class="cell-border stripe",rownames=NULL,options=list(pageLength=25),selection=list(mode="single", target="cell")) %>%
+    datatable(x13,escape=F,class="cell-border stripe",rownames=NULL,options=list(pageLength=25,language=list(info="显示 _START_ 个条目中的 _END_ 到 _TOTAL_ 个",paginate=list(previous="上一个",`next`="下一个"),search = "搜索:",lengthMenu ="显示 _MENU_ 个条目")),selection=list(mode="single", target="cell")) %>%
       DT::formatStyle(columns=12:13,fontSize='90%') %>%
       DT::formatStyle(columns=c(6:10,14,15),"text-align"='center') %>%
       DT::formatStyle('pLI',backgroundColor=styleInterval(c(0.5,0.9),c("white","#ffffb2","#fcae91"))) %>%
@@ -998,7 +1006,7 @@ server=function(input,output,session){
     coord=unlist(input$genes_table_cells_selected)
     if (length(coord)==2){
       if (coord[2]==1-1 || coord[2]==2-1 || coord[2]==3-1){
-        showModal(mymodal(title="Transcript Information",easyClose=T,
+        showModal(mymodal(title="成绩单信息",easyClose=T,
                           HTML(x13_v1$V20[as.numeric(coord[1])]),idcss="xl1"))
       }
     }
@@ -1019,24 +1027,24 @@ server=function(input,output,session){
     }
     if (master_info$type=="DEL"){
       ds_table=x9_dosage[ds_region_index,2:6]
-      colnames(ds_table)=c("Name","Chr","Start","End","Haploinsufficiency")
+      colnames(ds_table)=c("姓名","Chr","开始","结束","Haploinsufficiency")
     } else{
       ds_table=x9_dosage[ds_region_index,2:7]
-      colnames(ds_table)=c("Name","Chr","Start","End","Haploinsufficiency","Triplosensitivity")      
+      colnames(ds_table)=c("姓名","Chr","开始","结束","Haploinsufficiency","Triplosensitivity")      
     }
     ds_table
-  },escape=F,rownames=F,options=list(pageLength=25),selection='none')
+  },escape=F,rownames=F,options=list(pageLength=25,language=list(info="显示 _START_ 个条目中的 _END_ 到 _TOTAL_ 个",paginate=list(previous="上一个",`next`="下一个"),search = "搜索:",lengthMenu ="显示 _MENU_ 个条目")),selection='none')
   
   output$genes=renderPlot({
     req(rv$config_loaded, input$cnv_name, master_info$loaded)
     par(mgp=c(2.1,1,0),mai=c(0.4,0.62,0.5,0.1))
     
     plot(0,0,col=rgb(0,0,0,0),
-         xlab="",xlim=ranges$x,ylab="",ylim=c(0,3.5),xaxs="i",yaxs="i",axes=F,main="Genomic Neighbourhood")
+         xlab="",xlim=ranges$x,ylab="",ylim=c(0,3.5),xaxs="i",yaxs="i",axes=F,main="基因组邻域")
     box()
     
     if (load$genes==0){
-      text((as.numeric(ranges$x[1])+as.numeric(ranges$x[2]))/2,1.75,"Click the \"Plot Genomic Neighbourhood\" button above to load this plot.",cex=2)
+      text((as.numeric(ranges$x[1])+as.numeric(ranges$x[2]))/2,1.75,"单击上面的 \"绘制基因组邻域\" 按钮以加载此图。",cex=2)
     }
     if (load$genes>0){
       x9=read.table(paste(rv$temp_file_dir,"/",master_info$proband,"/",input$cnv_name,".script06_file1.txt.gz",sep=""),comment.char="",sep="\t",quote="",fill=T)
@@ -1081,11 +1089,11 @@ server=function(input,output,session){
           }
         }
       } else{
-        text((ranges$x[1]+ranges$x[2])/2,2.75,"This variant does not overlap with ClinGen HI regions.")
+        text((ranges$x[1]+ranges$x[2])/2,2.75,"此变体与Clingen HI区域不重叠。")
       }
       
       if (master_info$type=="DEL"){
-        text((ranges$x[1]+ranges$x[2])/2,3.25,"TS not applicable because the variant is a DEL.")
+        text((ranges$x[1]+ranges$x[2])/2,3.25,"TS不适用，因为变体是DEL。")
       } else{
         if (length(sv1$dosage_ts[,1])>0){
           for (i in 1:length(sv1$dosage_ts[,1])){
@@ -1110,7 +1118,7 @@ server=function(input,output,session){
             }
           }
         } else{
-          text((ranges$x[1]+ranges$x[2])/2,3.25,"This variant does not overlap with ClinGen TS regions.")
+          text((ranges$x[1]+ranges$x[2])/2,3.25,"此变体不与Clingen TS区域重叠。")
         }
       }
       
@@ -1192,15 +1200,15 @@ server=function(input,output,session){
           }
         }
       } else{
-        text((as.numeric(ranges$x[1])+as.numeric(ranges$x[2]))/2,2.25,"This variant does not overlap with genes with pLI >= 0.1.")
+        text((as.numeric(ranges$x[1])+as.numeric(ranges$x[2]))/2,2.25,"该变体与pLI >= 0.1的基因不重叠。")
       }
             
       text(ranges$x[1],3.4,"ClinGen Triplosensitivity Map",pos=4)
       text(ranges$x[1],2.9,"ClinGen Haploinsufficiency Map",pos=4)
-      text(ranges$x[1],2.4,"gnomAD HI Constraint",pos=4)
-      text(ranges$x[1],1.9,"Genes",pos=4)
+      text(ranges$x[1],2.4,"gnomAD HI 约束",pos=4)
+      text(ranges$x[1],1.9,"基因",pos=4)
       text(ranges$x[1],0.9,"pext",pos=4)
-      legend("topright",legend=c("Sufficient","Emerging","Little","Recessive/Unlikely","pLI 0.9+ / LOEUF 0.35-","pLI 0.5+","pLI 0.1+"),
+      legend("topright",legend=c("足够的","新兴","小","隐性/不太可能","pLI 0.9+ / LOEUF 0.35-","pLI 0.5+","pLI 0.1+"),
              fill=c("#f03b20","#fd8d3c","#fecc5c","#969696","#2c7fb8","#a1dab4","#ffffcc"),cex=0.8,bg="white",border=NA)
       # legend("bottomleft",legend=c("pext >= 0.2"),fill=c("#756bb1"),cex=0.8,bg="white",border=NA) # currently all pext bars (regardless of level) are in purple
       rect(master_info$start,-1000,master_info$end,1000,col="#8dd3c71A",border="#8dd3c74D")

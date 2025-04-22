@@ -1,0 +1,161 @@
+SCIP: Suite for CNV Interpretation and Prioritization
+CNV Name (Start Typing to Search)
+Save
+Previous
+Next
+Variant Quality
+Determination
+No Override
+Passed
+Failed
+Not Evaluated
+Ruled Out - Quality Inadequate / Difficult to Assess
+Ruled Out - Population Variation
+Ruled Out - No Gene of Interest Identified
+Ruled Out - Incorrect Boundary, Fully Intronic
+Ruled Out - Non-intragenic DUP
+Ruled Out - Other Reasons
+Deferred - Recessive Gene - Look for Compound Het SNV
+Already Interpreted - Same Variant Identified by Another Caller
+Further Review - Potentially Reportable
+Further Review - Not Likely Reportable
+Notes (Optional)
+Optional Notes about the Variant
+Variant Summary
+Read Depth and Mapping Quality
+Bin Size
+Update Read Depth
+View Sample Only
+View Sample with NA12878 Overlaid
+View NA12878 Only
+Update Mapping Quality
+Anomalous Reads
+Load Anomalous Reads
+All (Paired-end and Split-reads)
+Paired-end Reads Only
+Normal Orientation, Small Insert Size Only
+Normal Orientation, Large Insert Size Only
+Abnormal Orientation Only
+Split-reads Only
+Paired-end Outlier Percentile
+Insert Size Estimates
+External and Internal Variant Databases
+gnomAD SV Allele Frequency
+ClinVar - Consequence
+No Filter
+P/LP Only
+Any non-B/LB
+B/LB Only
+ClinVar - Variant Size
+No Filter
+Under 10 Mb
+Under 5 Mb
+Under 1 Mb
+Under 500 kb
+Under 250 kb
+Genomic Neighbourhood
+Plot Genomic Neighbourhood
+Important Notes
+For Manta INS and BND variants: the Read Depth and Mapping Quality section is not applicable. The Anomalous Reads section is experimental. 
+Users are encouraged to double check those variants in IGV.
+In the External and Internal Variant Databases section, CNVs in the opposite direction of the analyzed variant (e.g., DELs when the analyzed variant is a DUP) are not shown.
+In the Genomic Neighbourhood section, ClinGen HI/TS regions/genes that do not overlap the analyzed variant are not shown. For DELs, TS information are not displayed.
+Version Control
+Interface Version 0.1.7 Public (20220202)
+Cardiac Genome Clinic, Ted Rogers Centre for Heart Research
+Division of Clinical and Metabolic Genetics & The Centre for Applied Genomics, The Hospital for Sick Children. © 2022
+Already at the First Variant
+Interpretation Saved
+Already at the Last Variant
+No Change from Last Saved
+Last Interpreted
+High
+Medium
+Low
+Quality
+Priority
+Sample ID
+Start
+End
+Type
+Size (kb)
+Depth Ratio
+Mapping Quality
+Supporting Pairs
+Opposing Pairs
+Split-reads
+Positive Information
+No Positive Information
+Negative Information
+No Negative Information
+Read Depth
+Click the "Update Read Depth" button above to show read depth. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.
+This section is not applicable for INS or BND type variants.
+Mapping Quality
+Click the "Update Mapping Quality" button above to show mapping quality. For larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.
+This section is not applicable for INS or BND type variants.
+Lower Bound
+Upper Bound
+Click the "Load Anomalous Reads" button above to load this section.
+Anomalous Reads
+Click the "Load Anomalous Reads" button above to load this section. Experimental for INS and BND type variants.
+Read_Name
+Flag
+Left_Start
+Left_End
+Right_Start
+Right_End
+Size
+Read_Type
+No reads were found based on the filter(s).
+No gnomAD-SV variants were found based on the filter(s).
+No ClinVar variants were found based on the filter(s).
+No variants in other internal samples were found based on the filter(s).
+Internal Cohort
+Total
+Same Family
+No variants in other CGC samples were found based on the filter(s).
+Strand
+Overlap
+Expression
+Links
+Search
+Transcript Information
+Genomic Neighbourhood
+Click the "Plot Genomic Neighbourhood" button above to load this plot.
+This variant does not overlap with ClinGen HI regions.
+TS not applicable because the variant is a DEL.
+This variant does not overlap with ClinGen TS regions.
+This variant does not overlap with genes with pLI >= 0.1.
+Genes
+Sufficient
+Emerging
+Little
+Recessive/Unlikely
+Constraint
+or
+deletion
+tandem dup or translocation
+inversion
+Read Name
+Left Start
+Left End
+Right Start
+Right End
+Size
+Read Type
+Never
+None
+QC Flag
+Interpretation
+Condition
+Allele Origin
+Sample
+Algorithm
+Name
+First
+Last
+showing 1 to 2 of 2 entries
+search
+show 10 entries
+ClinGen Dosage Map

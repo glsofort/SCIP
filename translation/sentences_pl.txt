@@ -1,0 +1,25 @@
+This [DEL] is fully contained in ClinGen HI region(s) ([ABC])
+This [DEL] overlaps ClinGen HI gene(s) ([ABC])
+This [DEL] overlaps candidate gene(s) ([ABC])
+This [DEL] overlaps gene(s) with pLI >= 0.9 and/or LOEUF <= 0.35 ([ABC])
+This [DEL] overlaps gene(s) with pLI >= 0.5 but < 0.9 ([ABC])
+This [DEL] overlaps gene(s) associated with dominant disorder(s): [ABC]
+This [DEL] overlaps gene(s) associated with only non-dominant disorder(s): [ABC]
+This DUP fully contains ClinGen TS region(s) or gene(s) ([ABC])
+This DUP overlaps ClinGen TS gene(s) ([ABC])
+This intragenic DUP overlaps ClinGen HI gene(s) ([ABC])
+This DUP overlaps candidate gene(s) ([ABC])
+This intragenic DUP overlaps gene(s) with pLI >= 0.9 and/or LOEUF <= 0.35 ([ABC])
+This intragenic DUP overlaps gene(s) with pLI >= 0.5 ([ABC])
+This intragenic DUP overlaps gene(s) associated with dominant disorder(s): [ABC]
+This intragenic DUP overlaps gene(s) associated with only non-dominant disorder(s): [ABC]
+This non-intragenic DUP overlaps gene(s) associated with dominant disorder(s): [ABC]
+This non-intragenic DUP overlaps gene(s) associated with only non-dominant disorder(s): [ABC]
+This [DEL] has [ABC]% overlap with gnomAD [DEL](s) with popmax >= 1%
+This [DEL] has both breakpoints within 10 bp of an intron-exon junction - rule out pseudogene insertion
+This [DEL] has [ABC]% overlap with ERDS+ [DEL] recurrence region(s) or other low quality region(s)
+This [DEL] has both breakpoints within [ABC] bp of Manta [DEL] recurrence region(s)
+The maximum pext within the [DEL] is low ([ABC]) - double check: gene may have a highly expressed non-coding transcript or not expressed in GTEx tissues
+This [DEL] is supported by [ABC] anomalous read pair(s)
+This [DEL] is supported by [ABC] anomalous split-read(s)
+There are no anomalous read(s) supporting this [DEL]

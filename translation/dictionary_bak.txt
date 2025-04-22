@@ -1,0 +1,153 @@
+scip: suite for cnv interpretation and prioritization	scip: 用于cnv解释和优先级排序的套件
+cnv name (start typing to search)	cnv名称 (开始键入以搜索)
+save	保存
+previous	上一个
+next	下一个
+variant quality	变体质量
+determination	测定
+no override	无覆盖
+passed	通过
+failed	失败
+ruled out - quality inadequate / difficult to assess	排除-质量不足/难以评估
+ruled out - population variation	排除-人口变异
+ruled out - no gene of interest identified	排除-没有发现感兴趣的基因
+ruled out - incorrect boundary, fully intronic	排除-不正确的边界，完全内含子
+ruled out - non-intragenic dup	排除-非基因内dup
+ruled out - other reasons	排除-其他原因
+deferred - recessive gene - look for compound het snv	延迟-隐性基因-寻找复合het snv
+already interpreted - same variant identified by another caller	已解释-由另一个调用方标识的相同变体
+further review - potentially reportable	进一步审查-可能需要报告
+further review - not likely reportable	进一步审查-不太可能报告
+notes (optional)	注释 (可选)
+optional notes about the variant	关于变体的可选说明
+variant summary	变体摘要
+read depth and mapping quality	读取深度和映射质量
+update read depth	更新读取深度
+view sample only	仅查看示例
+view sample with na12878 overlaid	查看覆盖了na12878的示例
+view na12878 only	仅查看na12878
+update mapping quality	更新映射质量
+anomalous reads	异常读取
+load anomalous reads	加载异常读取
+all (paired-end and split-reads)	全部 (双端和拆分读取)
+paired-end reads only	双端只读
+normal orientation, small insert size only	正常方向，仅小插入尺寸
+normal orientation, large insert size only	正常方向，仅大插入尺寸
+abnormal orientation only	仅方向异常
+split-reads only	拆分-仅读取
+paired-end outlier percentile	双端异常值百分位数
+insert size estimates	插入尺寸估计值
+external and internal variant databases	外部和内部变体数据库
+gnomad sv allele frequency	gnomad sv等位基因频率
+clinvar - consequence	clinvar-后果
+no filter	无筛选器
+p/lp only	仅p/lp
+any non-b/lb	任何非b/lb
+b/lb only	仅b/lb
+clinvar - variant size	clinvar-变体尺寸
+under 10 mb	10 mb以下
+under 5 mb	5 mb以下
+under 1 mb	1 mb以下
+under 500 kb	500 kb以下
+under 250 kb	250 kb以下
+genomic neighbourhood	基因组邻域
+plot genomic neighbourhood	绘制基因组邻域
+important notes	重要说明
+for manta ins and bnd variants: the read depth and mapping quality section is not applicable. the anomalous reads section is experimental. 	对于manta ins和bnd变体: 读取深度和映射质量部分不适用。异常读取部分是实验性的。
+users are encouraged to double check those variants in igv.	鼓励用户在igv中仔细检查这些变体。
+in the external and internal variant databases section, cnvs in the opposite direction of the analyzed variant (e.g., dels when the analyzed variant is a dup) are not shown.	在外部和内部变体数据库部分中，未显示在所分析的变体的相反方向上的cnv (例如，当所分析的变体是dup时的del)。
+in the genomic neighbourhood section, clingen hi/ts regions/genes that do not overlap the analyzed variant are not shown. for dels, ts information are not displayed.	在基因组邻域部分中，未显示与所分析的变体不重叠的clingenhi/ts区域/基因。对于dels，不显示ts信息。
+version control	版本控制
+interface version 0.1.7 public (20220202)	接口版本0.1.7 public (20220202)
+cardiac genome clinic, ted rogers centre for heart research	心脏基因组诊所，ted罗杰斯心脏研究中心
+division of clinical and metabolic genetics & the centre for applied genomics, the hospital for sick children. © 2022	临床和代谢遗传学科和应用基因组学中心，病童医院。©2022
+already at the first variant	已经在第一个变体
+interpretation saved	已保存解释
+already at the last variant	已经在最后一个变体
+no change from last saved	与上次保存时无更改
+last interpreted	最后解释
+high	高
+medium	中
+low	低
+quality	质量
+priority	优先级
+sample id	样品编号
+start	开始
+end	结束
+type	类型
+size (kb)	大小 (kb)
+depth ratio	深度比
+mapping quality	映射质量
+supporting pairs	支撑对
+opposing pairs	对立对
+split-reads	拆分-读取
+positive information	正面信息
+no positive information	无正面信息
+negative information	负面信息
+no negative information	无负面信息
+read depth	读取深度
+click the "update read depth" button above to show read depth. for larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新读取深度” 按钮以显示读取深度。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+this section is not applicable for ins or bnd type variants.	本节不适用于ins或bnd类型变体。
+click the "update mapping quality" button above to show mapping quality. for larger variants, setting bin size to 5 kb or larger (before clicking the button) is recommended for faster performance.	单击上面的 “更新映射质量” 按钮以显示映射质量。对于较大的变体，建议将bin大小设置为5 kb或更大 (在单击按钮之前)，以提高性能。
+lower bound	下界
+upper bound	上界
+click the "load anomalous reads" button above to load this section.	单击上面的 “加载异常读数” 按钮以加载此部分。
+click the "load anomalous reads" button above to load this section. experimental for ins and bnd type variants.	单击上面的 “加载异常读数” 按钮以加载此部分。ins和bnd型变体的实验。
+read_name	read_name
+flag	旗标
+left_start	left_start
+left_end	left_end
+right_start	right_start
+right_end	right_end
+size	尺寸
+read_type	read_type
+no reads were found based on the filter(s).	基于过滤器未找到读取。
+no gnomad-sv variants were found based on the filter(s).	基于过滤器未发现gnomad-sv变体。
+no clinvar variants were found based on the filter(s).	基于过滤器未发现clinvar变体。
+no variants in other internal samples were found based on the filter(s).	基于过滤器未发现其他内部样品中的变体。
+internal cohort	内部队列
+total	合计
+same family	同一个家庭
+no variants in other cgc samples were found based on the filter(s).	基于过滤器未发现其他cgc样品中的变体。
+strand	钢绞线
+overlap	重叠
+expression	表达式
+links	链接
+search	搜索
+transcript information	成绩单信息
+click the "plot genomic neighbourhood" button above to load this plot.	单击上面的 “绘制基因组邻域” 按钮以加载此图。
+this variant does not overlap with clingen hi regions.	此变体与clingen hi区域不重叠。
+ts not applicable because the variant is a del.	ts不适用，因为变体是del。
+this variant does not overlap with clingen ts regions.	此变体不与clingen ts区域重叠。
+this variant does not overlap with genes with pli >= 0.1.	该变体与pli >= 0.1的基因不重叠。
+genes	基因
+sufficient	足够的
+emerging	新兴
+little	小
+recessive/unlikely	隐性/不太可能
+not evaluated	未评估
+bin size	bin大小
+constraint	约束
+or	或
+deletion	删除
+tandem dup or translocation	串联dup或易位
+inversion	反演
+read name	读取姓名
+left start	左起动
+left end	左端
+right start	右启动
+right end	右端
+read type	读取类型
+never	从不
+none	无
+qc flag	qc标志
+interpretation	口译
+condition	条件
+allele origin	等位基因起源
+sample	样品
+algorithm	算法
+name	姓名
+first	第一
+last	最后一个
+showing 1 to 2 of 2 entries	显示2个条目中的1到2个
+show 10 entries	显示10个条目
