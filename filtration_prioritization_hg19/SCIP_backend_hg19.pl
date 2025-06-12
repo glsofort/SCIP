@@ -15,6 +15,8 @@ push @chr, "X";
 # parallelization possible if this script is run by chromosome
 
 open out1, ">./user_data/$name.filt_step01.txt";
+open log_file, ">./user_data/$name.filt_step01.filtered.log";
+
 foreach my $chr (@chr){
 my @shared;
 open file1, "gunzip -c ./hg19_files/hg19_gap.txt.gz |";
@@ -75,11 +77,12 @@ while (<file1>){
  my @split1=split /\t/,$_;
  if ($split1[0] eq $chr){
   my $out=1;
+  my $filter_reason="";
   if ($split1[3] eq "DEL"){
    LOOP2: foreach my $shared (@shared){
     my @split2=split /\|/,$shared;
     if ($split2[0]<=$split1[1] && $split2[1]>=$split1[2]){
-     $out=0; last LOOP2;
+     $out=0; $filter_reason="GAP_OR_SUPERDUP"; last LOOP2;
     }
    }
  
@@ -87,7 +90,7 @@ while (<file1>){
     LOOP1: foreach my $del (@del){
      my @split2=split /\|/,$del;
      if ($split2[0]<=$split1[1] && $split2[1]>=$split1[2]){
-      $out=0; last LOOP1;
+      $out=0; $filter_reason="RECURRENT_DEL"; last LOOP1;
      }
     }
    }
@@ -97,7 +100,7 @@ while (<file1>){
    LOOP2: foreach my $shared (@shared){
     my @split2=split /\|/,$shared;
     if ($split2[0]<=$split1[1] && $split2[1]>=$split1[2]){
-     $out=0; last LOOP2;
+     $out=0; $filter_reason="GAP_OR_SUPERDUP"; last LOOP2;
     }
    }
  
@@ -105,7 +108,7 @@ while (<file1>){
     LOOP1: foreach my $dup (@dup){
      my @split2=split /\|/,$dup;
      if ($split2[0]<=$split1[1] && $split2[1]>=$split1[2]){
-      $out=0; last LOOP1;
+      $out=0; $filter_reason="RECURRENT_DUP"; last LOOP1;
      }
     }
    }
@@ -113,12 +116,15 @@ while (<file1>){
  
   if ($out==1){
    print out1 "$_\n";
+  } else {
+   print log_file "$_\t$filter_reason\n";
   }
  }
 }
 close file1;
 }
 close out1;
+close log_file;
 
 system ("perl ./SCIP_filt_02_hg19.pl -n $name");
 system ("perl ./SCIP_filt_03_hg19.pl -n $name");

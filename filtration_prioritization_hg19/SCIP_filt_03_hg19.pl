@@ -13,6 +13,8 @@ push @chr, "X";
 # parallelization possible if this script is run by chromosome
 
 open out1, ">./user_data/$name.filtered.txt";
+open log_file, ">./user_data/$name.filt_step03.filtered.log";
+
 foreach my $chr (@chr){
  print "SCIP Filtration Module script 03 processing hg19 chr$chr\n";
  my (@del,@dup);
@@ -49,6 +51,8 @@ foreach my $chr (@chr){
  
     if ($st==0){
      print out1 "$_\n";
+    } else {
+     print log_file "$_\tCOMMON_DEL\n";
     }
    }
    elsif ($split1[3] eq "DUP"){
@@ -63,6 +67,8 @@ foreach my $chr (@chr){
 
     if ($st==0){
      print out1 "$_\n";
+    } else {
+     print log_file "$_\tCOMMON_DUP\n";
     }
    }
   }
@@ -70,5 +76,6 @@ foreach my $chr (@chr){
  close file1;
 }
 close out1;
+close log_file;
 
 exit 2;

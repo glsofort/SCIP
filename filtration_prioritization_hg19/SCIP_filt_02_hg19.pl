@@ -13,6 +13,8 @@ push @chr, "X";
 # parallelization possible if this script is run by chromosome
 
 open out1, ">./user_data/$name.filt_step02.txt";
+open log_file, ">./user_data/$name.filt_step02.filtered.log";  # ADD LOG FILE
+
 foreach my $chr (@chr){
  print "SCIP Filtration Module script 02 processing hg19 chr$chr\n";
  my @exon;
@@ -45,11 +47,14 @@ foreach my $chr (@chr){
 
    if ($st==1){
     print out1 "$_\n";
+   } else {
+    print log_file "$_\tNO_EXON_OVERLAP\n";  # LOG FILTERED CNV
    }
   }
  }
  close file1;
 }
 close out1;
+close log_file;
 
 exit 2;
