@@ -51,12 +51,14 @@ my @prefix=split /\;/,$prefix;
 my @cyc=("d1temp_server");
 
 open file1, "<$sampleid_file";
-my %id;
+my $id;
 while (<file1>){
  chomp;
  my @split1=split /\t/,$_;
  my @split2=split /\-/,$split1[0];
- $id{$split1[1]}=$split1[0];
+ if ($proband eq $split1[1]) {
+    $id = $split1[0];
+ }
 }
 close file1;
 
@@ -73,22 +75,22 @@ foreach my $cyc (@cyc){
 my $file;
 if ($preload==0){
  my $st=0;
- if (-e "$aln_dir/$id{$proband}/$id{$proband}.cram"){
-  $file="$aln_dir/$id{$proband}/$id{$proband}.cram"; $st=1;
+ if (-e "$aln_dir/$id/$id.cram"){
+  $file="$aln_dir/$id/$id.cram"; $st=1;
  }
- elsif (-e "$aln_dir/$id{$proband}/$id{$proband}.bam"){
-  $file="$aln_dir/$id{$proband}/$id{$proband}.bam"; $st=1;
+ elsif (-e "$aln_dir/$id/$id.bam"){
+  $file="$aln_dir/$id/$id.bam"; $st=1;
  }
  foreach my $prefix (@prefix){
-  if (-e "$aln_dir/$id{$proband}/$id{$proband}.$prefix.cram"){
-   $file="$aln_dir/$id{$proband}/$id{$proband}.$prefix.cram"; $st=1;
+  if (-e "$aln_dir/$id/$id.$prefix.cram"){
+   $file="$aln_dir/$id/$id.$prefix.cram"; $st=1;
   }
-  elsif (-e "$aln_dir/$id{$proband}/$id{$proband}.$prefix.bam"){
-   $file="$aln_dir/$id{$proband}/$id{$proband}.$prefix.bam"; $st=1;
+  elsif (-e "$aln_dir/$id/$id.$prefix.bam"){
+   $file="$aln_dir/$id/$id.$prefix.bam"; $st=1;
   }
  }
  if ($st==0){
-  die "No BAM/CRAM file found for $id{$proband}!";
+  die "No BAM/CRAM file found for $id!";
  }
 
  print "Generating new temporary SAM/DEPTH files\n";
