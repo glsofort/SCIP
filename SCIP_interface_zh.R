@@ -212,6 +212,7 @@ server=function(input,output,session){
     # If sample_id exists in the URL, update config_path and store sample_id
     if (!is.null(query$sample_id)) {
       rv$sample_id <- query$sample_id
+      rv$results_out <- paste0("/glsofort/samples/", query$sample_id, "/SCIP_results.txt")
       config_path <- paste0("/highspeed-data/samples/", query$sample_id, "/SCIP/interface_config.txt")
     }
     
@@ -237,9 +238,8 @@ server=function(input,output,session){
     regions_sorted <- rv$regions_list[sort(rv$regions_list$V5 - rv$regions_list$V4 + 1, 
                                            index.return = TRUE, decreasing = TRUE)$ix,]
     rv$regions_name <- regions_sorted$V17[sort(regions_sorted$V18, index.return = TRUE)$ix]
-    results_out=paste(rv$config_file[3,2],"/SCIP_results.txt",sep="")
-    if (file.exists(results_out)==F){
-      file.create(results_out)
+    if (file.exists(rv$results_out)==F){
+      file.create(rv$results_out)
     }
 
     # Get CNV
@@ -287,7 +287,7 @@ server=function(input,output,session){
     if ((input$qual_override!="No Override" && input$qual_override!=latest_interpretation$qual_override) || 
         (input$decision!="Not Evaluated" && input$decision!=latest_interpretation$decision) || (input$comment!="" && input$comment!=latest_interpretation$comment)){
       write(paste(as.numeric(Sys.time()),input$cnv_name,input$qual_override,input$decision,input$comment,Sys.time(),rv$username,sep="\t"),
-            file=results_out,append=T)
+            file=rv$results_out,append=T)
       if (st2==0){
         showNotification("已保存解释",type="message",duration=2)
       } else{
@@ -315,7 +315,7 @@ server=function(input,output,session){
     if ((input$qual_override!="No Override" && input$qual_override!=latest_interpretation$qual_override) || 
         (input$decision!="Not Evaluated" && input$decision!=latest_interpretation$decision) || (input$comment!="" && input$comment!=latest_interpretation$comment)){
       write(paste(as.numeric(Sys.time()),input$cnv_name,input$qual_override,input$decision,input$comment,Sys.time(),rv$username,sep="\t"),
-            file=results_out,append=T)
+            file=rv$results_out,append=T)
       if (st2==0){
         showNotification("已保存解释",type="message",duration=2)
       } else{
@@ -334,7 +334,7 @@ server=function(input,output,session){
     if ((input$qual_override!="No Override" && input$qual_override!=latest_interpretation$qual_override) || 
         (input$decision!="Not Evaluated" && input$decision!=latest_interpretation$decision) || (input$comment!="" && input$comment!=latest_interpretation$comment)){
       write(paste(as.numeric(Sys.time()),input$cnv_name,input$qual_override,input$decision,input$comment,Sys.time(),rv$username,sep="\t"),
-            file=results_out,append=T)
+            file=rv$results_out,append=T)
       latest_interpretation$qual_override=input$qual_override
       latest_interpretation$decision=input$decision
       latest_interpretation$comment=input$comment
@@ -386,7 +386,7 @@ server=function(input,output,session){
     }
     
     current_var=which(rv$regions_name==input$cnv_name)
-    x1=try(read.table(results_out,comment.char="",sep="\t",quote=""),silent=T)
+    x1=try(read.table(rv$results_out,comment.char="",sep="\t",quote=""),silent=T)
     st1=0
     if(class(x1)=="data.frame"){
       x1_sub=x1[which(x1$V2==rv$regions_name[current_var]),]
