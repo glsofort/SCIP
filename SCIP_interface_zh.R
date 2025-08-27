@@ -198,7 +198,8 @@ server=function(input,output,session){
     config_loaded = FALSE,
     cnv_name = NULL,
     sample_id = NULL,
-    assembly = NULL
+    assembly = NULL,
+    results_out = NULL
   )
 
   # Read URL parameters and update config
